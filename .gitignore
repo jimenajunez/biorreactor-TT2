@@ -1,0 +1,43 @@
+# Archivos generados por LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.idx
+*.ind
+*.ilg
+*.glo
+*.gls
+*.ist
+*.acn
+*.acr
+*.alg
+*.xdy
+*.nav
+*.snm
+*.vrb
+*.dvi
+*.ps
+
+# PDF compilado (no necesario en git, se genera del fuente)
+main.pdf
+test_*.pdf
+DOCUMENTO_FINAL*.pdf
+
+# Archivos de backup y temporales
+*.bak
+*.tmp
+*~
+.DS_Store
+Thumbs.db
+
+# Archivos de TeXstudio
+*.txss
+*.txss2

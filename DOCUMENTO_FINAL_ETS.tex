@@ -1,0 +1,2713 @@
+% Archivo principal de formato de tesis de Trabajo Terminal
+%======================================================
+% Diseño y construcción de un biorreactor airlift como estación de
+% pruebas para hongos ascomicetos coprófilos
+% UPIIZ - Ingeniería Mecatrónica - Trabajo Terminal I
+%======================================================
+
+\documentclass[11pt,tesis,twoside,openright,spanish]{upiiztt}
+%				standard font size
+%command		10pt	11pt	12pt
+
+%\tiny			5pt		6pt		6pt
+%\scriptsize	7pt		8pt		8pt
+%\footnotesize	8pt		9pt		10pt
+%\small			9pt		10pt	11pt
+%\normalsize	10pt	11pt	12pt
+%\large			12pt	12pt	14pt
+%\Large			14pt	14pt	17pt
+%\LARGE			17pt	17pt	20pt
+%\huge			20pt	20pt	25pt
+%\Huge			25pt	25pt	25pt
+%								 ||	
+
+%======================================================
+% DECLARACIÓN DE PAQUETES A UTILIZAR
+% (se pueden agregar a la lista cuantos paquetes sean necesario declarar )
+%======================================================
+% babel[spanish] requires texlive-lang-spanish which may not be installed.
+% Using english babel for framework compatibility; accented chars handled via inputenc+T1.
+\usepackage[english]{babel}
+% \selectlanguage{spanish}  % commented out — not available without lang pack
+\usepackage[utf8]{inputenc} % latin1 es para sistemas basados en windows, para sistemas unix la codificación de caracteres es utf8
+\usepackage[T1]{fontenc} %paquete necesario para los acentos, NO es necesario usar (\'a) para obtener (á)
+\usepackage{amssymb,amsmath,amsfonts}
+\usepackage{color,curves}
+\usepackage{epsfig}
+\usepackage{times}
+\usepackage{multirow,rotating}
+\usepackage{times}
+\usepackage{subfig,wrapfig}
+\usepackage{pdfpages}
+\usepackage[bookmarks=true,citebordercolor={1 1 1},linkbordercolor={1 1 1},urlbordercolor={1 1 1},hidelinks]{hyperref}
+\usepackage{bookmark}
+\usepackage{booktabs}
+\usepackage{lipsum}
+\usepackage{longtable}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{colortbl, xcolor}
+\usepackage{bm}	
+\usepackage{authoraftertitle}
+\usepackage{mfirstuc}
+\MFUnocap{de}
+\MFUnocap{y}
+\MFUnocap{por}
+\MFUnocap{para}
+\MFUnocap{del}
+\MFUnocap{un}
+\MFUnocap{una}
+\MFUnocap{el}
+\MFUnocap{la}
+\MFUnocap{en}
+\MFUnocap{con}
+% \usepackage[a4paper,left=3cm,right=3cm,top=2.5cm,bottom=2.5cm,showframe]{geometry}
+\usepackage[a4paper,left=3cm,right=3cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{tabulary}
+%\usepackage{cite}
+\usepackage[notlof, notlot, numbib,nottoc]{tocbibind}
+%\usepackage[none]{hyphenat}
+\usepackage{soul}
+\usepackage{anyfontsize}
+\usepackage{capt-of}
+\usepackage{ifthen}
+\usepackage{float}
+\usepackage{xurl}
+\usepackage{import}
+\usepackage{graphicx}
+\usepackage{footnote}
+\usepackage{changepage}
+%\usepackage{showframe}
+\usepackage{pgfgantt}
+\usepackage{nameref}
+%\renewcommand\ShowFrameLinethickness{0.25pt}
+%\renewcommand*\ShowFrameColor{\color{green}}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+% IEEEtrantools: using local stub (full package may not be installed)
+\usepackage{IEEEtrantools}
+\usepackage{easyReview} % for \comment, \alert, etc.
+\usepackage{listings}
+\lstset{
+    language=bash, %% Troque para PHP, C, Java, etc... bash é o padrão
+    basicstyle=\ttfamily\small,
+    numberstyle=\footnotesize,
+    numbers=left,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    tabsize=2,
+    rulecolor=\color{black!30},
+    title=\lstname,
+    escapeinside={\%*}{*)},
+    breaklines=true,
+    breakatwhitespace=true,
+    framextopmargin=2pt,
+    framexbottommargin=2pt,
+    inputencoding=utf8,
+    showstringspaces=false,
+    extendedchars=true,
+    literate={á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {í}{{\'i}}1
+          {á}{{\'a}}1  {é}{{\'e}}1  {í}{{\'i}}1 {ó}{{\'o}}1  {ú}{{\'u}}1
+      {Á}{{\'A}}1  {É}{{\'E}}1  {Í}{{\'I}}1 {Ó}{{\'O}}1  {Ú}{{\'U}}1
+      {à}{{\`a}}1  {è}{{\`e}}1  {ì}{{\`i}}1 {ò}{{\`o}}1  {ù}{{\`u}}1
+      {À}{{\`A}}1  {È}{{\`E}}1  {Ì}{{\`I}}1 {Ò}{{\`O}}1  {Ù}{{\`U}}1
+      {ä}{{\"a}}1  {ë}{{\"e}}1  {ï}{{\"i}}1 {ö}{{\"o}}1  {ü}{{\"u}}1
+      {Ä}{{\"A}}1  {Ë}{{\"E}}1  {Ï}{{\"I}}1 {Ö}{{\"O}}1  {Ü}{{\"U}}1
+      {â}{{\^a}}1  {ê}{{\^e}}1  {î}{{\^i}}1 {ô}{{\^o}}1  {û}{{\^u}}1
+      {Â}{{\^A}}1  {Ê}{{\^E}}1  {Î}{{\^I}}1 {Ô}{{\^O}}1  {Û}{{\^U}}1
+      {œ}{{\oe}}1  {Œ}{{\OE}}1  {æ}{{\ae}}1 {Æ}{{\AE}}1  {ß}{{\ss}}1
+      {ẞ}{{\SS}}1  {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {ø}{{\o}}1  {Ø}{{\O}}1
+      {å}{{\aa}}1  {Å}{{\AA}}1  {ã}{{\~a}}1  {õ}{{\~o}}1 {Ã}{{\~A}}1
+      {Õ}{{\~O}}1  {ñ}{{\~n}}1  {Ñ}{{\~N}}1  {¿}{{?`}}1  {¡}{{!`}}1
+      {°}{{\textdegree}}1 {º}{{\textordmasculine}}1 {ª}{{\textordfeminine}}1
+      {£}{{\pounds}}1  {©}{{\copyright}}1  {®}{{\textregistered}}1
+      {«}{{\guillemotleft}}1  {»}{{\guillemotright}}1  {Ð}{{\DH}}1  {ð}{{\dh}}1
+      {Ý}{{\'Y}}1    {ý}{{\'y}}1    {Þ}{{\TH}}1    {þ}{{\th}}1    {Ă}{{\u{A}}}1
+      {ă}{{\u{a}}}1  {Ą}{{\k{A}}}1  {ą}{{\k{a}}}1  {Ć}{{\'C}}1    {ć}{{\'c}}1
+      {Č}{{\v{C}}}1  {č}{{\v{c}}}1  {Ď}{{\v{D}}}1  {ď}{{\v{d}}}1  {Đ}{{\DJ}}1
+      {đ}{{\dj}}1    {Ė}{{\.{E}}}1  {ė}{{\.{e}}}1  {Ę}{{\k{E}}}1  {ę}{{\k{e}}}1
+      {Ě}{{\v{E}}}1  {ě}{{\v{e}}}1  {Ğ}{{\u{G}}}1  {ğ}{{\u{g}}}1  {Ĩ}{{\~I}}1
+      {ĩ}{{\~\i}}1   {Į}{{\k{I}}}1  {į}{{\k{i}}}1  {İ}{{\.{I}}}1  {ı}{{\i}}1
+      {Ĺ}{{\'L}}1    {ĺ}{{\'l}}1    {Ľ}{{\v{L}}}1  {ľ}{{\v{l}}}1  {Ł}{{\L{}}}1
+      {ł}{{\l{}}}1   {Ń}{{\'N}}1    {ń}{{\'n}}1    {Ň}{{\v{N}}}1  {ň}{{\v{n}}}1
+      {Ő}{{\H{O}}}1  {ő}{{\H{o}}}1  {Ŕ}{{\'{R}}}1  {ŕ}{{\'{r}}}1  {Ř}{{\v{R}}}1
+      {ř}{{\v{r}}}1  {Ś}{{\'S}}1    {ś}{{\'s}}1    {Ş}{{\c{S}}}1  {ş}{{\c{s}}}1
+      {Š}{{\v{S}}}1  {š}{{\v{s}}}1  {Ť}{{\v{T}}}1  {ť}{{\v{t}}}1  {Ũ}{{\~U}}1
+      {ũ}{{\~u}}1    {Ū}{{\={U}}}1  {ū}{{\={u}}}1  {Ů}{{\r{U}}}1  {ů}{{\r{u}}}1
+      {Ű}{{\H{U}}}1  {ű}{{\H{u}}}1  {Ų}{{\k{U}}}1  {ų}{{\k{u}}}1  {Ź}{{\'Z}}1
+      {ź}{{\'z}}1    {Ż}{{\.Z}}1    {ż}{{\.z}}1    {Ž}{{\v{Z}}}1,
+}
+
+\sodef\spaceout{}{0pt plus 1fil}{.8em plus 1fil}{0pt}
+\definecolor{upiizcolor}{RGB}{113,48,70}
+
+\usepackage{datatool}
+\newcommand{\sortitem}[1]{
+	\DTLnewrow{list}
+	\DTLnewdbentry{list}{description}{#1}
+}
+\newenvironment{sortedlist}{
+	\DTLifdbexists{list}{\DTLcleardb{list}}{\DTLnewdb{list}}
+}{%
+	\DTLsort{description}{list}
+	\begin{itemize}
+		\DTLforeach*{list}{\theDesc=description}{
+			\item \theDesc}
+	\end{itemize}
+}
+
+\newcommand{\itemcolor}[1]{
+	\renewcommand{\makelabel}[1]{\color{#1}\hfil ##1}}
+\setlist[itemize]{label={$\diamond$}}
+\setlength\parindent{0pt}
+
+\counterwithout{footnote}{chapter}
+
+%======================================================
+% DECLARACIÓN DE CARPETA DONDE SE ENCUENTRAN LAS FIGURAS
+%======================================================
+
+% NOTA MUY IMPORTANTE
+
+% Dependiendo del formato de las figuras será el método de compilación del documento:
+
+%*.EPS o *.PDF ---- Latex=>dvi2ps=>ps2pdf=>ver pdf
+%					Latex=>dvi2pdf=>ver pdf
+%*.png y *.jpg ---- PDFLatex=>ver PDF					
+
+\graphicspath{{Figuras/}}  % Las figuras se encuentran en una carpeta llamada 'Figuras' que se incluye en la carpeta principal de los archivos .tex
+%================================================================
+% OPCIONES DE DOCUMENTO
+%
+% La opción \psdraft deja un espacio en blanco en donde van
+% las figuras. Esto ahorra toner en la impresión del borrador de tesis
+%
+% La opción \psfull hace incluir a todas las figuras
+%
+%===============================================================
+
+\psfull
+
+%===============================================================
+% ESTILO DE PÁGINA
+%
+% El estilo de página \pagestyle{thesis} coloca los encabezados
+% correctos de la versión final del documento
+%==============================================================
+\pagestyle{thesis}
+
+%====================================
+
+%======================================================
+%-----------------------Portada------------------------
+%======================================================
+\title{\capitalisewords{Diseño y construcción de un biorreactor airlift como estación de pruebas para hongos ascomicetos coprófilos}}
+\formato{1}
+%Formato de entrega:
+% 1.- Para TT1 y TT2
+% 2.- Para titulación
+
+%======================================================
+% Número de alumnos
+\authnum{3}
+%======================================================
+% Número de asesores
+\asesornum{3}
+%======================================================
+% Nombre completo de los alumnos
+\alumnoA{Jet Ming Adrián Huang Sánchez}
+\alumnoB{María Jimena Júnez Huerta}
+\alumnoC{Jesús Said Zesati Márquez}
+%======================================================
+% Nombre completo de los asesores
+\asesorA{Dr. Umanel Azazael Hernández González}
+\asesorB{M. en C. Flabio Dario Mirelez Delgado}
+\asesorC{M. en P. y M. Jorge Talavera Otero}
+%======================================================
+% Presidente y secretario del jurado
+\presidente{Ing. Jesús Álvarez Montúfar}
+\secretario{M. en C. Eleazar Pacheco Reyes}
+
+%======================================================
+% Línea de trabajo
+\linea{1}
+%Línea de trabajo:
+% 1.- Diseño e implementación de un sistema robótico, dispositivos o sistemas Mecatrónicos.
+
+%======================================================
+% Mes y año oficial de liberación
+\date{junio de 2026}
+
+%==============================================================
+% INICIA DOCUMENTO
+%==============================================================
+\begin{document}
+    \renewcommand{\listfigurename}{Lista de Figuras}
+    \renewcommand{\listtablename}{Lista de Tablas}
+    \bstctlcite{IEEEexample:BSTcontrol}
+
+% Estilo del documento
+    \thesism
+
+%======================================================
+%-----------------Portada y contraportada--------------
+%======================================================
+\maketitle
+\clearpage
+\pagestyle{empty}
+\newpage~\newpage
+\begin{contraportada}
+\end{contraportada}
+\newpage~\newpage
+\clearpage
+\pagestyle{plain}
+
+%======================================================
+%----------------------Índice--------------------------
+%======================================================
+\pagestyle{empty}
+\tableofcontents\pagestyle{empty}
+\listoffigures
+\cleardoublepage\pagestyle{empty}
+\listoftables
+\cleardoublepage\pagestyle{empty}
+
+%======================================================
+%--------------------Capítulos------------------------
+%======================================================
+\clearpage\pagestyle{plain}
+\pagenumbering{roman}
+
+%======================================================
+%--------------------Resumen--------------------------
+%======================================================
+\cleardoublepage
+{
+\section*{Resumen}\label{resumen}
+\addcontentsline{toc}{chapter}{Resumen}
+\thispagestyle{empty}
+\let\clearpage\relax
+
+En el presente documento se realizó el diseño de un biorreactor tipo airlift para el
+cultivo de hongos coprófilos pertenecientes al filo Ascomycota, con el objetivo de
+proporcionar una plataforma experimental confiable y reproducible. El sistema
+contará con monitoreo y control de los parámetros: disponibilidad de nutrientes,
+temperatura, presión y nivel, permitiendo al investigador caracterizar el
+comportamiento del organismo mientras que asegura la estabilidad de las
+condiciones de experimentación. De igual manera, se integrará un sistema de
+monitoreo de las variables iluminación y oxigenación más no se controlarán. A lo
+largo de este documento se presenta el proceso de diseño del contenedor de los
+ascomicetos, consideraciones para la selección de materiales y componentes, así
+como simulaciones y cálculos que validan la viabilidad de su construcción. A su
+vez, se encuentran contenidos planos, diagramas eléctricos, bosquejos de la
+interfaz, sistemas de control y plan de manufactura.
+
+\subsection*{Palabras clave}\label{palabras}
+\addcontentsline{toc}{chapter}{Palabras clave}
+
+Biorreactor airlift, ascomicetos coprófilos, sistema controlado, monitoreo automatizado.
+
+\newpage
+\section*{Abstract}\label{abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+This document presents the design of an airlift bioreactor for the cultivation of
+coprophilous fungi belonging to the Ascomycota phylum, aiming to provide a reliable
+and reproducible experimental platform. The system features monitoring and control
+of key parameters: nutrient availability, temperature, pressure, and level, allowing
+the researcher to characterize the organism's behavior while ensuring stable
+experimental conditions. Additionally, a monitoring system for lighting and
+oxygenation variables is integrated, though these will not be controlled. Throughout
+this document, the design process for the ascomycete containment tank is detailed,
+including material and component selection criteria, as well as simulations and
+calculations that validate the feasibility of its construction. Furthermore, it contains
+blueprints, electrical diagrams, interface sketches, control systems, and a
+manufacturing plan.
+
+\subsection*{Keywords}\label{keywords}
+\addcontentsline{toc}{chapter}{Keywords}
+
+Airlift bioreactor, coprophilous ascomycetes, controlled system, automated monitoring.
+}
+\clearpage\pagenumbering{arabic}
+
+%======================================================
+%--------------------Capítulo 1-----------------------
+%======================================================
+\clearpage\pagestyle{plain}
+\chapter{Introducción}\label{cap1}
+
+El presente documento expone el diseño detallado de un biorreactor tipo airlift,
+elaborado bajo la metodología de diseño mecatrónico con el fin de crear el entorno
+de experimentación óptimo para el estudio y caracterización del comportamiento de
+un cultivo de hongos ascomicetos coprófilos.
+
+Primeramente, se presentan los objetivos a cumplir con el desarrollo del prototipo,
+seguido de la justificación, en la que se expone la problemática existente y el
+alcance de este. El marco teórico por su parte presenta conceptos y términos que
+conforman las bases teóricas para la comprensión del proyecto. En el estado del
+arte se manejan algunos de los últimos avances de este tipo de tecnología que
+mantienen relación con los objetivos planteados.
+
+En la sección planteamiento del problema se desglosa a profundidad el problema
+a resolver, además de describirse el sistema por medio de diagramas IDEF0, donde
+se describe paso a paso las acciones a realizar para la obtención de una respuesta
+favorable.
+
+Por su parte el apartado diseño detallado se encuentra dividido en diversas
+secciones, comenzando por la creación de la geometría general del tanque,
+seguido del diseño del sistema de control de nutrientes, nivel y temperatura;
+después la programación, etapa en la que se consideran los diagramas de flujo que
+rigen el ciclo lógico del sistema, así como diagramas de estados y bosquejos de la
+interfaz. La sección de diseño de electrónica recopila todos los elementos que
+conforman las etapas de potencia, protocolos de comunicación y microcontrolador,
+todo eso con su respectivo diseño de PCB. En selección de materiales se presentan
+todos los elementos prefabricados que componen el sistema, así como una breve
+explicación del porqué de su elección. Finalmente, el apartado plan de manufactura
+recaba todos los procesos que se llevaran a cabo para la creación del prototipo.
+
+\section{Objetivos}
+
+\subsection{Objetivo General}
+
+Diseñar y construir un biorreactor tipo airlift semiautomatizado que permita al
+usuario realizar pruebas en hongos ascomicetos coprófilos, mediante el ajuste
+previo de las variables temperatura, presión, nivel, y cantidad de nutrientes, así
+como el monitoreo de oxigenación e iluminación, facilitando la investigación y
+determinación de las condiciones óptimas para su cultivo.
+
+\subsection{Objetivos específicos}
+
+\begin{itemize}
+  \item Diseñar y construir una estructura con dimensiones máximas de 80~cm $\times$ 80~cm $\times$ 100~cm, que cuente con compartimentos para la adición de los reactivos implicados en el crecimiento de los ascomicetos.
+  \item Diseñar e implementar un algoritmo de control que gestione las transiciones entre etapas de crecimiento del hongo, ajustando la salida de los actuadores en función de las variables de entrada: temperatura, presión, oxigenación y cantidad de nutrientes.
+  \item Diseñar e integrar un sistema electrónico que incorpore sensores, circuitos de acondicionamiento de señal y actuadores.
+  \item Desarrollar e implementar una interfaz humano-máquina que muestre las variables críticas: temperatura, presión, oxigenación, cantidad de nutrientes, iluminación y nivel. Estas variables deberán actualizarse cada minuto y almacenarse en una base de datos descargable.
+\end{itemize}
+
+%======================================================
+%--------------------Capítulo 2-----------------------
+%======================================================
+\chapter{Justificación}\label{cap2}
+
+Los ascomicetos coprófilos representan una reserva importante de antibióticos y
+otros metabolitos secundarios bioactivos, útiles para el desarrollo de nuevos
+tratamientos farmacéuticos \cite{Bills2013}. Estas propiedades cobran relevancia debido al
+aumento de las bacterias multirresistentes y la limitada eficacia de antibióticos
+actuales. Aunque antibióticos como la penicilina provienen de hongos, desde la
+década de 1990, barreras técnicas y regulaciones han limitado el descubrimiento
+de nuevos compuestos fúngicos \cite{Correia2023}.
+
+A pesar del conocido potencial biotecnológico de estos hongos, rara vez han sido
+aislados para ser cultivados de forma controlada con fines experimentales, a fin de
+comprender su comportamiento y, posteriormente, fomentar la producción de
+biomasa y metabolitos \cite{MarinFelix}. En la naturaleza, el ecosistema óptimo para la
+proliferación de estos hongos son los matorrales xerófilos, los cuales son
+vulnerables al deterioro por el cambio de uso del suelo \cite{Sanchez2004}.
+
+Actualmente, en el área de Bioquímica de la Escuela Nacional de Ciencias
+Biológicas (ENCB) del Instituto Politécnico Nacional (IPN), micólogos estudian
+hongos coprófilos en cajas Petri. Sin embargo, al escalar el cultivo en biorreactores,
+se presentan diferentes problemáticas, puesto que se carece de equipo
+especializado que considere las características de estos hongos, aseguren su
+crecimiento uniforme y sin obstrucciones, y faciliten la limpieza del equipo y
+recolección de la biomasa generada.
+
+En este contexto, se identifica la necesidad de generar una estación de pruebas
+controladas para la investigación de hongos ascomicetos coprófilos. Para ello, se
+propone diseñar y construir un biorreactor de tipo airlift, uno de los preferidos para
+el cultivo de hongos filamentosos, debido a su eficiente transferencia volumétrica
+de oxígeno y a que evita el estrés por cizallamiento generado por la agitación
+mecánica presente en otro tipo de biorreactores \cite{Cerrone2025}.
+
+El desarrollo de este proyecto representará una herramienta práctica en el campo
+de la biotecnología fúngica, puesto que brindará un ambiente cerrado y controlado,
+asegurando la reproducibilidad de los experimentos, lo que facilitará la
+experimentación científica en este tipo de hongos.
+
+%======================================================
+%--------------------Capítulo 3-----------------------
+%======================================================
+\chapter{Antecedentes}\label{cap3}
+
+En la Unidad Interdisciplinaria de Ingeniería Campus Zacatecas (UPIIZ-IPN), se
+han realizado diversas investigaciones relacionadas con la presente propuesta. A
+continuación, se muestran los trabajos más relevantes que contribuyen al desarrollo
+de los objetivos planteados.
+
+En 2016, los alumnos Pedro Rodríguez Segura y Juan José Saldívar Nava,
+asesorados por el M.\ en C.\ Omar Désiga Orenday, Dra.\ Verónica Ávila Vázquez y
+el M.\ en C.\ Sergio Zavala Castillo, presentaron el proyecto ``Reactor para la
+producción de biodiesel utilizando aceite vegetal usado''. Este trabajo se enfocó en
+el control de variables para la producción de biodiesel como la temperatura,
+velocidad de agitación e intensidad luminosa \cite{Rodriguez2016}. Su utilidad radica en que
+proporciona bases importantes para la implementación de sistemas de medición y
+control de temperatura y agitación en medios líquidos.
+
+Por otro lado, en 2023, el trabajo ``Diseño y construcción de un fotobiorreactor como
+soporte vital para prueba en la estratosfera'' desarrollado por los alumnos Carlos
+Alvarado, Joel Escareño y Diego Osorio, asesorados por el Dr.\ Hans Christian
+Correa Aguado, M.\ en C.\ Flabio Darío Mirelez Delgado y M.\ en I.\ Addried Samir
+Moreno Castro, tuvo como fin controlar las variables que afectan al desarrollo del
+crecimiento de las microalgas, siendo estas la intensidad lumínica y la temperatura,
+entre otros \cite{Alvarado2023}. Este proyecto será de gran importancia ya que sienta las bases para
+el diseño de sistemas de monitoreo y control de variables.
+
+%======================================================
+%--------------------Capítulo 4-----------------------
+%======================================================
+\chapter{Marco teórico}\label{cap4}
+
+\section{Diseño y tipos de biorreactores}
+
+Un biorreactor es un dispositivo capaz de proporcionar un entorno homogéneo y
+favorable para que se lleven a cabo las reacciones químicas que fomentan que los
+organismos tratados produzcan los metabolitos deseados. El diseño de un
+biorreactor involucra contemplar parámetros como concentración, tasa de flujo
+volumétrico y volumen. Además, es necesario considerar el uso de dispositivos de
+medición, como sensores de pH u oxígeno, puesto que diferentes variables juegan
+un papel importante en el crecimiento del organismo \cite{Jaibiba2020}.
+
+Los biorreactores tipo airlift se caracterizan por utilizar una
+turbulencia creada por gas para mezclar el contenido. El aire se introduce desde el
+fondo del reactor, lo que resulta en un movimiento circulatorio del contenido dentro
+del reactor que ayuda a obtener una mayor transferencia de oxígeno.
+Además, presentan ventajas como bajo consumo energético, altas tasas de
+transferencia de calor y masa, menor estrés por cizallamiento debido a la ausencia
+de agitadores mecánicos, y costos de construcción y operación reducidos \cite{Esperanca2023}.
+
+\section{Factores clave en el uso de biorreactores airlift}
+
+La hidrodinámica representa uno de los factores críticos en el diseño de
+biorreactores airlift, puesto que afecta en el crecimiento del organismo y la viabilidad
+del proyecto. Suelen evaluarse parámetros hidrodinámicos como la retención del
+gas ($\varepsilon$), la velocidad del líquido ($V_L$) y la tasa de corte ($\dot{\gamma}$). En la actualidad se utiliza
+la dinámica de fluidos computacional (CFD) para estos análisis, puesto que
+significan un ahorro de tiempo, energía y reactivos \cite{Esperanca2023}.
+
+El cultivo de hongos filamentosos representa desafíos en lo respectivo al diseño del
+biorreactor. La reología\footnote{Estudio de los principios físicos que regulan el movimiento de los fluidos. \cite{rae_reologia}} del medio, transferencia de oxígeno y estrés por
+cizallamiento son factores por considerar relacionados con la eficiencia de su
+cultivo. También es necesario considerar la morfología del hongo filamentoso,
+puesto que la selección del tipo de reactor, en específico los mecanismos para la
+mezcla, dependen de esta \cite{Gomes2023}.
+
+En particular, los ascomicetos coprófilos requieren de condiciones específicas de
+pH que deben variar según su etapa de desarrollo, así como una humedad y
+oxigenación elevadas. Además, se ha encontrado también que el desarrollo de sus
+ascomas es estimulado por la luz. Las características químicas del medio de cultivo
+tienen un impacto en el desarrollo del hongo, por lo que es necesario asegurar la
+dispersión homogénea de los nutrientes \cite{Bills2013,Gomes2023}.
+
+\section{Escalamiento y automatización de biorreactores}
+
+Existen diferentes parámetros a considerar al escalar biorreactores airlift, uno de
+ellos es el volumen de producción deseado. Para investigación, es común usar
+biorreactores pequeños (1--10~L), mientras que biorreactores de mayor capacidad
+suelen emplearse en la producción comercial. Debido a la dificultad para modelar
+el comportamiento de biorreactores de gran capacidad, es posible usar varios
+contenedores con dimensiones menores a 10~L de forma simultánea \cite{Moresi2025}.
+
+Otro parámetro por considerar es el mezclado y transferencia de masa, puesto que
+el tamaño seleccionado debe garantizar una transferencia eficiente de nutrientes y
+oxigeno sin generar esfuerzo cortante excesivo. Por otra parte, biorreactores de
+mayor capacidad implican costos iniciales y de operación más elevados, además
+de requerir procedimientos de esterilización más complejos y costosos \cite{Moresi2025,Micheletti2006}.
+
+La automatización mediante dispositivos eléctricos, como placas de desarrollo y
+sensores (temperatura, presión, etanol, luminosidad y oxigenación) permite
+monitorear y controlar las condiciones internas del sistema. Como consecuencia,
+se incrementa la productividad del sistema y se asegura una calidad constante en
+el producto generado \cite{Paredes2024}.
+
+%======================================================
+%--------------------Capítulo 5-----------------------
+%======================================================
+\chapter{Estado del arte}\label{cap5}
+
+A continuación, se presentan algunos de los trabajos más recientes que se
+encuentran en el campo de estudio de interés. Estos permitirán conocer el estado
+actual de la investigación y desarrollo en el área de los biorreactores, así como
+posicionar el presente trabajo en un contexto actual de los avances ya logrados.
+
+En 2025, Mauro Moresi, catedrático titular en Operaciones de Ingeniería de
+Alimentos y Evaluación del Impacto Ambiental en la Industria Alimentaria en la
+Universidad de Tuscia, Italia, realizó un proyecto de investigación que culminó con
+el desarrollo de un biorreactor de torre con camisa versátil. Este diseño permitió
+optimizar la eficiencia en la transferencia de oxígeno y el control del proceso. Su
+flexibilidad operativa permitió el funcionamiento en dos modos, el modo airlift
+(circulación por aire) y en modo bucle eyector, ideal en varios de los procesos de
+fermentación aeróbica. Al operar en modo airlift, se identificaron problemas debido
+a una sedimentación no homogénea, lo que demuestra la necesidad de un sistema
+de recirculación controlada. En modo bucle eyector resultó eficaz para algunas
+cepas, pero inadecuado en organismos sensibles, puesto que los esfuerzos
+cortantes resultaron perjudiciales \cite{Moresi2025}.
+
+Este trabajo es de interés puesto que muestra un diseño versátil aplicable al cultivo
+de organismos aerobios, como lo son los ascomicetos coprófilos. A lo largo del
+mismo se resaltan las consideraciones de diseño ingenieril y las mejoras
+propuestas, como la necesidad de recirculación controlada en futuros trabajos.
+
+El trabajo realizado en 2025 por Federico Cerrone, profesor asistente de Ingeniería
+de Bioprocesos en la Universidad de la Ciudad de Dublín e investigador principal
+asociado en BiOrbic, y Kevin E O'Connor, catedrático titular en Bioeconomía y
+Bioprocesos en la Universidad de la Ciudad de Dublín, Irlanda, llevaron a cabo un
+estudio sobre el cultivo de hongos filamentosos en biorreactores de tipo airlift. El
+trabajo analizó las ventajas y desventajas del cultivo de hongos filamentosos en
+biorreactores de tipo airlift. En el estudio, se hace una comparativa de estos
+biorreactores con otros medios de cultivo, como lo son los biorreactores de tanque
+agitado y de columna de burbujeo.
+
+El análisis concluye que el cultivo en biorreactores tipo airlift ofrece una relación
+entre transferencia volumétrica de oxígeno y estrés por cizalladura, lo que aumenta
+la productividad en comparación con los otros medios estudiados. Sin embargo, se
+hace énfasis en la necesidad de un control adecuado del tamaño y densidad de los
+agregados miceliales formados, ya que pueden disminuir la eficiencia del proceso.
+En el artículo se mencionan también mejoras en el diseño para aumentar la
+producción de hongos \cite{Cerrone2025}.
+
+En 2023, Francisco Gabriel Pardo Pérez, Ingeniero Civil Químico de la Universidad
+de Chile, asesorado por María Elena Lienqueo Contreras, PhD en Ingeniería
+Química de la Universidad de Chile, presentó su investigación sobre una estrategia
+de escalamiento de un biorreactor tanque agitado, con el fin de producir biomasa y
+proteína enfocado de hongos filamentosos. Para lograrlo, se optimizó el control de
+la temperatura, aireación y agitación; además de obtenerse el coeficiente
+volumétrico de transferencia de masa ($k_L a$), con el objetivo de escalar sistema de
+laboratorio a una planta industrial.
+
+Este proyecto aporta un gran valor al desarrollo del trabajo propuesto, debido a que
+muestra la metodología utilizada para escalar un proceso de fermentación
+sumergida en laboratorio a uno industrial considerando variables como la
+viscosidad del medio y esfuerzos de corte \cite{Pardo2023}.
+
+En 2024, Federico Cerrone, investigador principal en el BiOrbic Bioeconomy
+Research Centre y profesor en la University College Dublin, junto con Kevin E.\
+O'Connor, catedrático en Bioeconomía y Bioprocesos, presentaron una
+investigación en la que se analizan las estrategias de cultivo en biorreactores tipo
+airlift aplicadas al crecimiento de Agaricomycetes, hongos filamentosos comestibles \cite{Cerrone2024}.
+
+Este artículo documenta el diseño, operación y rendimiento de un biorreactor airlift,
+de igual manera aborda aspectos clave al tratar con hongos filamentosos, como la
+formación de pellets, consumo de oxígeno y acumulación de metabolitos. Esta
+información será de utilidad ya que, a pesar de centrarse en Basidiomycetes y no
+en Ascomicetos, las condiciones de cultivo en entornos controlados son similares.
+
+En 2024, Diego Amador Guerra, Jorge Luis Chimal Ayala y Leví Alberto González
+López, estudiantes de Ingeniería en Biotecnología del Instituto Tecnológico y de
+Estudios Superiores de Occidente (ITESO), diseñaron el bioproceso completo para
+la producción de extracto antioxidante presente en \textit{Lepista sordida}. En este trabajo
+se seleccionó un reactor de tanque agitado, comparándolo con uno de tipo airlift,
+destacando ventajas y desventajas. Este trabajo es útil porque presenta una
+experiencia aplicada en la comparación de diseño de biorreactores, además de
+presentar un marco teórico solido para la selección de medios de cultivo,
+escalamiento y evaluación de productos bioactivos \cite{Amador2024}.
+
+%======================================================
+%--------------------Capítulo 6-----------------------
+%======================================================
+\chapter{Planteamiento del problema}\label{cap6}
+
+\section{Exposición del problema}
+
+Investigadores de la ENCB se encuentran estudiando las propiedades antibióticas
+de una variedad de organismos pertenecientes al género ascomicetos coprófilos,
+sin embargo, el procedimiento actual en cajas Petri está limitado a una producción
+reducida, además de requerir una alta manipulación manual. Existen biorreactores
+comerciales para el escalado de estos sistemas biológicos, sin embargo, ninguno
+considera las particularidades de estos organismos, como la baja resistencia a las
+fuerzas cortantes, el alto índice de oxigenación requerido, iluminación homogénea
+y control de otras variables ambientales clave (pH, presión, temperatura). Esta
+brecha tecnológica representa una limitante en la reproducibilidad y eficacia de los
+experimentos a efectuar sobre estos organismos.
+
+\section{Solución propuesta}
+
+El presente proyecto tiene como objetivo diseñar y construir un biorreactor de tipo
+airlift con una capacidad útil de 17 litros, orientado a la investigación en el cultivo
+controlado de hongos coprófilos del filo Ascomycota. El biorreactor será diseñado
+considerando las características particulares del hongo, proporcionando un entorno
+controlado y libre de contaminantes significativos. Para asegurar una repartición
+consistente de los nutrientes y una oxigenación adecuada, se añadirá un sistema
+de burbujeo que permita la circulación del medio. Además, se incorporarán
+mecanismos para monitorear y controlar las variables temperatura, iluminación y
+oxigenación a lo largo de las diferentes etapas de crecimiento del hongo.
+
+Se contará con un subsistema que permitirá liberar el exceso de oxígeno y otros
+gases generados durante el proceso con el fin de evitar una zona de aireación en
+la cual se puedan desarrollar elementos no deseados como el micelio
+contaminante. El biorreactor integrará una interfaz humano-máquina que permitirá
+al usuario programar el ensayo a realizar en el hongo de manera intuitiva. Durante
+la prueba, mostrará los valores más recientes correspondientes al muestreo con
+actualizaciones cada minuto.
+
+Al finalizar el experimento, permitirá descargar la información capturada en una
+memoria externa para su posterior análisis. Se busca que el diseño del biorreactor
+sea modular, puesto que el desmontaje para limpieza y esterilización es un factor
+clave en el cultivo. Todos los materiales de construcción deberán ser de grado
+alimenticio y compatibles con los protocolos de limpieza química. Esta
+configuración modular también facilitará la recolección de la biomasa generada,
+permitiendo el acceso directo a los sólidos producidos posterior al vaciado del
+contenido líquido. El sistema completo deberá tener dimensiones máximas de
+80~cm $\times$ 80~cm $\times$ 100~cm, e incorporar compuertas para la adición de los reactivos.
+
+%======================================================
+%--------------------Capítulo 7-----------------------
+%======================================================
+\chapter{Desarrollo del trabajo}\label{cap7}
+
+Para el desarrollo del proyecto se utilizará la metodología de diseño mecatrónico,
+la cual permite desarrollar de forma integral el diseño de sistemas que integran
+componentes mecánicos, eléctricos y de control.
+
+\section{Análisis del problema}
+
+Con el objetivo de analizar las etapas de funcionamiento del sistema en su totalidad,
+se hizo uso de diagramas IDEF0, metodología que permite conceptualizar el
+producto final a desarrollar representándolo como cajas negras con entradas,
+controles y maquinaria que generan una o varias salidas.
+
+\textbf{Diagrama A-0:} Muestra de manera general el sistema biorreactor, así como los
+controles y mecanismos que permitirán llevar a las entradas a las salidas requeridas
+(Figura~\ref{fig:idef0_A0}). Las entradas del proceso serán el inóculo con el ascomiceto, así como
+agua; los mecanismos requeridos son la interfaz HMI, sensores, actuadores y
+controladores, mientras que los controles que guiarán el proceso son tanto los
+parámetros de cultivo como la temperatura, oxigenación y nutrientes. Como salidas
+de este proceso, se obtendrán biomasa, metabolitos secundarios y residuos.
+
+\textbf{Diagrama A0:} Este diagrama descompone la función principal en procesos de
+mayor detalle, contemplando la preparación del biorreactor para asegurar el medio
+optimo de cultivo, el cultivo y monitoreo, para finalmente cosechar vaciar y extraer
+los datos recopilados a lo largo del ciclo de funcionamiento (Figura~\ref{fig:idef0_A0b}).
+
+\textbf{Diagramas A1, A2 y A3:} Estos diagramas muestran de manera aún más detallada
+los procesos de preparación y configuración del biorreactor, el cultivo y monitoreo
+y finalmente la cosecha, vaciado y extracción de datos. (Los diagramas IDEF A1,
+A2 y A3 se encuentran en el Apéndice~\ref{ap:idef0}).
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 1: Diagrama IDEF0, nodo A-0]\vspace{2cm}}}
+  \caption{Diagrama IDEF0, nodo A-0.}
+  \label{fig:idef0_A0}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 2: Diagrama IDEF0, nodo A0]\vspace{2cm}}}
+  \caption{Diagrama IDEF0, nodo A0.}
+  \label{fig:idef0_A0b}
+\end{figure}
+
+\section{Especificaciones de diseño}
+
+\subsection{Necesidades del usuario}
+
+Con base en la investigación documentada en los capítulos III y IV, se identificaron
+las necesidades del usuario final. La Tabla~\ref{tab:necesidades} enlista todas estas necesidades y a
+su vez incluye un índice de importancia relativa, el cual evalúa del 1 al 3 la
+importancia de cada parámetro, representando un valor más bajo una mayor prioridad.
+
+\begin{table}[H]
+\centering
+\caption{Tabla de Necesidad.}
+\label{tab:necesidades}
+\begin{tabular}{clc}
+\toprule
+\textbf{N\textdegree} & \textbf{Necesidad} & \textbf{Importancia relativa} \\
+\midrule
+1  & La estructura debe ser biocompatible con el hongo & 1 \\
+2  & La estructura debe soportar protocolos de limpieza y desinfección sin sufrir degradación & 3 \\
+3  & El sistema debe mantener su contenido protegido frente a la entrada de contaminantes externos y la pérdida de fluidos & 2 \\
+4  & La interfaz debe mostrar información y alertas & 3 \\
+5  & La interfaz debe permitir el monitoreo y ajuste del pH & 2 \\
+6  & La interfaz debe permitir el monitoreo y ajuste de la iluminación & 2 \\
+7  & La interfaz debe permitir el monitoreo y ajuste de la temperatura & 2 \\
+8  & La interfaz debe permitir el monitoreo y ajuste del nivel de llenado del biorreactor & 2 \\
+9  & La interfaz debe permitir el monitoreo y ajuste de la presión & 2 \\
+10 & La base de datos debe permitir que todas las pruebas realizadas al biorreactor sean registradas localmente & 3 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Métricas}
+
+Posteriormente, se elabora la tabla de métricas, la cual facilita la organización de
+la información sobre las necesidades según su nivel de importancia. Esta tabla
+también detalla las necesidades que se satisfacen y especifica las unidades de
+medida correspondientes, como se muestra en la Tabla~\ref{tab:metricas}. En el Apéndice~\ref{ap:necesidades_vs_metricas} se
+presenta la tabla ``Necesidades vs métricas''.
+
+\begin{table}[H]
+\centering
+\caption{Tabla de Métricas.}
+\label{tab:metricas}
+\small
+\begin{tabular}{cclcc}
+\toprule
+\textbf{N\textdegree~Métrica} & \textbf{N\textdegree~Necesidad} & \textbf{Métrica} & \textbf{Nivel importancia} & \textbf{Unidades} \\
+\midrule
+1  & 1  & Material que cumpla la norma USP 87 & 1 & --- \\
+2  & 2  & Lineamientos ASME BPE & 5 & --- \\
+3  & 3  & Tasa de fuga & 1 & m$^3$/s \\
+4  & 3  & Presión diferencial soportada & 2 & bar \\
+5  & 4  & Tiempo máx.\ desde detección de condición crítica hasta alarma & 3 & Segundos \\
+6  & 4  & Periodo de actualización de datos & 2 & Segundos \\
+7  & 10 & Capacidad de almacenamiento & 2 & Gb \\
+8  & 7  & Nivel de temperatura & 1 & \textdegree C \\
+9  & 5  & Nivel de pH & 1 & pH \\
+10 & 9  & Nivel de presión & 1 & atm \\
+11 & 8  & Nivel de agua & 3 & \% \\
+12 & 6  & Nivel de intensidad lumínica & 2 & Lúmenes \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Especificaciones de objetivo}
+
+Finalmente se realiza una tabla en la cual con la información recopilada de los
+anteriores puntos se establece su valor marginal y su valor ideal para cada una de
+las métricas establecidas anteriormente, como se observa en la Tabla~\ref{tab:especificaciones}.
+
+\begin{table}[H]
+\centering
+\caption{Tabla de especificaciones de objetivo.}
+\label{tab:especificaciones}
+\small
+\begin{tabular}{cclccccc}
+\toprule
+\textbf{N\textdegree~Mét.} & \textbf{N\textdegree~Nec.} & \textbf{Métrica} & \textbf{Importancia} & \textbf{Unidades} & \textbf{Valor ideal} & \textbf{Valor marginal} \\
+\midrule
+1  & 1  & Material USP 87         & 1 & ---     & Clase VI      & --- \\
+2  & 2  & Lineamientos ASME BPE   & 5 & ---     & ---           & --- \\
+3  & 3  & Tasa de fuga             & 1 & m$^3$/s & $<0.1$        & $<0.2$ \\
+4  & 3  & Presión diferencial      & 2 & bar     & $>0.3$        & $>0.2$ \\
+5  & 4  & T. máx.\ alarma          & 3 & s       & 1             & 3 \\
+6  & 4  & Periodo actualización    & 2 & s       & 1             & 3 \\
+7  & 10 & Capacidad almacenamiento & 2 & Gb      & 16            & 8 \\
+8  & 7  & Nivel temperatura        & 1 & \textdegree C & 15--40 & 10--45 \\
+9  & 5  & Nivel de pH              & 1 & pH      & 3--7          & 2--8 \\
+10 & 9  & Nivel de presión         & 1 & atm     & 1             & 0.95--1.05 \\
+11 & 8  & Nivel de agua            & 3 & \%      & 95            & 90 \\
+12 & 6  & Intensidad lumínica      & 2 & Lúmenes & 10\,000--20\,000 & 8\,000--25\,000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Generación de posibles soluciones}
+
+\subsection{Concentrado de ideas}
+
+Se utilizaron herramientas de pensamiento convergente para la formulación de
+ideas. La Tabla~\ref{tab:morfologico} muestra el resultado de descomponer el producto esperado en
+sus componentes para después brindar diferentes ideas de elementos que podrían
+satisfacer esta necesidad.
+
+\subsubsection{Pensamiento convergente}
+
+\begin{table}[H]
+\centering
+\caption{Tabla del análisis morfológico para el pensamiento convergente.}
+\label{tab:morfologico}
+\small
+\begin{tabular}{lccc}
+\toprule
+\textbf{Función} & \textbf{Opción 1} & \textbf{Opción 2} & \textbf{Opción 3} \\
+\midrule
+Tanque del biorreactor & Vidrio de borosilicato & Policarbonato autoclavable & Acero inoxidable \\
+Sistema de burbujeo & Burbujeo directo (anillo) & Tubo de tiro interno & Anillo externo desmontable \\
+Uniones herméticas & Conectores de Espiga & Conectores roscados & Empaques \\
+Placa controladora & Arduino & Raspberry Pi & Jetson nano \\
+Interfaz (HMI) & Pantalla LCD & Pantalla táctil & Interfaz web \\
+Control de temperatura & Resistencia calefactora & Manta calefactora & Serpentín con recirculación \\
+Control de pH & Adición manual ácido/base & Mediante reactivos & Bomba peristáltica reversible \\
+Sistema llenado/vaciado & Válvulas manuales & Válvulas solenoides & Inyección manual \\
+Suministro de sustrato & Flujo por gravedad & Bomba peristáltica & --- \\
+Protocolo comunicación & Serial (USB/UART) & CANBUS & SPI \\
+Almacenamiento datos & Tarjeta MicroSD & Memoria USB & Base de datos Nube/Local \\
+Fuente de energía & Adaptador Corriente Alterna & Baterías DC & Corriente alterna \\
+Tipo de iluminación & Tiras de LEDs & Lámparas fluorescentes & Lámpara incandescente \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Pensamiento divergente}
+
+De igual manera, se utilizó una herramienta de pensamiento divergente en el Apéndice~\ref{ap:mapa_mental} (Figura~\ref{fig:mapa_mental}).
+
+\subsection{Diseños conceptuales}
+
+A partir de las opciones derivadas de la caja morfológica, se generaron tres diseños
+conceptuales mediante diversas combinaciones. Estos diseños comparten las
+siguientes características constantes:
+
+\begin{itemize}
+  \item \textbf{Sensores:} Necesariamente los sensores tienen que ser sumergibles y grado alimenticio.
+  \item \textbf{Concentración de gases:} La liberación de gases ocurre en la parte superior del contenedor a través de una válvula de alivio.
+  \item \textbf{Entradas:} El sistema debe contar con dos entradas para semilíquidos para ingresar el hongo, cuatro entradas para líquidos, dos para agua y dos para el etanol utilizado para el control de nivel de nutrientes.
+  \item \textbf{Extracción de líquidos:} El sistema debe de contar con dos compartimentos a diferente nivel para la extracción de los líquidos.
+  \item \textbf{HMI:} La HMI será externa al biorreactor, esta cuenta con una pantalla con todos los datos recopilados además debe contar con un puerto USB con el cual es posible extraer la información y finalmente debe contener todas las conexiones para todos los sensores y actuadores (Figura~\ref{fig:hmi_conceptual}).
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 3: Diseño conceptual del HMI]\vspace{2cm}}}
+  \caption{Diseño conceptual del HMI.}
+  \label{fig:hmi_conceptual}
+\end{figure}
+
+\subsubsection{Diseño conceptual 1}
+
+Para el primer diseño conceptual (Figura~\ref{fig:dc1}) muestra el sistema de control de
+temperatura el cual es un biorreactor de doble pared unido por agarraderas
+centradoras, el contendor interior es el biorreactor, mientras que el exterior es
+utilizado para calentar el biorreactor a través de baño maría. Además el diseño
+cuenta con un flujo interno que pasa a través de un foco cilindro hueco con el cual
+se ilumina el biorreactor.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 4: Diseño conceptual 1]\vspace{2cm}}}
+  \caption{Diseño conceptual 1.}
+  \label{fig:dc1}
+\end{figure}
+
+\subsubsection{Diseño conceptual 2}
+
+El segundo diseño conceptual (Figura~\ref{fig:dc2}) implementa el control de temperatura
+mediante calentamiento por placas inductivas aplicadas directamente al
+biorreactor. Este diseño incluye un tubo externo para el flujo del sistema y, este
+diseño además presenta un foco cilíndrico no hueco en su centro.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 5: Diseño conceptual 2]\vspace{2cm}}}
+  \caption{Diseño conceptual 2.}
+  \label{fig:dc2}
+\end{figure}
+
+\subsubsection{Diseño conceptual 3}
+
+Finalmente el tercer diseño conceptual (Figura~\ref{fig:dc3}) utiliza aire caliente para el control
+de la temperatura. El aire se calienta mediante resistencias y se introduce en el
+biorreactor a través de un burbujeador. Similar al diseño anterior, incluye un tubo
+externo para el flujo del sistema y un foco cilíndrico situado en el centro.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 6: Diseño conceptual 3]\vspace{2cm}}}
+  \caption{Diseño conceptual 3.}
+  \label{fig:dc3}
+\end{figure}
+
+\subsection{Selección de la solución adecuada}
+
+Para analizar y diferenciar las características de cada diseño conceptual, se
+utilizaron tablas de pertenencia y de selección para identificar la solución que
+resuelve mejor el problema.
+
+\subsubsection{Evaluación de pertenencia}
+
+En la Tabla~\ref{tab:pertenencia} se observa la tabla de pertenencia, en donde se comparan los criterios
+y se determina la importancia relativa entre cada uno en comparación al resto. Se
+tomaron criterios de selección tomando en cuenta las necesidades identificadas del
+proyecto:
+
+\begin{itemize}
+  \item \textbf{Sistema de transferencia de calor:} Evalúa la capacidad del sistema de transmitir y mantener la temperatura de la manera más eficiente y controlada, expresada en grados Celsius (\textdegree C).
+  \item \textbf{Flujo:} Evalúa la eficacia con la que el sistema promueve la homogeneidad de nutrientes, expresada en número de Reynolds (Re).
+  \item \textbf{Precisión del sistema de control:} Consiste en la capacidad de los sistemas implementados para lograr una estabilidad de una variable física en un valor deseado. Una ponderación alta representa un menor error de precisión, expresado en porcentaje de error (\%).
+  \item \textbf{Hermeticidad:} Evalúa la integridad de contención del biorreactor para prevenir la entrada de microorganismos y contaminantes externos al medio además de evitar fugas del medio. Una ponderación alta implica un valor bajo de tasa de fuga, este se mide en m$^3$/s.
+  \item \textbf{Biocompatibilidad:} Evalúa que todos los materiales en contacto directo con el medio de cultivo o el microorganismo cumplan con los estándares de biocompatibilidad y no toxicidad. Se prioriza el cumplimiento de normativas como la USP Clase VI.
+  \item \textbf{Costo:} Considera el gasto total para el diseño y construcción del prototipo en pesos mexicanos (MXN). Una ponderación alta se debe a un menor precio.
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Tabla de pertenencia.}
+\label{tab:pertenencia}
+\begin{tabular}{lcccccccc}
+\toprule
+\textbf{Criterios} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} & \textbf{E} & \textbf{F} & \textbf{Total} & \textbf{Pertenencia \%} \\
+\midrule
+A.- Transf.\ calor  & x & 1 & 1 & 1 & 1 & 0 & 4 & 26.67 \\
+B.- Flujo            & 0 & x & 0 & 0 & 1 & 0 & 1 & 6.67 \\
+C.- Precisión control & 0 & 1 & x & 1 & 1 & 1 & 4 & -- \\
+D.- Hermeticidad     & 0 & 1 & 0 & x & 1 & 0 & 2 & -- \\
+E.- Biocompatibilidad & 0 & 0 & 0 & 0 & x & 0 & 0 & -- \\
+F.- Costo            & 1 & 1 & 0 & 1 & 1 & x & 4 & -- \\
+\midrule
+\multicolumn{7}{r}{\textbf{Total:}} & 15 & 100 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Tabla de ponderaciones.}
+\label{tab:ponderaciones}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Criterio} & \textbf{Peso} & \textbf{Descripción} \\
+\midrule
+A.- Sistema de transferencia de calor & 0.0667 & Excelente \\
+B.- Flujo                              & 0.2667 & --- \\
+C.- Precisión del sistema de control   & 0.0667 & --- \\
+D.- Hermeticidad                       & 0.3333 & --- \\
+E.- Biocompatibilidad                  & 0.0333 & --- \\
+F.- Costo                              & 0.0667 & Bueno \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Selección de diseño}
+
+\begin{table}[H]
+\centering
+\caption{Tabla de selección.}
+\label{tab:seleccion}
+\begin{tabular}{lccccccc}
+\toprule
+\textbf{Criterios} & \textbf{Total} & \multicolumn{2}{c}{\textbf{DC1}} & \multicolumn{2}{c}{\textbf{DC2}} & \multicolumn{2}{c}{\textbf{DC3}} \\
+\midrule
+A.- Transf.\ calor    & 0.0667 & 0.75 & 0.05 & 0.90 & 0.06 & 0.50 & 0.033 \\
+B.- Flujo              & 0.2667 & 0.75 & 0.20 & 0.90 & 0.24 & 0.75 & 0.20  \\
+C.- Precisión control  & 0.0667 & 0.90 & 0.06 & 0.90 & 0.06 & 0.50 & 0.033 \\
+D.- Hermeticidad       & 0.3333 & 0.50 & 0.10 & 0.90 & 0.18 & 0.50 & 0.10  \\
+E.- Biocompatibilidad  & 0.0333 & 0.75 & 0.25 & 0.90 & 0.30 & 0.50 & 0.167 \\
+F.- Costo              & 0.0667 & 0.90 & 0.06 & 0.75 & 0.05 & 0.50 & 0.033 \\
+\midrule
+\textbf{TOTAL}         &        & \multicolumn{2}{c}{\textbf{0.72}} & \multicolumn{2}{c}{\textbf{0.89}} & \multicolumn{2}{c}{\textbf{0.57}} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+El resultado de la Tabla~\ref{tab:seleccion} muestra que el diseño conceptual 2 consigue el mayor
+puntaje con relación a los objetivos planteados y las ponderaciones asignadas, por
+lo que será el utilizado para realizar el diseño detallado.
+
+%======================================================
+%--------------------Capítulo 8-----------------------
+%======================================================
+\chapter{Diseño detallado}\label{cap8}
+
+Posterior a la selección del diseño conceptual que más se adecua a las
+necesidades del usuario y su importancia relativa, se procedió con el diseño
+detallado del sistema, en el cual se documentan los cálculos, selección de
+componentes y justificaciones teóricas que rigen la geometría del tanque.
+
+El objetivo es crear las especificaciones técnicas necesarias para la posterior
+fabricación, ensamblaje y automatización del sistema. El diseño detallado se
+desglosará en los siguientes puntos:
+
+\begin{itemize}
+  \item \textbf{Diseño Geométrico y Mecánico:} Justifica la geometría del tanque principal.
+  \item \textbf{Selección de componentes:} En esta sección se detallan las características que fueron determinantes al seleccionar los componentes que conformarán el sistema.
+  \item \textbf{Integración y CAD:} Se describe la disposición de los elementos hidráulicos y neumáticos, sistema de iluminación e interfaz.
+  \item \textbf{Sistema de Control:} Describe la arquitectura de control, incluye el proceso de diseño de los diferentes tipos de control que se utilizarán en el proyecto.
+  \item \textbf{Programación:} Detalla el algoritmo utilizando, haciendo uso los diagramas de flujo con la estructura del código que rige el comportamiento del sistema.
+  \item \textbf{Sistemas Eléctricos:} Presenta los esquemas de conexión y la integración de los componentes electrónicos como actuadores, sensores y microcontroladores.
+  \item \textbf{Plan de manufactura:} Define la ruta de fabricación, la selección de herramientas y los procesos técnicos de montaje.
+\end{itemize}
+
+\section{Diseño geométrico y mecánico}
+
+\subsection{Dimensiones y estructura del biorreactor}
+
+El cultivo de hongos filamentosos en biorreactores convencionales presenta
+algunas desventajas, entre ellas la adhesión de micelio en las paredes, la baja
+resistencia del hongo a fuerzas cortantes, necesidad de un entorno homogéneo y
+altas tasas de transferencia de oxígeno. La geometría propuesta en este diseño
+busca atacar estas debilidades mediante la adecuación de las dimensiones a las
+necesidades propias del organismo y la incorporación de elementos nuevos.
+
+La configuración de biorreactor tipo airlift (Figura~\ref{fig:airlift_config}) mitiga el estrés por
+cizallamiento, puesto que elimina los elementos mecánicos de agitación. Esta
+configuración se caracteriza por la inyección de gas en la parte inferior y un aro que
+conduce el flujo. El flujo es resultado de la diferencia de densidad entre dos
+regiones, a la región donde se inyecta el gas se le denomina \textit{riser}, mientras que la
+zona donde el fluido recircula hacia la base se llama \textit{downcomer} \cite{Cerrone2024}.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 7: Configuración de un biorreactor tipo airlift]\vspace{2cm}}}
+  \caption{Configuración de un biorreactor tipo airlift \cite{Cerrone2025}.}
+  \label{fig:airlift_config}
+\end{figure}
+
+La configuración convencional mostrada en la Figura~\ref{fig:airlift_config}, tiene la desventaja de que
+requiere una distancia considerable entre nivel de agua y superficie (espacio libre
+superior) para asegurar el flujo \cite{Cerrone2025}, sin embargo, la existencia de esta área libre
+promueve la formación de micelio. Siguiendo el mismo principio, se han
+desarrollado diferentes modificaciones, entre ellas el biorreactor airlift con aro
+externo, el cual al contar con una separación física entre \textit{riser} y \textit{downcomer}, no
+cuenta con la limitante de que el flujo esté relacionado con el área libre superior.
+Además, el espacio que permitiría la recirculación interna se aprovechará para la
+incorporación del sistema de iluminación. La Figura~\ref{fig:partes_airlift} muestra el diseño tipo airlift
+con aro externo.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 8: Partes de un biorreactor tipo airlift con aro externo]\vspace{2cm}}}
+  \caption{Partes de un biorreactor tipo airlift con aro externo.}
+  \label{fig:partes_airlift}
+\end{figure}
+
+Existen algunas relaciones estandarizadas para biorreactores cilíndricos
+(preferidos para evitar el estancamiento). Se prefieren biorreactores con una
+relación entre la altura de la columna de líquido ($H$) y diámetro interno del tanque
+($D$) de aproximadamente 17 para facilitar el flujo. Sin embargo, en esta ocasión la
+relación $H/D$ se mantuvo en aproximadamente 4.17, esto debido al aumento del
+diámetro del tanque para alojar un foco interno concéntrico.
+
+Otra relación encontrada en la bibliografía es el área de la sección transversal del
+\textit{downcomer} ($A_d$, conducto de descenso) con respecto a la del \textit{riser} ($A_r$, columna de
+ascenso y oxigenación) de 0.5 a 1 para aumentar la velocidad de transferencia. En
+esta ocasión, se priorizó mantener una relación $A_d/A_r = 0.2$, sacrificando velocidad de
+transferencia a cambio de que la mayor parte del cultivo se encuentre distribuida
+en el área iluminada. En el Apéndice~\ref{ap:estructura} se contienen los cálculos para la geometría
+del reactor.
+
+Siempre que existen curvaturas en el tanque, la norma ASME BPE sugiere
+mantener ciertas relaciones para facilitar la limpieza CIP del tanque. Este estándar
+define las dimensiones precisas para los accesorios higiénicos utilizados en estas
+aplicaciones. Para el diseño de las líneas de tubería de 80~mm, equivalente nominal
+a 3 pulgadas, se ha consultado la ``Tabla 19'' de dicha norma. De acuerdo con esta
+tabla, para un tamaño de tubería nominal de 3 pulgadas el estándar BPE especifica
+un radio de curvatura 4.5 pulgadas \cite{Huitt2016}.
+
+La Tabla~\ref{tab:medidas_tanque} recopila las dimensiones seleccionadas para la generación de la
+geometría del tanque.
+
+\begin{table}[H]
+\centering
+\caption{Tabla recopiladora de medidas del tanque.}
+\label{tab:medidas_tanque}
+\begin{tabular}{lll}
+\toprule
+\textbf{Nombre} & \textbf{Designación} & \textbf{Valor} \\
+\midrule
+Radio del riser          & $R_r$ & 85~mm \\
+Radio del downcomer      & $R_d$ & 38.1~mm \\
+Altura del tanque        & $H$   & 700~mm \\
+Altura del downcomer     & $H_d$ & 343.8~mm \\
+Radio de curvatura       & $R_B$ & 114.3~mm \\
+Capacidad volumétrica total del tanque & $V$ & 17.256~L \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 9: Simbología de los parámetros utilizados para la geometría del biorreactor]\vspace{2cm}}}
+  \caption{Simbología de los parámetros utilizados para la geometría del biorreactor.}
+  \label{fig:simbologia}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 10: Ensamble completo del biorreactor]\vspace{2cm}}}
+  \caption{Ensamble completo del biorreactor.}
+  \label{fig:ensamble_biorreactor}
+\end{figure}
+
+\subsection{Análisis de esfuerzos y validación estructural}
+
+Para corroborar la integridad física del biorreactor ante las condiciones de
+operación esperadas, se realizó un análisis de elemento finito (FEA). Se evaluaron
+dos escenarios: la presión hidrostática del medio de cultivo y la presión
+manométrica ante la inyección de aire.
+
+Se considera una estructura fabricada en acero 316L, material predilecto en
+aplicaciones biotecnológicas y farmacéuticas debido a su inocuidad y resistencia a
+la corrosión \cite{Serviacero}; además de un espesor para el tanque de 5~mm.
+
+Para el análisis hidrostático se consideraron la densidad del medio y la aceleración
+gravitacional, arrojando un factor de seguridad mínimo de 5. Demostrando que el
+contenedor soporta el peso del líquido con un margen de seguridad considerable.
+
+En tanto al análisis de la presión manométrica, se sometió al modelo a una carga
+de 15~bar para evaluar su comportamiento ante fallas en las válvulas de alivio,
+donde se obtuvo un factor de seguridad superior a 7.
+
+El Apéndice~\ref{ap:estructura} reúne el proceso de simulación del comportamiento del modelo ante
+las cargas expresadas, así como los resultados obtenidos.
+
+\subsection{Selección de pernos}
+
+Para garantizar la integridad hermética y estructural del biorreactor ante una
+presión interna de 5~bar, se realizó un análisis de fatiga y precarga en los pernos
+de sujeción. El diseño utiliza una configuración de 6 pernos M5 de 20~mm
+distribuidos en un diámetro de sellado de 170~mm.
+
+Se utilizó el modelo de rigidez de juntas de Shigley para determinar el factor de
+seguridad a la fluencia, carga y separación de la unión. La Tabla~\ref{tab:factores_seguridad} recopila los
+resultados de seguridad obtenidos.
+
+\begin{table}[H]
+\centering
+\caption{Tabla de los resultados de los factores de seguridad.}
+\label{tab:factores_seguridad}
+\begin{tabular}{llll}
+\toprule
+\textbf{Factor de seguridad} & \textbf{Símbolo} & \textbf{Valor obtenido} & \textbf{Criterio de aceptación} \\
+\midrule
+A la fluencia        & $n_p$ & 1.3333 & $> 1$ \\
+A la carga           & $n_L$ & 4.892  & $> 1$ \\
+A la separación de la unión & $n_0$ & 2.1404 & $> 1.2$ (para evitar fugas) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Selección de componentes}
+
+\subsection{Sensor de oxígeno y temperatura RK500-04 Tipo-B}
+
+La Figura~\ref{fig:sensor_od} muestra el sensor de oxígeno y temperatura RK500-04, sensor
+seleccionado debido a su alta confiabilidad, material biocompatible y características
+eléctricas y de comunicación adaptables al sistema planteado. Dado que la
+oxigenación es un factor determinante para asegurar la vida del organismo, es
+requerido contar con una medición fiel en todo momento. Se escogió este modelo
+entre otras opciones más económicas principalmente por el material de grado
+alimenticio y su alta resolución.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 11: Sensor de temperatura RK500-04]\vspace{1.5cm}}}
+  \caption{Sensor de temperatura RK500-04.}
+  \label{fig:sensor_od}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Especificaciones sensor de OD.}
+\label{tab:sensor_od}
+\begin{tabular}{ll}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Resolución sensor OD          & 0.01~mg/L \\
+Resolución sensor temperatura & 0.1~\textdegree C \\
+Material                      & 316L \\
+Alimentación                  & 7--30~V \\
+Salida                        & RS485 / 4--20~mA \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Sensor de pH RK500-12 Tipo-B3}
+
+En tanto al sensor de pH, se seleccionó un modelo de grado industrial debido a su
+exactitud, su sencilla auto calibración, rosca y materiales inocuos. Además de
+operar en un amplio rango de temperatura y presión, sus características de
+alimentación y presentación de la salida se adecuan a las necesidades de este
+proyecto. La Figura~\ref{fig:sensor_ph} muestra el sensor de pH seleccionado.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 12: Sensor de pH RK500-12 Tipo-B3]\vspace{1.5cm}}}
+  \caption{Sensor de pH RK500-12 Tipo-B3.}
+  \label{fig:sensor_ph}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Especificaciones del sensor de pH RK500-12 Tipo-B3.}
+\label{tab:sensor_ph}
+\begin{tabular}{ll}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Resolución sensor pH          & 0.01~pH \\
+Resolución sensor temperatura & 0.1~\textdegree C \\
+Temperatura de operación      & 0--100~\textdegree C \\
+Presión de operación          & 1~MPa \\
+Material                      & 316L y vidrio \\
+Rosca                         & PG13.5 \\
+Alimentación                  & 7--28~V \\
+Salida                        & RS485 / 4--20~mA \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Sensor de nivel VEGAPULS C22}
+
+La medición de nivel del líquido requiere efectuarse sin contacto, ser fiable y de
+alta precisión, además de abarcar un rango de 0 a 71~cm. La Figura~\ref{fig:sensor_nivel} muestra el
+sensor seleccionado.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 13: Sensor de nivel VEGAPULS C22]\vspace{1.5cm}}}
+  \caption{Sensor de nivel VEGAPULS C22.}
+  \label{fig:sensor_nivel}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Especificaciones del sensor nivel VEGAPULS C22.}
+\label{tab:sensor_nivel}
+\begin{tabular}{ll}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Rango de medición        & 0 a 20~m \\
+Precisión                & $\pm 2$~mm \\
+Temperatura de operación & $-40$ a $80$~\textdegree C \\
+Presión de operación     & 300~kPa \\
+Material                 & PVDF con certificado higiénico FDA \\
+Rosca                    & 1\,½~NPT \\
+Alimentación             & 12--35~V \\
+Salida                   & RS485 / 4--20~mA \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Válvula de alivio de presión}
+
+La válvula seleccionada regula y libera la presión dentro del tanque, está
+manufacturada en cobre de grado alimenticio e incluye manómetro y conectores.
+La Figura~\ref{fig:valvula} muestra el componente seleccionado.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 14: Válvula de alivio y presión]\vspace{1.5cm}}}
+  \caption{Válvula de alivio y presión.}
+  \label{fig:valvula}
+\end{figure}
+
+\subsection{Compresor bomba de aire}
+
+Se seleccionó una bomba de aire con características superiores a las requeridas
+para obtener el caudal adecuado, esto debido a la posibilidad de escalamiento a
+futuro. La Figura~\ref{fig:bomba_aire} muestra la bomba seleccionada.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 15: Compresor bomba de aire]\vspace{1.5cm}}}
+  \caption{Compresor bomba de aire.}
+  \label{fig:bomba_aire}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Especificaciones del compresor bomba de aire.}
+\label{tab:bomba_aire}
+\begin{tabular}{ll}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Caudal máximo & 65~l/min \\
+Potencia      & 46~W \\
+Alimentación  & 110~V \\
+Presión       & 0.027~MPa \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Bomba de agua}
+
+Se seleccionó una bomba de cerveza fabricada en acero inoxidable 304, lo cual
+asegura su inocuidad y durabilidad. La Figura~\ref{fig:bomba_agua} muestra la bomba seleccionada.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 16: Bomba de agua]\vspace{1.5cm}}}
+  \caption{Bomba de agua.}
+  \label{fig:bomba_agua}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Especificaciones de la bomba de agua.}
+\label{tab:bomba_agua}
+\begin{tabular}{ll}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Caudal nominal                 & 8/12~L/min \\
+Potencia de salida             & 10~W \\
+Resistencia a altas temperatura & Hasta 140~\textdegree C \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Manta calefactora}
+
+Para seleccionar una manta con la potencia adecuada se realizaron los siguientes
+cálculos, considerando:
+
+\begin{itemize}
+  \item Temperatura ambiente del agua: 18~\textdegree C
+  \item Temperatura máxima: 40~\textdegree C
+  \item Tiempo requerido: 1 hora con 10 minutos = 4\,200~s
+  \item Calor específico del agua: $C_p = 4.186$~kJ/(kg$\cdot$K)
+  \item Volumen de agua: 17~L $\approx$ 17~kg
+\end{itemize}
+
+\begin{equation}
+Q = m \cdot c \cdot \Delta T = 17 \cdot 4.186 \cdot (40 - 18) = 1\,565.56 \text{ kJ}
+\end{equation}
+
+\begin{equation}
+P = \frac{Q}{t} = \frac{1\,565.56 \text{ kJ}}{4\,200 \text{ s}} = 372.75 \text{ W}
+\end{equation}
+
+Las características principales de la manta seleccionada se encuentran en la Tabla~\ref{tab:manta}.
+
+\begin{table}[H]
+\centering
+\caption{Especificaciones de la manta térmica.}
+\label{tab:manta}
+\begin{tabular}{ll}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Material             & Silicona \\
+Voltaje              & 110~V \\
+Potencia             & 450~W \\
+Rango de temperatura & 30--110~\textdegree C \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Disco difusor}
+
+En la industria, existen numerosos estudios para el modelado de sistemas de
+burbujeo, por lo que componentes estándar son comúnmente utilizados para
+asegurar una distribución homogénea del oxígeno en el tanque. Por esta razón, se
+optó por implementar un componente comercial estandarizado en lugar de un
+diseño de manufactura propia. El elemento comercial seleccionado fue un disco
+difusor de material sinterizado con dimensiones de 3~in $\times$ 1~in.
+
+\subsection{Raspberry Pi 3B}
+
+El control del biorreactor requiere la ejecución simultánea de la adquisición de datos
+de los diferentes sensores, activación de actuadores, manipulación de lazos de
+control PI y difuso, así como la actualización constante del interfaz humano-máquina.
+Por ello se seleccionó la Raspberry Pi 3B. La Figura~\ref{fig:raspberry} muestra el microprocesador
+seleccionado.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 17: Raspberry Pi 3B]\vspace{1.5cm}}}
+  \caption{Raspberry Pi 3B.}
+  \label{fig:raspberry}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Especificaciones del Raspberry Pi 3B.}
+\label{tab:raspberry}
+\begin{tabular}{ll}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Arquitectura       & 64-bit (ARMv8) \\
+Procesador         & Quad-Core 1.2~GHz ARM Cortex-A53 \\
+GPU                & Broadcom VideoCore IV \\
+Puertos de video   & HMI, DSI \\
+Pines de E/S (GPIO) & 40 pines \\
+Alimentación       & 5~V \\
+Conectividad       & LAN, BLE, Ethernet \\
+Almacenamiento     & Ranura para microSD \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Pantalla táctil LCD}
+
+Con el objetivo de brindar una interfaz intuitiva para el personal de investigación,
+se seleccionó una pantalla táctil de 7 pulgadas como HMI. La pantalla táctil
+seleccionada (Figura~\ref{fig:pantalla}) está pensada para el desarrollo en Raspberry Pi, cuenta
+con un tiempo de respuesta de 5~ms para una navegación fluida y conectividad vía
+HDMI con una resolución HD (1024 $\times$ 600 píxeles).
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 18: Pantalla táctil LCD]\vspace{1.5cm}}}
+  \caption{Pantalla táctil LCD.}
+  \label{fig:pantalla}
+\end{figure}
+
+\subsection{Tira LED}
+
+Se busca recrear condiciones de iluminación similares a las existentes bajo la
+sombra de un matorral xerófilo en el estado de Zacatecas. Se conoce que la
+radiación fotosintéticamente activa (RFA) en el estado es alta, de aproximadamente
+$819.52\ \mu$mol/m$^2$/s \cite{Escobedo2020}, y que el microambiente generado bajo la sombra de estos
+matorrales tiene en promedio una RFA 44.1\% menor \cite{Sanchez2024}. Por lo tanto, el objetivo
+lumínico del sistema será de aproximadamente $458.1152\ \mu$mol/m$^2$/s. La tira LED
+seleccionada (Figura~\ref{fig:tira_led}) está basada en Chip on Board, lo que asegura una luz uniforme
+y una alta densidad de fuentes (480~LEDs/m).
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 19: Tira LED]\vspace{1.5cm}}}
+  \caption{Tira LED.}
+  \label{fig:tira_led}
+\end{figure}
+
+\section{Integración y CAD}
+
+\subsection{Conexión neumática e hidráulica}
+
+Se utilizaron tres tipos de conexiones para el sistema neumático del biorreactor,
+ocho conexiones en total. La primera iniciando de la parte interior del biorreactor la
+cual tiene un niple de 1/4 a 3/8, seguido de una válvula antirretorno de 3/8, la cual
+va conectada a un cople espiga con el que se conecta a la manguera de silicón y
+de ahí al motor; estas conexiones se realizan cuatro veces en total: dos veces para
+ingresar el agua al biorreactor y otras dos veces para ingresar el etanol.
+
+La segunda conexión se utiliza para el vaciado y la regulación del nivel del agua,
+entonces el sistema está conformado nuevamente por un niple de 1/4 a 3/8, unido
+a una electroválvula de giro, seguida de un cople espiga y finalmente este se
+conecta a la manguera de silicón. Este sistema de conexiones se utiliza tres veces:
+dos para el sistema de salida de líquidos y una para la regulación del nivel de agua.
+
+La última conexión es una bomba de aire la cual proporciona al sistema la presión
+que será suministrada al biorreactor mediante una piedra difusora; esta está
+conectada con coples para mantener el biorreactor oxigenado.
+
+\subsection{Sistema de iluminación}
+
+Se busca dotar de una iluminación homogénea al tanque, por lo que se planteó
+incorporar la fuente de luz en un tubo concéntrico al interior del sistema. Debido a
+que no existen fuentes de grado alimenticio, se realizó un encapsulado de la tira
+LED seleccionada, este elemento se compone de dos partes, un cilindro hueco de
+vidrio y una pieza de metal (Acero 316L) roscada a la tapa. La Figura~\ref{fig:foco_union} muestra el
+diseño CAD de estos componentes.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 20: Foco con la unión metálica roscada]\vspace{2cm}}}
+  \caption{Foco con la unión metálica roscada.}
+  \label{fig:foco_union}
+\end{figure}
+
+Para alcanzar el objetivo de iluminación planteado se requiere la relación de
+conversión de leds de alto índice de reproducción cromática a lux, donde:
+$1\ \mu$mol $\approx 70$ Lux.
+
+\begin{equation}
+\text{Lux} \approx 458.1152\ \mu\text{mol} \times 70 \frac{\text{Lux}}{\mu\text{mol}} = 32\,068\ \text{Lux}
+\end{equation}
+
+Para cubrir el cilindro interno, con altura interna $h = 0.7$~m y radio interno $r = 0.085$~m:
+
+\begin{equation}
+\text{Área de exposición} = 2\pi r h = 2\pi \times 0.085 \times 0.7 = 0.37\ \text{m}^2
+\end{equation}
+
+Dado que 1~Lux = 1~Lumen/m$^2$:
+\begin{equation}
+\text{Lúmenes} = 32\,068\ \text{Lux} \times 0.37\ \text{m}^2 = 11\,865\ \text{lúmenes}
+\end{equation}
+
+Debido a que la tira LED seleccionada emite 1\,155~lúmenes/m, se requerirán
+aproximadamente 10~m de la misma para cubrir el tanque completo.
+La Figura~\ref{fig:foco_biorreactor} muestra la incorporación del sistema de iluminación al tanque.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 21: Incorporación del foco al biorreactor]\vspace{2cm}}}
+  \caption{Incorporación del foco al biorreactor.}
+  \label{fig:foco_biorreactor}
+\end{figure}
+
+\subsection{Dimensiones y estructura de la unidad de control y HMI}
+
+El diseño de este módulo compone dos funciones principales, albergar la
+electrónica y proporcionar al usuario una interfaz con el sistema.
+La carcasa está conformada principalmente por paneles de acrílico, unidos por un
+conjunto de bloques de PETG y tornillos, tuercas y arandelas M3, además de
+soportes en las 4 esquinas y una pantalla de 7 pulgadas acoplada en la parte
+superior (Figura~\ref{fig:hmi_ensamble}).
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 22: Ensamble completo de la HMI]\vspace{2cm}}}
+  \caption{Ensamble completo de la HMI.}
+  \label{fig:hmi_ensamble}
+\end{figure}
+
+La Figura~\ref{fig:sistema_total} muestra el sistema biorreactor en su totalidad.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 23: Biorreactor y HMI]\vspace{2cm}}}
+  \caption{Biorreactor y HMI.}
+  \label{fig:sistema_total}
+\end{figure}
+
+\section{Sistema de instrumentación y control}
+
+\subsection{Control de pH}
+
+Debido a la dificultad de encontrar un modelo matemático que describa el
+comportamiento no lineal del pH, se optó por utilizar lógica difusa para el
+controlador. Este sistema se compone de una entrada (lectura de pH) y dos salidas
+(bomba ácido y bomba base), por lo que se optó por utilizar dos controladores tipo
+SISO (\textit{single input, single output}) en paralelo, donde cada uno gestiona un
+actuador según el signo y magnitud del error. La Figura~\ref{fig:control_ph} muestra el diagrama de
+bloques que representa el control planteado.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 24: Diagrama de bloque control PH]\vspace{2cm}}}
+  \caption{Diagrama de bloque control PH.}
+  \label{fig:control_ph}
+\end{figure}
+
+Se comenzó por definir la entrada para cada sistema, estando el error definido por
+la expresión:
+\begin{equation}
+e(t) = pH_{setpoint} - pH_{actual}
+\end{equation}
+
+Donde el rango de interés en el que se desea controlar el pH es de 2 a 8, por lo
+que el error estará definido en un rango operativo de $[-6, 6]$. Para la fusificación de
+la entrada se definieron siete funciones de membresía con las etiquetas: Altamente
+Alcalino (AA), Medianamente Alcalino (MA), Bajo Alcalino (BA), Neutro (N), Bajo
+Base (BB), Medianamente Base (MB), Altamente Base (AB). En el Apéndice~\ref{ap:control}
+se muestra la distribución de estas funciones así como los conjuntos difusos para
+las salidas.
+
+\subsection{Control de nivel}
+
+El control de pH opera incorporando volumen de contenido al tanque, por lo que es
+necesario administrar el nivel de líquido para evitar desbordamientos. Para
+gestionar el nivel de líquido se diseñó un lazo de control con histéresis. La lógica
+de estados de este sistema opera de la siguiente manera:
+
+\begin{enumerate}
+  \item \textbf{Operación normal:} Si el nivel se encuentra por debajo del límite (95\%), el sistema opera con normalidad. Se habilita el control de pH.
+  \item \textbf{Vaciado:} Si el nivel alcanza el 95\% de la capacidad total, se deshabilita el control de pH y se activa la bomba de drenado.
+  \item \textbf{Histéresis:} El sistema vuelve a su operación habitual una vez que el nivel del tanque desciende del 85\%.
+\end{enumerate}
+
+Se cuenta con una banda de histéresis del 10\% para asegurar un tiempo suficiente
+para la estabilización de la mezcla mediante el control de pH, así como para evitar
+la oscilación continua de la bomba de drenado. La Figura~\ref{fig:control_nivel} muestra la lógica
+de supervisión y control por histéresis del nivel.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 25: Diagrama de control de nivel]\vspace{2cm}}}
+  \caption{Diagrama de control de nivel.}
+  \label{fig:control_nivel}
+\end{figure}
+
+\subsection{Control de temperatura}
+
+El diseño del control de temperatura comenzó con la realización de una prueba a
+lazo abierto aplicando un escalón unitario (fuente de calor constante) a un
+recipiente con agua mientras se registró el cambio en la temperatura a lo largo del
+tiempo con un sensor. La información recabada se utilizó para graficar la respuesta
+transitoria de la planta (Figura~\ref{fig:planta_temp}).
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 26: Caracterización de la planta de temperatura (temperatura \textdegree C vs tiempo s)]\vspace{2cm}}}
+  \caption{Caracterización de la planta de temperatura.}
+  \label{fig:planta_temp}
+\end{figure}
+
+Al observar la gráfica de salida, se identificó un sistema de primer orden con
+retardo, por lo que se pudo aproximar la planta utilizando la relación planteada por
+Ziegler y Nichols:
+
+\begin{equation}
+G(s) = \frac{K e^{-Ls}}{\tau s + 1}
+\end{equation}
+
+Se determinaron además los parámetros $K = 20$, $L = 20$~s y $\tau = 1350$, los cuales
+permitieron describir la planta y formular el control. La Figura~\ref{fig:respuesta_pid} muestra una
+comparativa entre el comportamiento real del sistema, la planta aproximada y la
+salida tras la aplicación del bloque de control PID.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 27: Comportamiento real del sistema, planta aproximada y respuesta PID]\vspace{2cm}}}
+  \caption{Comportamiento real del sistema, planta aproximada y respuesta PID.}
+  \label{fig:respuesta_pid}
+\end{figure}
+
+Para la obtención de las constantes $K_p$ y $K_i$, el método de Ziegler-Nichols resultó
+inestable y agresivo debido a que el retardo era despreciable en comparación con
+su constante de tiempo ($\tau$). Por ello, se optó por el método de Asignación de Polos.
+La ganancia proporcional se calculó utilizando el Criterio de Saturación al Arranque:
+
+\begin{equation}
+K_p = \frac{1}{\Delta T_{max}} = \frac{1}{60} = 0.0166 \approx 0.017
+\end{equation}
+
+Para el cálculo de la ganancia integral se igualó el Tiempo Integral ($\tau_i$) a la
+Constante de Tiempo del proceso ($\tau$) para cancelar el polo dominante:
+
+\begin{equation}
+K_i = \frac{K_p}{\tau} = \frac{0.017}{1350} = 12.59 \times 10^{-6}
+\end{equation}
+
+La acción derivativa fue omitida debido a la naturaleza lenta de los procesos
+térmicos. Por lo tanto, la función de transferencia del controlador puede
+representarse como:
+
+\begin{equation}
+C(s) = 0.017 \cdot \frac{1350s + 1}{1350s}
+\end{equation}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 28: Diagrama de bloques del control de temperatura]\vspace{2cm}}}
+  \caption{Diagrama de bloques del control de temperatura.}
+  \label{fig:bloques_temp}
+\end{figure}
+
+Donde $K_p = 0.017$ y $K_i = 12.59 \times 10^{-6}$.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 29: Simulación del sistema ante un setpoint de 20]\vspace{2cm}}}
+  \caption{Simulación del sistema ante un setpoint de 20.}
+  \label{fig:sim_sp20}
+\end{figure}
+
+\section{Programación}
+
+\subsection{Arquitectura de software y diseño de interfaz}
+
+El código se divide en diferentes apartados para facilitar su realización y mantenimiento. La Tabla~\ref{tab:modulos_software} muestra la organización final del software separada en capas y componentes críticos, seguido de una pequeña descripción.
+
+% [TABLA: Módulos software — capas y componentes críticos]
+\begin{table}[H]
+  \centering
+  \caption{Módulos de software por capa.}
+  \label{tab:modulos_software}
+  \begin{tabular}{ll}
+    \toprule
+    \textbf{Capa / Módulo} & \textbf{Descripción} \\
+    \midrule
+    % Completar con los módulos de raspberrypi\_config.h
+    \multicolumn{2}{c}{\textit{[Tabla pendiente — ver archivo de módulos software]}} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+El siguiente diagrama representa a grandes rasgos la arquitectura del sistema (Figura~\ref{fig:arq_software}). Posterior a ello se muestran los diagramas de flujo que rigen la navegación en la HMI, la preparación del tanque y el proceso (Figuras~\ref{fig:flujo_hmi} y~\ref{fig:flujo_proceso}).
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA: Diagrama de arquitectura del sistema]\vspace{2cm}}}
+  \caption{Arquitectura general del sistema de software.}
+  \label{fig:arq_software}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA: Diagrama de flujo — navegación HMI]\vspace{2cm}}}
+  \caption{Diagrama de flujo de navegación en la HMI.}
+  \label{fig:flujo_hmi}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA: Diagrama de flujo — preparación del tanque y proceso]\vspace{2cm}}}
+  \caption{Diagrama de flujo de preparación del tanque y proceso.}
+  \label{fig:flujo_proceso}
+\end{figure}
+
+\subsection{Protocolo RS485}
+
+La interacción con los sensores RK500-12 y RK500-04 requiere de la generación de cadenas de texto enviadas vía TTL al módulo MAX485. Este módulo gestiona el envío y recepción de mensajes por hardware, por lo que solo es necesario crear tramas con la estructura presentada en los respectivos manuales de cada sensor.
+
+% [TABLA: Estructura de comunicación RS485 — tramas y comandos]
+\begin{table}[H]
+  \centering
+  \caption{Estructura de comunicación RS485 para sensores RK500.}
+  \label{tab:rs485}
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{Sensor} & \textbf{Comando} & \textbf{Descripción} \\
+    \midrule
+    % Completar con los comandos de los manuales RK500-12 y RK500-04
+    \multicolumn{3}{c}{\textit{[Tabla pendiente — ver manuales de sensores]}} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Protocolo I2C}
+
+% [TABLA: Dispositivos en bus I2C — direcciones y descripción de hardware]
+\begin{table}[H]
+  \centering
+  \caption{Dispositivos en bus I2C.}
+  \label{tab:i2c}
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{Dispositivo} & \textbf{Dirección} & \textbf{Función} \\
+    \midrule
+    \multicolumn{3}{c}{\textit{[Tabla pendiente — ver hardware en tablas de programación]}} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Fórmula de llenado óptimo}
+
+\begin{equation}
+    \text{frac}_B = \frac{10^{pH_{obj}-14} - 10^{pH_{agua}-14}}{10^{pH_B-14} - 10^{pH_{agua}-14}}
+\end{equation}
+
+\begin{equation}
+    V_B = \text{frac}_B \times V_{total} \qquad V_{agua} = V_{total} - V_B
+\end{equation}
+
+\begin{equation}
+    t_{dosif} = \left\lceil \frac{V_B}{\text{CAUDAL\_BOMBA\_B\_ML\_S}} \right\rceil \text{ segundos}
+\end{equation}
+
+\noindent Constantes del prototipo (de \texttt{raspberrypi\_config.h}):
+\begin{itemize}
+    \item $V_{tanque}$ = 35.85 L, $\eta_{llenado}$ = 85\% $\rightarrow$ $V_{total}$ = 30.47 L
+    \item $pH_{agua}$ = 7.0, $pH_B$ = 12.0 (calibrar en campo)
+    \item \texttt{CAUDAL\_BOMBA\_B\_ML\_S} = 5.0 mL/s (calibrar en campo)
+\end{itemize}
+
+\subsection{Diagrama de flujo general}
+
+Para la realización del programa del biorreactor se tomó como base el diagrama de
+la Figura~\ref{fig:flujo_simplificado} el cual muestra de manera sencilla los pasos generales que debe
+realizar el programa.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 30: Diagrama de flujo simplificado de la programación del biorreactor]\vspace{2cm}}}
+  \caption{Diagrama de flujo simplificado de la programación del biorreactor.}
+  \label{fig:flujo_simplificado}
+\end{figure}
+
+A continuación se muestra la máquina de estados que utiliza el sistema (Tablas~\ref{tab:estados1} y~\ref{tab:estados2}).
+
+\begin{longtable}{p{2.5cm}p{1.5cm}p{1.5cm}p{7cm}}
+\caption{Tabla de la máquina de estados parte uno.}
+\label{tab:estados1}\\
+\toprule
+\textbf{Estado Actual} & \textbf{Estado Sig.} & \textbf{Señal} & \textbf{Descripción / Acción de Salida} \\
+\midrule
+\endfirsthead
+\multicolumn{4}{c}{\tablename\ \thetable{} -- continuación}\\
+\toprule
+\textbf{Estado Actual} & \textbf{Estado Sig.} & \textbf{Señal} & \textbf{Descripción / Acción de Salida} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+A1 (Inicio)       & A2 & 2 & Error en carga del sistema. \\
+                  & A3 & 1 & Carga exitosa. Ir a Menú Principal. \\
+A2 (Error Carga)  & A1 & 1 & Reintento. \\
+A3 (Menú Ppal)    & A4 & 1 & Ir a Gestión de Proyectos (``Nuevo'' / ``Guardados''). \\
+                  & A32 & 2 & Exportación de datos. \\
+A4 (Gestión)      & A5 & 2 & ``Nuevo Proyecto''. Ir a configuración de parámetros. \\
+                  & A9 & 1 & ``Datos Guardados''. Ir a Lista Página. \\
+                  & A3 & 6 & ``Volver''. Regresar al Menú Principal. \\
+A5 (Param 1)      & A6 & 1,2,3,4 & Tocar campo de texto. Ir a Teclado. \\
+                  & A7 & 5 & ``Siguiente''. Ir a nombrar proyecto. \\
+                  & A4 & 6 & ``Volver''. Regresar a Gestión. \\
+A6 (Teclado)      & A5 & 6 & ``Volver''. Quitar teclados. \\
+                  & A7 & 5 & ``Enter''. Confirmar nombre proyecto. \\
+A7 (Nombrar)      & A6 & 6 & ``Volver''. Regresar a Teclado. \\
+                  & A8 & 5 & ``Aceptar''. Ir a Resumen de datos. \\
+A8 (Confirmar)    & A15 & 5 & ``Confirmar Todo''. Ir a Calibración. \\
+                  & A7 & 6 & ``Volver''. Editar nombre/datos. \\
+A9 (Lista Pág 1)  & A10 & 4 & ``Siguiente Pág''. Ver más archivos. \\
+                  & A11 & 1,2,3 & Seleccionar archivo de esta lista. \\
+                  & A4 & 6 & ``Volver''. Regresar a Gestión. \\
+A10 (Lista Pág 2) & A9 & 6 & ``Anterior Pág''. Volver a lista. \\
+                  & A12 & 1,2,3 & Seleccionar archivo de esta lista. \\
+A11 (Info Arch.\ 1) & A13 & 5 & ``Cargar''. Pre-cargar datos archivo. \\
+                  & A9 & 6 & ``Volver''. Regresar a Lista. \\
+A12 (Info Arch.\ 2) & A14 & 5 & ``Cargar''. Pre-cargar datos archivo 2. \\
+                  & A10 & 6 & ``Volver''. Regresar a Lista. \\
+A13 (Confirmar 1) & A15 & 5 & Confirmar carga. Ir a Calibración. \\
+                  & A11 & 6 & ``Cancelar''. Volver a Info Archivo. \\
+A14 (Confirmar 2) & A15 & 5 & Confirmar carga. Ir a Calibración. \\
+                  & A12 & 6 & ``Cancelar''. Volver a Info Archivo. \\
+A15 (Calibración) & A16 & 5 & ``No''. Omitir/Verificación directa. \\
+                  & A33 & 2 & Error en carga del sistema. \\
+\end{longtable}
+
+\begin{longtable}{p{2.5cm}p{1.5cm}p{1.5cm}p{7cm}}
+\caption{Tabla de la máquina de estados parte dos.}
+\label{tab:estados2}\\
+\toprule
+\textbf{Estado Actual} & \textbf{Estado Sig.} & \textbf{Señal} & \textbf{Descripción / Acción de Salida} \\
+\midrule
+\endfirsthead
+\multicolumn{4}{c}{\tablename\ \thetable{} -- continuación}\\
+\toprule
+\textbf{Estado Actual} & \textbf{Estado Sig.} & \textbf{Señal} & \textbf{Descripción / Acción de Salida} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+A16 (Check Inicio)  & A17 & 3 & ``Configuración de tabla''. Selección de tabla a mostrar. \\
+                    & A19 & 1 & ``Pausa/Detener''. \\
+                    & A18 & 5 & ``Proceso finalizado''. Se terminó de manera exitosa el proceso cultivo. \\
+A17 (Proc. Calibración) & A16 & 6 & ``Tabla seleccionada''. Regresar al menú de operaciones. \\
+A18 (Verificación)  & A20 & 5 & Ir a Gestión de Proyectos 2. \\
+A19 (Pausa)         & A20 & 5 & Ir a Gestión de Proyectos 2. \\
+A33 (Alerta Error)  & A15 & 1 & Confirmar carga. Ir a Calibración. \\
+A20 (Gestión 2)     & A21 & 5 & ``Enter''. Confirmar configuración deseada. \\
+                    & A35 & 1 & Loop de monitoreo (Lectura sensores). \\
+A35 (Alerta Error)  & A20 & 6 & Confirmar carga. Ir a Calibración. \\
+A21 (Menú Pausa)    & A20 & 6 & Ir a Gestión de Proyectos 2. \\
+                    & A22 & 5 & ``Comenzar Extracción''. Iniciar vaciado. \\
+A22 (Vaciado N1)    & A23 & 5 & Ir a confirmar N1. \\
+A23 (Confirmar N1)  & A24 & 5 & ``Aceptar''. Iniciar vaciado Nivel 1. \\
+                    & A22 & 6 & ``Atrás''. Regresar a estado anterior. \\
+A24 (Espere N1)     & A25 & 5 & Proceso activo. Ir a pantalla de Espera 1. \\
+A25 (Vaciado N2)    & A26 & 5 & Ir a confirmar N2. \\
+A26 (Confirmar N2)  & A34 & 5 & ``Aceptar''. Iniciar vaciado Nivel 2. \\
+                    & A25 & 6 & ``Atrás''. Regresar a estado anterior. \\
+A34 (Espere N2)     & A27 & 5 & Proceso activo. Ir a pantalla de finalización. \\
+A27 (Finalizado)    & A28 & 5 & Pantalla de guardado. \\
+A28 (Config.\ guardado) & A31 & 5 & ``No''. Ir directo a Limpieza. \\
+                    & A29 & 1 & ``Sí''. Ir a procesar guardado. \\
+A29 (Nombrar Archivo) & A30 & 1 & Confirmación de guardado. \\
+A30 (Confirm.\ guardado) & A31 & 1 & Recordatorio de limpieza. \\
+A31 (Record.\ limpieza) & A3 & 1 & ``OK''. Recordatorio visto. Ir a Fin. \\
+A32 (Exportando)    & A3 & 6 & Ir a Menú Principal. \\
+\end{longtable}
+
+En el Apéndice~\ref{ap:programacion} se recopila la lógica general del sistema. Se presenta el diagrama
+de flujo de la programación del biorreactor desarrollado a detalle, además de una
+visión más detallada de la máquina de estados de la HMI, así como los diseños de
+las pantallas de usuario (mockups).
+
+\section{Electrónica}
+
+\subsection{Mapa de hardware}
+
+% [TABLA: Mapa de hardware — pines, periféricos y módulos conectados a la Raspberry Pi]
+\begin{table}[H]
+  \centering
+  \caption{Mapa de hardware del sistema de control.}
+  \label{tab:mapa_hardware}
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{Pin / Puerto} & \textbf{Periférico} & \textbf{Función} \\
+    \midrule
+    \multicolumn{3}{c}{\textit{[Tabla pendiente — ver hardware en tablas de programación]}} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Esquema de conexiones}
+
+En la Figura~\ref{fig:esquema_electrico} se observa el esquema de conexiones eléctricas, en la que se
+contemplan el microcontrolador (Raspberry 3B), los puertos para sensores (pH,
+O$_2$, temperatura y nivel), así como las etapas de potencia, módulos de
+comunicación y fuente de alimentación.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 31: Diagrama de conexiones eléctricas]\vspace{2cm}}}
+  \caption{Diagrama de conexiones eléctricas.}
+  \label{fig:esquema_electrico}
+\end{figure}
+
+El diagrama eléctrico se distribuye en 3 PCBs: la primera encargada del
+microcontrolador central y fuente de voltaje (Figura~\ref{fig:pcb1}); la segunda contiene un
+módulo encargado de gestionar la comunicación entre sensores y microcontrolador
+(Figura~\ref{fig:pcb2}), la última placa está encargada de acondicionar la señal de salida del
+microcontrolador para el control de los actuadores (Figura~\ref{fig:pcb3}).
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{1.5cm}[FIGURA 32: PCB microcontrolador central]\vspace{1.5cm}}}
+  \caption{PCB microcontrolador central.}
+  \label{fig:pcb1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{1.5cm}[FIGURA 33: PCB protocolos de comunicación RS485]\vspace{1.5cm}}}
+  \caption{PCB protocolos de comunicación RS485.}
+  \label{fig:pcb2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{1.5cm}[FIGURA 34: PCB 3 gestión de actuadores]\vspace{1.5cm}}}
+  \caption{PCB 3 gestión de actuadores.}
+  \label{fig:pcb3}
+\end{figure}
+
+\section{Plan de manufactura}
+
+Para la fabricación de los elementos que se implementarán en el prototipo se ha
+decidido plantear un plan de manufactura. La Figura~\ref{fig:jerarquia_manufactura} muestra un diagrama que
+establece la jerarquía entre los distintos procesos necesarios para la creación del
+sistema. La información detallada sobre el plan de manufactura se muestra en el Apéndice~\ref{ap:manufactura}.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 35: Diagrama de jerarquía para la manufactura del biorreactor]\vspace{2cm}}}
+  \caption{Diagrama de jerarquía para la manufactura del biorreactor.}
+  \label{fig:jerarquia_manufactura}
+\end{figure}
+
+%======================================================
+%--------------------Capítulo 9-----------------------
+%======================================================
+\chapter{Conclusiones}\label{cap9}
+
+El desarrollo del presente Trabajo Terminal 1 finalizó con la obtención de los
+parámetros para el diseño detallado del sistema compuesto por el biorreactor
+(tanque de pruebas) y unidad de control (interfaz HMI), así como la validación
+teórica de la viabilidad de su construcción.
+
+En el ámbito de la mecánica, la geometría del tanque fue validada mediante análisis
+por elementos finitos, simulaciones de presión hidrostática y manométrica fueron
+efectuadas y concluidas con éxito asegurando un factor de seguridad superior a 7,
+lo que permite una operación segura. Se consideraron algunos factores de diseño
+presentados en la bibliografía adaptados a las prioridades de este prototipo, pero
+sin comprometer su operación.
+
+Se abordó también el diseño del sistema de control, donde se establecieron
+diferentes técnicas dependiendo de la naturaleza de la variable, tanto la lógica
+difusa como el control proporcional integral fueron validados teóricamente mediante
+simulaciones para asegurar que el sistema alcanzase los estados deseados.
+
+Finalmente se realizó un análisis de costos, así como el plan de manufactura con
+el objetivo de comprobar la viabilidad tanto económica como técnica del prototipo,
+arrojando un presupuesto competitivo frente a soluciones comerciales sin
+personalización para este tipo específico de hongos.
+
+En conclusión, el diseño planteado a lo largo de este documento satisface los
+requerimientos biológicos planteados para el cultivo de los ascomicetos mediante
+una solución mecatrónica viable y adecuada a la problemática. Además, abre el
+camino para la futura etapa de construcción física, integración electrónica y pruebas
+a realizar a lo largo de Trabajo Terminal II.
+
+%======================================================
+%--------------------Bibliografía---------------------
+%======================================================
+\chapter*{Bibliografía}
+\addcontentsline{toc}{chapter}{Bibliografía}
+
+\begin{thebibliography}{20}
+
+\bibitem{Bills2013}
+G.~F. Bills, J.~B. Gloer, y Z.~An, ``Coprophilous fungi: antibiotic discovery and functions in an underexplored arena of microbial defensive mutualism'', \textit{Curr. Opin. Microbiol.}, vol.~16, núm.~5, pp.~549--565, 2013, doi: \url{https://doi.org/10.1016/j.mib.2013.08.001}.
+
+\bibitem{Correia2023}
+J.~Correia, A.~Borges, M.~Simões, y L.~C. Simões, ``Beyond Penicillin: The Potential of Filamentous Fungi for Drug Discovery in the Age of Antibiotic Resistance'', \textit{Antibiotics}, vol.~12, núm.~8, 2023, doi: 10.3390/antibiotics12081250.
+
+\bibitem{MarinFelix}
+Y.~Marin-Felix, ``Metabolitos secundarios con actividad biológica producidos por hongos ascomicetos'', \textit{Micol. enmarcada en los Objetivos de Desarrollo Sostenible}, p.~34.
+
+\bibitem{Sanchez2004}
+S.~C. et~al., ``Dinámica y conservación de la flora del matorral xerófilo de la Reserva Ecológica del Pedregal de San Ángel (D.F., México)'', \textit{Bol. Soc. Botánica México}, pp.~51--75, 2004.
+
+\bibitem{Cerrone2025}
+F.~Cerrone y K.~E. O'Connor, ``Cultivation of filamentous fungi in airlift bioreactors: advantages and disadvantages'', \textit{Appl. Microbiol. Biotechnol.}, vol.~109, núm.~1, p.~41, feb.~2025, doi: 10.1007/s00253-025-13422-4.
+
+\bibitem{Rodriguez2016}
+P.~Rodríguez Segura y J.~J. Saldivar Nava, ``Reactor para la producción de biodiésel utilizando aceite vegetal usado'', Instituto Politécnico Nacional, Zacatecas, Zac., 2016.
+
+\bibitem{Alvarado2023}
+C.~Alvarado, J.~Escareño, y D.~Osorio, ``Diseño y construcción de un fotobiorreactor como soporte vital para prueba en la estratosfera'', Unidad Politécnica Interdisciplinaria de Ingeniería Campus Zacatecas, Zacatecas, 2023.
+
+\bibitem{Jaibiba2020}
+P.~Jaibiba, S.~N. Vignesh, y S.~Hariharan, ``Chapter 10 -- Working principle of typical bioreactors'', en \textit{Bioreactors}, L.~Singh, A.~Yousuf, y D.~M. Mahapatra, Eds., Elsevier, 2020, pp.~145--173. doi: \url{https://doi.org/10.1016/B978-0-12-821264-6.00010-3}.
+
+\bibitem{Esperanca2023}
+M.~N. Esperança, M.~O. Cerri, V.~T. Mazziero, R.~Béttega, y A.~C. Badino, ``Hydrodynamic comparison of different geometries of square cross-section airlift bioreactor using computational fluid dynamics.'', \textit{Int. J. Chem. React. Eng.}, vol.~21, núm.~10, pp.~1291--1303, 2023.
+
+\bibitem{rae_reologia}
+{Real Academia Española}, ``Reología'', \textit{Diccionario de la lengua española}, 2024. [En línea]. Disponible: \url{https://dle.rae.es/reología}. [Consultado: junio 2026].
+
+\bibitem{Sanchez2024}
+R.~Sánchez-Martín et~al., ``Homogeneous microenvironmental conditions under nurses promote facilitation'', \textit{Funct. Ecol.}, vol.~38, núm.~2, pp.~350--362, 2024, doi: url = {https://doi.org/10.1111/1365-2435.14486}
+
+\bibitem{Gomes2023}
+D.~G. Gomes, E.~Coelho, R.~Silva, L.~Domingues, y J.~A. Teixeira, ``8 -- Bioreactors and engineering of filamentous fungi cultivation'', en \textit{Current Developments in Biotechnology and Bioengineering}, M.~J. Taherzadeh, J.~A. Ferreira, y A.~Pandey, Eds., Elsevier, 2023, pp.~219--250. doi: \url{https://doi.org/10.1016/B978-0-323-91872-5.00018-1}.
+
+\bibitem{Moresi2025}
+M.~Moresi, ``Design and Operation of a Multifunctional Pilot-Scale Bioreactor for Enhanced Aerobic Fermentation'', \textit{Fermentation}, vol.~11, núm.~2, 2025, doi: 10.3390/fermentation11020101.
+
+\bibitem{Micheletti2006}
+M.~Micheletti et~al., ``Fluid mixing in shaken bioreactors: Implications for scale-up predictions from microlitre-scale microbial and mammalian cell cultures'', \textit{Chem. Eng. Sci.}, vol.~61, núm.~9, pp.~2939--2949, 2006, doi: \url{https://doi.org/10.1016/j.ces.2005.11.028}.
+
+\bibitem{Paredes2024}
+D.~Paredes, G.~Alvarez, M.~Fuentes, y R.~Sanchez, ``Sistema Embebido para un biorreactor: aplicación a la fermentación de azúcares'', vol.~8, núm.~2, 2024.
+
+\bibitem{Pardo2023}
+F.~Pardo Pérez, ``Diseño de una estrategia de escalamiento de un biorreactor para el crecimiento de consorcios de hongos marinos filamentosos'', Universidad de Chile, 2023. [En línea]. Disponible en: \url{https://repositorio.uchile.cl/handle/2250/199208}
+
+\bibitem{Cerrone2024}
+F.~Cerrone, C.~Ó. Lochlainn, T.~Callaghan, P.~McDonald, y K.~E. O'Connor, ``Airlift bioreactor--based strategies for prolonged semi-continuous cultivation of edible Agaricomycetes'', \textit{Appl. Microbiol. Biotechnol.}, vol.~108, núm.~1, p.~377, jun.~2024, doi: 10.1007/s00253-024-13220-4.
+
+\bibitem{Amador2024}
+D.~Amador-Guerra, J.~Chimal-Ayala, y L.~Gonzalez Lopez, ``Diseño de proceso de fermentación sumergida de \textit{Lepista sordida} para la producción de extracto antioxidante'', ITESO, 2024.
+
+\bibitem{Huitt2016}
+W.~M. (Bill) Huitt, \textit{Bioprocessing Piping and Equipment Design: A Companion Guide for the ASME BPE Standard}. ASME Press, 2016. doi: 10.1115/1.861BPEQ.
+
+\bibitem{Serviacero}
+``Hoja técnica AISI 316L'', Serviacero. [En línea]. Disponible en: \url{www.serviacero.com/especiales}
+
+\bibitem{Escobedo2020}
+M.~M. Escobedo Sánchez, R.~Conejo, S.~Durón-Torres, y J.~García, ``Radiación fotosintéticamente activa evaluada en la ciudad de Zacatecas'', \textit{Rev. Energ. Quím. Física}, pp.~1--11, jun.~2020, doi: 10.35429/JCPE.2020.22.7.1.11.
+
+
+
+\end{thebibliography}
+
+%======================================================
+%--------------------Apéndices------------------------
+%======================================================
+\appendix
+\chapter{Cronograma de Trabajo Terminal I}
+\label{ap:cronogramaI}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 36: Cronograma de trabajo de Trabajo Terminal I]\vspace{2cm}}}
+  \caption{Cronograma de trabajo de Trabajo Terminal I.}
+  \label{fig:cronograma1}
+\end{figure}
+\chapter{Cronograma de Trabajo Terminal II}
+\label{ap:cronogramaII}
+
+\begin{table}[H]
+\centering
+\caption{Cronograma de trabajo de Trabajo Terminal II.}
+\label{tab:cronograma2}
+\small
+\begin{tabular}{clcccccccccccccccccccccccc}
+\toprule
+\textbf{No.} & \textbf{Actividad} & \multicolumn{4}{c}{\textbf{Feb}} & \multicolumn{4}{c}{\textbf{Mar}} & \multicolumn{4}{c}{\textbf{Abr}} & \multicolumn{4}{c}{\textbf{May}} & \multicolumn{4}{c}{\textbf{Jun}} & \multicolumn{4}{c}{\textbf{Jul}} \\
+\midrule
+1  & Documentación & & & & & & & & & & & & & & & & & & & & & & & & \\
+2  & Adquisición de materiales & & & & & & & & & & & & & & & & & & & & & & & & \\
+3  & Pruebas de sensores y actuadores & & & & & & & & & & & & & & & & & & & & & & & & \\
+4  & Construcción del tanque & & & & & & & & & & & & & & & & & & & & & & & & \\
+5  & Construcción del sistema mecánico & & & & & & & & & & & & & & & & & & & & & & & & \\
+6  & Construcción del sistema eléctrico & & & & & & & & & & & & & & & & & & & & & & & & \\
+7  & Elaboración del programa & & & & & & & & & & & & & & & & & & & & & & & & \\
+8  & Construcción de la HMI & & & & & & & & & & & & & & & & & & & & & & & & \\
+9  & Incorporación de sensores & & & & & & & & & & & & & & & & & & & & & & & & \\
+10 & Incorporación del sistema mecánico & & & & & & & & & & & & & & & & & & & & & & & & \\
+11 & Incorporación del sistema eléctrico & & & & & & & & & & & & & & & & & & & & & & & & \\
+12 & Incorporación de la HMI & & & & & & & & & & & & & & & & & & & & & & & & \\
+13 & Pruebas de funcionamiento & & & & & & & & & & & & & & & & & & & & & & & & \\
+14 & Ajustes y correcciones & & & & & & & & & & & & & & & & & & & & & & & & \\
+15 & Presentación del proyecto & & & & & & & & & & & & & & & & & & & & & & & & \\
+16 & Reunión con asesores & & & & & & & & & & & & & & & & & & & & & & & & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 37: Cronograma de trabajo de Trabajo Terminal II]\vspace{2cm}}}
+  \caption{Cronograma de trabajo de Trabajo Terminal II.}
+  \label{fig:cronograma2}
+\end{figure}
+\chapter{Diagrama IDEF0}
+\label{ap:idef0}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 38: Diagrama IDEF0, nodo A1]\vspace{2cm}}}
+  \caption{Diagrama IDEF0, nodo A1.}
+  \label{fig:idef0_A1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 39: Diagrama IDEF0, nodo A2]\vspace{2cm}}}
+  \caption{Diagrama IDEF0, nodo A2.}
+  \label{fig:idef0_A2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 40: Diagrama IDEF0, nodo A3]\vspace{2cm}}}
+  \caption{Diagrama IDEF0, nodo A3.}
+  \label{fig:idef0_A3}
+\end{figure}
+\chapter{Relación de necesidades vs métricas}
+\label{ap:necesidades_vs_metricas}
+
+La Tabla~\ref{tab:nec_vs_met} presenta la relación entre las necesidades del cliente y las métricas
+que se utilizarán para evaluar su cumplimiento.
+
+\begin{table}[H]
+\centering
+\caption{Tabla de Necesidades vs Métricas.}
+\label{tab:nec_vs_met}
+\small
+\begin{tabular}{lcccccccccccc}
+\toprule
+\textbf{Necesidad} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} & \textbf{11} & \textbf{12} \\
+\midrule
+1. Biocompatibilidad       & * & & & & & & & & & & & \\
+2. Protocolos limpieza     & & * & & & & & & & & & & \\
+3. Hermeticidad            & & & * & * & & & & & & & & \\
+4. Mostrar información     & & & & & * & * & & & & & & \\
+5. Monitoreo pH            & & & & & & & & & * & & & \\
+6. Monitoreo iluminación   & & & & & & & & & & & & * \\
+7. Monitoreo temperatura   & & & & & & & & * & & & & \\
+8. Monitoreo nivel         & & & & & & & & & & & * & \\
+9. Monitoreo presión       & & & & & & & & & & * & & \\
+10. Registro de pruebas    & & & & & & & * & & & & & \\
+\bottomrule
+\end{tabular}
+\end{table}
+\chapter{Mapa mental para la generación de ideas}
+\label{ap:mapa_mental}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{3cm}[FIGURA 41: Mapa mental del pensamiento divergente para el biorreactor]\vspace{3cm}}}
+  \caption{Mapa mental del pensamiento divergente para el biorreactor.}
+  \label{fig:mapa_mental}
+\end{figure}
+\chapter{Validación de estructura}
+\label{ap:estructura}
+
+\section*{Dimensiones del tanque}
+
+En base a la relación estandarizada de los biorreactores:
+
+\begin{align}
+A_r &= \pi(85)^2 = 22\,698.01\ \text{mm}^2 \\
+A_d &= \pi(38.10)^2 = 4\,560.36\ \text{mm}^2 \\
+\frac{A_d}{A_r} &= \frac{4\,560.36}{22\,698.01} = 0.20
+\end{align}
+
+Para el volumen total del tanque:
+
+\begin{equation}
+V = \frac{\pi(85)^2 \times 700}{1\,000} + \frac{\pi(38.10)^2 \times 343.8}{1\,000} = 17.456\ \text{L}
+\end{equation}
+
+La Tabla~\ref{tab:relaciones_radio} muestra las relaciones del tamaño del radio para el tubo exterior
+de retorno.
+
+\begin{table}[H]
+\centering
+\caption{Tabla de relaciones del tamaño del radio para el tubo exterior de retorno.}
+\label{tab:relaciones_radio}
+\fbox{\parbox{0.9\textwidth}{\centering\vspace{1cm}[TABLA: Ver documento original -- datos de relaciones de radio]\vspace{1cm}}}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 42: Volumen final, quitando el volumen de los sensores de pH, O2 y el foco]\vspace{2cm}}}
+  \caption{Volumen final, quitando el volumen de los sensores de pH, O$_2$ y el foco.}
+  \label{fig:volumen_final}
+\end{figure}
+
+\section*{Validación de pernos}
+
+Para la validación de selección de los tornillos se analizó la conexión de un cilindro
+de acero con un recipiente a presión de acero 316L con 6 pernos. Un sello de junta
+confinado tiene un diámetro de sellado efectivo de 170~mm. El cilindro almacena
+gas a una presión máxima de 5~bar.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 43: Representación visual del problema de los tornillos]\vspace{2cm}}}
+  \caption{Representación visual del problema de los tornillos.}
+  \label{fig:tornillos}
+\end{figure}
+
+Datos conocidos:
+\begin{itemize}
+  \item $A = 5$~mm, $B = 5$~mm, $C = 170$~mm, $D = 170$~mm, $E = 107.5$~mm, $F = 260$
+  \item $N = 6$, $P_g = 5$~bar, Grado de perno ISO~5.8, Especificación del perno M5
+\end{itemize}
+
+\begin{align}
+L &> l_m + H = 12.8 + 4.7\ \text{mm} \\
+L &> 17.5 \Rightarrow L = 20\ \text{mm} \\
+L_T &= 2d + 6 = 2(5) + 6 = 16\ \text{mm} \\
+l_d &= L - L_t = 20 - 16 = 4\ \text{mm} \\
+l_t &= l - l_d = 20 - 4 = 16\ \text{mm}
+\end{align}
+
+Área de la parte sin rosca:
+\begin{equation}
+A_d = \frac{\pi d^2}{4} = \frac{\pi(5)^2}{4} = 19.6349\ \text{mm}^2
+\end{equation}
+
+\begin{equation}
+A_t = 14.2\ \text{mm}^2 \quad \text{(Tabla 8-1)}, \quad E = 353\ \text{MPa}
+\end{equation}
+
+\begin{equation}
+K_b = \frac{A_d \cdot A_t \cdot E}{(A_d \cdot l_t) + (A_t \cdot l_d)} = \frac{19.6349 \times 14.2 \times 353}{(19.6349 \times 16) + (14.2 \times 4)} = 264.62\ \frac{\text{N}}{\text{mm}}
+\end{equation}
+
+\begin{equation}
+k_{1,4} = 9.159\ \frac{\text{MN}}{\text{mm}}, \quad k_{2,3} = 6.6918\ \frac{\text{MN}}{\text{mm}}
+\end{equation}
+
+\begin{equation}
+K_m = \left(\frac{1}{9.159} + \frac{1}{6.6918} + \frac{1}{6.6918} + \frac{1}{9.159}\right)^{-1} = 1.933\ \frac{\text{MN}}{\text{mm}}
+\end{equation}
+
+\begin{equation}
+C = \frac{k_b}{k_b + k_m} = \frac{264.62}{264.62 + 1.933} = 0.0001368
+\end{equation}
+
+\begin{equation}
+F_i = 0.75 \cdot A_t \cdot S_p = 0.75 \times 14.2 \times 380 = 4.047\ \frac{\text{N}}{\text{mm}}
+\end{equation}
+
+\begin{equation}
+P_{total} = 500\,000 \times \pi \times \left(\frac{170}{2}\right)^2 = 11.349\ \text{N}, \quad P = \frac{P_{total}}{6} = 1.891\ \text{N}
+\end{equation}
+
+\begin{align}
+n_p &= \frac{S_p \cdot A_t}{C \cdot P + F_i} = \frac{380 \times 14.2}{0.0001368 \times 1.891 + 4.047} = 1.3333 \\
+n_L &= \frac{S_p \cdot A_t - F_i}{C \cdot P} = \frac{380 \times 14.2 - 4.047}{0.0001368 \times 1.891} = 4.892 \\
+n_0 &= \frac{F_i}{P(1 - C)} = \frac{4.047}{1.891 \times (1 - 0.0001368)} = 2.1404
+\end{align}
+
+Con estos cálculos se puede confirmar que 6 tornillos M5$\times$20~mm resisten a la
+aplicación deseada.
+
+\section*{Presión hidrostática}
+
+Para corroborar que el biorreactor soporta el volumen de agua ingresado se
+sometió a un estudio de tensión estática. Se aplicaron condiciones de presión
+hidrostática (densidad del agua: $9.170 \times 10^{-7}$~kg/mm$^3$) y una carga de gravedad
+estándar de $9.807$~m/s$^2$.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 44: Aplicación de cargas a las caras internas del biorreactor]\vspace{2cm}}}
+  \caption{Aplicación de cargas a las caras internas del biorreactor.}
+  \label{fig:cargas_hidrostaticas}
+\end{figure}
+
+Con los resultados a través de la simulación, se comprobó que la estructura del
+biorreactor soporta con un gran margen la cantidad de líquido ingresado, contando
+con un factor de seguridad mayor a~5.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 45: Resultados del factor de seguridad al aplicar una presión hidrostática]\vspace{2cm}}}
+  \caption{Resultados del factor de seguridad al aplicar una presión hidrostática.}
+  \label{fig:fs_hidrostatica}
+\end{figure}
+
+\section*{Presión manométrica}
+
+El biorreactor se planea utilizar con una presión manométrica de 2~bar o 0.2~MPa.
+Se evaluó el esfuerzo al que se somete la estructura aplicando una carga de
+15~bar o 1.50~MPa a todas las caras internas del biorreactor.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 46: Aplicación de cargas de 1.5 MPa o 15 bar a las caras internas del biorreactor]\vspace{2cm}}}
+  \caption{Aplicación de cargas de 1.5~MPa o 15~bar a las caras internas del biorreactor.}
+  \label{fig:cargas_manometricas}
+\end{figure}
+
+Los resultados obtenidos mostraron que la estructura soporta perfectamente esta
+presión, con un factor de seguridad superior a~7. El modelo fue analizado
+utilizando una malla de elementos sólidos parabólicos con un total de 121\,510
+nodos y 61\,028 elementos.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 47: Resultados del factor de seguridad al aplicar una presión de 1.5 MPa o 5 bar]\vspace{2cm}}}
+  \caption{Resultados del factor de seguridad al aplicar una presión de 1.5~MPa o 5~bar.}
+  \label{fig:fs_manometrica}
+\end{figure}
+
+\section*{Vistas explosionadas}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{3cm}[FIGURA 48: Vista explosionada del biorreactor]\vspace{3cm}}}
+  \caption{Vista explosionada del biorreactor.}
+  \label{fig:explosionada_biorreactor}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{3cm}[FIGURA 49: Vista explosionada de la HMI]\vspace{3cm}}}
+  \caption{Vista explosionada de la HMI.}
+  \label{fig:explosionada_hmi}
+\end{figure}
+\chapter{Validación del control aplicado}
+\label{ap:control}
+
+\section*{Gráficas de diferentes setpoints para el control de temperatura}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 50: Simulación del sistema ante un setpoint de 40]\vspace{2cm}}}
+  \caption{Simulación del sistema ante un setpoint de 40.}
+  \label{fig:sim_sp40}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 51: Simulación del sistema ante un setpoint de 70]\vspace{2cm}}}
+  \caption{Simulación del sistema ante un setpoint de 70.}
+  \label{fig:sim_sp70}
+\end{figure}
+
+\section*{Validación del control de pH}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 52: Funciones de membresía de la entrada]\vspace{2cm}}}
+  \caption{Funciones de membresía de la entrada.}
+  \label{fig:membresia_entrada}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 53: Diagrama de bloques del sistema de inferencia difusa Mamdani Tipo 1 para el subsistema 2]\vspace{2cm}}}
+  \caption{Diagrama de bloques del sistema de inferencia difusa Mamdani Tipo 1 para el subsistema 2.}
+  \label{fig:mamdani_sub2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 54: Funciones de membresía de salida del subsistema 1]\vspace{2cm}}}
+  \caption{Funciones de membresía de salida del subsistema 1.}
+  \label{fig:membresia_salida1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 55: Inferencia de las reglas para el control del subsistema 1]\vspace{2cm}}}
+  \caption{Inferencia de las reglas para el control del subsistema 1.}
+  \label{fig:inferencia_sub1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 56: Diagrama de bloques del sistema de inferencia difusa Mamdani Tipo 1 para el subsistema 2 (detalle)]\vspace{2cm}}}
+  \caption{Diagrama de bloques del sistema de inferencia difusa Mamdani Tipo 1 para el subsistema 2 (detalle).}
+  \label{fig:mamdani_sub2b}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 57: Funciones de membresía de salida del subsistema 2]\vspace{2cm}}}
+  \caption{Funciones de membresía de salida del subsistema 2.}
+  \label{fig:membresia_salida2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 58: Inferencia de las reglas para el control del subsistema 2]\vspace{2cm}}}
+  \caption{Inferencia de las reglas para el control del subsistema 2.}
+  \label{fig:inferencia_sub2}
+\end{figure}
+\chapter{Programación de la HMI}
+\label{ap:programacion}
+
+\section*{Diagrama de flujo}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 59: Diagrama de flujo de la programación de la HMI parte uno]\vspace{2cm}}}
+  \caption{Diagrama de flujo de la programación de la HMI parte uno.}
+  \label{fig:flujo_hmi1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 60: Diagrama de flujo de la programación de la HMI parte dos]\vspace{2cm}}}
+  \caption{Diagrama de flujo de la programación de la HMI parte dos.}
+  \label{fig:flujo_hmi2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 61: Diagrama de flujo de la programación de la HMI parte tres]\vspace{2cm}}}
+  \caption{Diagrama de flujo de la programación de la HMI parte tres.}
+  \label{fig:flujo_hmi3}
+\end{figure}
+
+\section*{Máquina de estados}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 62: Máquina de estados completa]\vspace{2cm}}}
+  \caption{Máquina de estados completa.}
+  \label{fig:maquina_estados}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.8\textwidth}{\centering\vspace{2cm}[FIGURA 63: Parte uno de la máquina de estados]\vspace{2cm}}}
+  \caption{Parte uno de la máquina de estados.}
+  \label{fig:estados_p1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.8\textwidth}{\centering\vspace{2cm}[FIGURA 64: Parte dos de la máquina de estados]\vspace{2cm}}}
+  \caption{Parte dos de la máquina de estados.}
+  \label{fig:estados_p2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.8\textwidth}{\centering\vspace{2cm}[FIGURA 65: Parte tres de la máquina de estados]\vspace{2cm}}}
+  \caption{Parte tres de la máquina de estados.}
+  \label{fig:estados_p3}
+\end{figure}
+
+\section*{Mockups}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 66: Mockup A1]\vspace{1.5cm}}}
+  \caption{Mockup A1.}
+  \label{fig:mockup_a1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 67: Mockup A2 y Mockup A33]\vspace{1.5cm}}}
+  \caption{Mockup A2 y Mockup A33.}
+  \label{fig:mockup_a2}
+\end{figure}
+
+\noindent\textit{Nota: Los mockups A3 a A32 (Figuras 68 a 98) se incluyen en el documento original. Para incorporarlos al archivo \LaTeX{}, sustituir los marcadores de figura con los archivos de imagen correspondientes.}
+\chapter{Especificaciones eléctricas}
+\label{ap:especificaciones_electricas}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 99: Modelo 3D de la PCB para el microcontrolador central]\vspace{2cm}}}
+  \caption{Modelo 3D de la PCB para el microcontrolador central.}
+  \label{fig:pcb3d_1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 100: Modelo 3D de la PCB para protocolos de comunicación RS485]\vspace{2cm}}}
+  \caption{Modelo 3D de la PCB para protocolos de comunicación RS485.}
+  \label{fig:pcb3d_2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 101: Modelo 3D de la PCB para la gestión de actuadores]\vspace{2cm}}}
+  \caption{Modelo 3D de la PCB para la gestión de actuadores.}
+  \label{fig:pcb3d_3}
+\end{figure}
+\chapter{Selección de componentes, especificaciones técnicas y costos}
+\label{ap:componentes_costos}
+
+\section*{Selección de componentes}
+
+\begin{table}[H]
+\centering
+\caption{Tabla de comparación de componentes de Pantallas.}
+\label{tab:comp_pantallas}
+\begin{tabular}{lllll}
+\toprule
+\textbf{Dispositivo} & \textbf{Tamaño} & \textbf{Resolución} & \textbf{Interfaz} & \textbf{Compat.\ RPi} \\
+\midrule
+Pantalla Táctil LCD  & 7 pulgadas & 1024$\times$600 (HD) & HDMI / USB Touch & Nativa (Plug \& Play) \\
+Display Nextion      & 7 pulgadas & 800$\times$480        & UART (Serial)    & Requiere librería externa \\
+Monitor HDMI Genérico & 10+ pulgadas & 1920$\times$1080 & HDMI             & No suele ser táctil / Grande \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Tabla de comparación de componentes de sensores de nivel.}
+\label{tab:comp_nivel}
+\small
+\begin{tabular}{llllll}
+\toprule
+\textbf{Sensor} & \textbf{Tecnología} & \textbf{Rango} & \textbf{Precisión} & \textbf{Material} & \textbf{Afect.\ por espuma} \\
+\midrule
+VEGAPULS C22     & Radar (80~GHz) & 0--20~m & $\pm 2$~mm & PVDF (Cert.\ FDA) & No (Alta fiabilidad) \\
+JSN-SR04T        & Ultrasónico & 0.2--6~m & $\pm 1$~cm & Plástico/Metal & Sí (Falla con condensación) \\
+Sensor Presión Dif. & Hidrostático & 0--5~m & $\pm 0.5\%$ & Acero Inox & Sí (Contacto directo) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Tabla de comparación de componentes de pH.}
+\label{tab:comp_ph}
+\small
+\begin{tabular}{lllll}
+\toprule
+\textbf{Modelo} & \textbf{Rango Temp.} & \textbf{Material} & \textbf{Presión Máx.} & \textbf{Vida Útil} \\
+\midrule
+RK500-12 Tipo-B3 & 0--100~\textdegree C & 316L y Vidrio reforzado & 1~MPa (Industrial) & Alta ($>$1 año) \\
+Electrodo pH Genérico & 0--60~\textdegree C & Plástico/Vidrio & $<0.2$~MPa & Baja (consumible) \\
+Sensor pH Lab Grade & 0--80~\textdegree C & Vidrio (Cuerpo completo) & Atmosférica & Media \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Tabla de comparación de componentes de OD.}
+\label{tab:comp_od}
+\small
+\begin{tabular}{llllll}
+\toprule
+\textbf{Modelo} & \textbf{Principio} & \textbf{Material} & \textbf{Comunicación} & \textbf{Resolución} & \textbf{Grado Alim.} \\
+\midrule
+RK500-04 Tipo-B & Fluorescencia/Óptico & Acero Inox 316L & RS485 (Modbus) & 0.01~mg/L & Sí \\
+Kit Gravity (DFRobot) & Galvánico & Plástico ABS/Membrana & Analógica (0--5~V) & 0.1~mg/L & No \\
+Atlas Scientific DO & Galvánico & Epoxi/Policarbonato & I2C / UART & 0.01~mg/L & Parcial \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Tabla de comparación de componentes de microcontrolador.}
+\label{tab:comp_microcontrolador}
+\small
+\begin{tabular}{lllll}
+\toprule
+\textbf{Microcontrolador} & \textbf{Núcleo/Frec.} & \textbf{Pines I/O} & \textbf{Conectividad} & \textbf{Ventaja Principal} \\
+\midrule
+Raspberry Pi 3B  & Quad-core A53 1.2~GHz & 26/0 & WiFi, BT, Ethernet, HDMI & Multitarea, HMI, BD Local \\
+ESP32            & Xtensa dual-core 240~MHz & 34/10 & WiFi, Bluetooth & Bajo costo, bajo consumo \\
+RP2040 (Pico)    & Dual ARM Cortex 133~MHz & 26/3  & USB & Facilidad de uso \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{Costos}
+
+\begin{table}[H]
+\centering
+\caption{Tabla de coste final.}
+\label{tab:costos}
+\small
+\begin{tabular}{llrr}
+\toprule
+\textbf{Clasificación} & \textbf{Elemento} & \textbf{Precio (MXN)} & \textbf{Total (MXN)} \\
+\midrule
+Sensor      & Sensor de O$_2$ (incluye temperatura) & \$3,900.00 & \$3,900.00 \\
+Sensor      & Sensor de pH (incluye temperatura)    & \$3,300.00 & \$3,300.00 \\
+Sensor      & Sensor de nivel                       & \$1,163.00 & \$1,163.00 \\
+Sensor      & Válvula de Alivio de Presión Ajustable & \$524.00  & \$524.00 \\
+Actuador    & Bomba de aire                         & \$1,104.60 & \$1,104.60 \\
+Actuador    & Bomba 8/12 L/min (Grado alimenticio)  & \$1,870.00 & \$7,480.00 \\
+Actuador    & Chaqueta térmica                      & \$5,000.00 & \$5,000.00 \\
+HMI         & Pantalla táctil LCD                   & \$729.90   & \$729.90 \\
+HMI         & Raspberry 3B                          & \$817.00   & \$1,090.70 \\
+HMI         & Dimer                                 & \$180.00   & \$360.00 \\
+Electrónica & Fuente de 12V 10A                     & \$200.00   & \$200.00 \\
+Electrónica & Fuente de 5V 3A                       & \$100.00   & \$100.00 \\
+Electrónica & Relay                                 & \$117.00   & \$351.00 \\
+Electrónica & Controlador de servos PCA9685         & \$148.00   & \$148.00 \\
+Electrónica & Relay de estado sólido                & \$123.10   & \$123.10 \\
+Electrónica & Módulo Max485 (RS485)                 & \$57.90    & \$57.90 \\
+Electrónica & Juego de 580 conectores JST PH 2.0mm  & \$281.70   & \$281.70 \\
+Electrónica & Manufactura PCB                       & \$300.00   & \$600.00 \\
+Electrónica & Cable calibre 24                      & \$313.60   & \$313.60 \\
+Estructura  & Foco                                  & \$319.00   & \$319.00 \\
+Estructura  & Vidrio protector                      & \$500.00   & \$500.00 \\
+Estructura  & Hoja de silicón                       & \$380.00   & \$380.00 \\
+Estructura  & Imanes de Neodimio 4$\times$2mm 5 pcs & \$30.00    & \$30.00 \\
+Estructura  & Tanques de almacenamiento de líquidos & \$957.00   & \$1,914.00 \\
+Estructura  & Cople 3/8                             & \$35.00    & \$322.90 \\
+Estructura  & Manguera Grado alimenticio 10m        & \$920.00   & \$1,840.00 \\
+Estructura  & Niple 3/8                             & \$31.00    & \$279.70 \\
+Estructura  & Electroválvula de 3/8                 & \$546.00   & \$1,638.00 \\
+Estructura  & Cople espiga 3/8                      & \$546.00   & \$2,730.00 \\
+Estructura  & Válvulas antirretorno                 & \$1,897.40 & \$11,384.40 \\
+Estructura  & Metal 306L                            & \$5,000.00 & \$5,000.00 \\
+Estructura  & Acrílico                              & \$1,500.00 & \$1,500.00 \\
+Estructura  & 1 kg de filamento PETG                & \$320.00   & \$320.00 \\
+\midrule
+\multicolumn{3}{r}{\textbf{TOTAL:}} & \textbf{\$54,985.80} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{Especificaciones de componentes}
+
+\noindent Las Figuras 102 a 125 corresponden a las hojas de datos técnicas de los componentes
+seleccionados (sensor de pH, sensor de O$_2$, sensor de nivel, bombas, pantalla,
+Raspberry Pi, etc.). Estas figuras provienen del documento PDF original y deben
+incluirse como imágenes en el archivo final.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{1.5cm}[FIGURA 102: Hoja de datos sensor de pH, parte uno]\vspace{1.5cm}}}
+  \caption{Hoja de datos sensor de pH, parte uno.}
+  \label{fig:hoja_ph1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{1.5cm}[FIGURA 103: Hoja de datos sensor de pH, parte dos]\vspace{1.5cm}}}
+  \caption{Hoja de datos sensor de pH, parte dos.}
+  \label{fig:hoja_ph2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{1.5cm}[FIGURA 104: Hoja de datos sensor de O$_2$]\vspace{1.5cm}}}
+  \caption{Hoja de datos sensor de O$_2$.}
+  \label{fig:hoja_o2}
+\end{figure}
+
+\noindent\textit{Nota: Las Figuras 105 a 125 corresponden a hojas de datos adicionales de componentes, disponibles en el documento original.}
+\chapter{Planos}
+\label{ap:planos}
+
+\section*{Planos del biorreactor}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{3cm}[FIGURA 126: Plano del Cuerpo del Biorreactor]\vspace{3cm}}}
+  \caption{Plano del Cuerpo del Biorreactor.}
+  \label{fig:plano_cuerpo}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 127: Plano del empaque de silicón de 17 cm]\vspace{2cm}}}
+  \caption{Plano del empaque de silicón de 17 cm.}
+  \label{fig:plano_empaque}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 128: Plano del foco]\vspace{2cm}}}
+  \caption{Plano del foco.}
+  \label{fig:plano_foco}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 129: Plano de la rosca foco]\vspace{2cm}}}
+  \caption{Plano de la rosca foco.}
+  \label{fig:plano_rosca_foco}
+\end{figure}
+
+\end{document}

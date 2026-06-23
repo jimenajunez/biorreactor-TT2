@@ -1,0 +1,108 @@
+\chapter{Pruebas y resultados}\label{cap:pruebas}
+
+Este capítulo documenta las pruebas experimentales realizadas para la
+caracterización y validación de los subsistemas del biorreactor. Los resultados
+obtenidos fueron determinantes para la sintonización de los controladores previamente descritos en la Sección~\ref{cap8}.
+
+% ---------------------------------------------------------------
+\section{Sistema de control de pH}
+% ---------------------------------------------------------------
+
+\subsection{Calibración del sensor de pH}
+
+Para corroborar el funcionamiento del sensor RK500-12 y asegurar la exactitud
+de las mediciones, se realizó una calibración de tres puntos mediante los
+comandos definidos en el protocolo de comunicación Modbus del sensor.
+Se utilizaron soluciones de referencia con valores de pH de 4, 7 y 10. Posterior
+a la calibración, las lecturas del sensor reportaron un error máximo de
+$\pm 0.1$~unidades de pH con respecto a la sustancia de referencia, cumpliendo
+la resolución de 0.01~pH especificada por el fabricante.
+
+% ---------------------------------------------------------------
+\subsection{Caracterización del comportamiento de pH}
+
+Con el objetivo de definir la magnitud de la acción de control y justificar el
+diseño asimétrico de los conjuntos difusos, se caracterizó experimentalmente
+el comportamiento del medio ante la adición controlada de sustancia
+neutralizadora.
+
+Se simuló el medio de cultivo previo al ingreso del hongo utilizando una solución
+compuesta por 8.5~g de sal por litro de agua, escalando el experimento a un
+volumen reducido por practicidad pero respetando las proporciones del biorreactor.
+El pH inicial de este medio se registró en 7.93. Posteriormente, se acidificó el
+medio hasta un pH de 3.97 con ácido acético (vinagre) para emular el
+comportamiento del metabolismo propio del organismo.
+
+Se tomaron 301 muestras registrando el cambio de pH resultante de la adición
+de volúmenes controlados de sustancia neutralizadora. En eventos clave se
+realizaron mediciones de control con tiras indicadoras de pH como referencia
+adicional.
+
+La Figura~\ref{fig:curva_ph} muestra el cambio del pH en función de la cantidad de sustancia
+estabilizadora aplicada, así como la ganancia registrada para cada zona
+experimental.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figuras/curva_ph_caracterizacion.png}
+  \caption{Curva de caracterización del pH: cambio de pH vs.\ volumen de
+           sustancia neutralizadora aplicada.}
+  \label{fig:curva_ph}
+\end{figure}
+
+Los datos capturados evidenciaron una ganancia significativamente menor en la
+zona muy ácida ($e > 3$, ganancia $\approx 0.006$~pH/ciclo) comparada con la zona
+intermedia. Este resultado justifica el uso de conjuntos difusos asimétricos en el
+controlador, donde los errores de mayor magnitud se asocian a conjuntos más
+amplios para asegurar que la acción correctiva se active con mayor anticipación.
+
+% ---------------------------------------------------------------
+\subsection{Tiempo de mezclado}
+
+Con el objetivo de analizar las propiedades de mezclado del biorreactor
+construido y determinar el tiempo de muestreo adecuado para el lazo de control,
+se realizó una prueba de escalón consistente en la adición de un volumen definido
+de vinagre al sistema. El pH fue registrado de forma continua hasta su
+estabilización.
+
+Empleando el criterio de estabilización al 95\%, utilizado convencionalmente en
+procesos biológicos y químicos, la prueba arrojó un tiempo de estabilización
+de \textbf{130~s}. La Figura~\ref{fig:mezclado_ph} muestra los valores de pH capturados durante esta
+prueba.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figuras/mezclado_ph.png}
+  \caption{Respuesta del pH tras la adición de un escalón de vinagre. Tiempo
+           de estabilización al 95\%: 130~s.}
+  \label{fig:mezclado_ph}
+\end{figure}
+
+Este resultado llevó a establecer un tiempo entre muestras de $T_s = 30$~s,
+valor redondeado al alza para garantizar que cada lectura sea significativa
+y útil para la toma de decisiones de control.
+
+% ---------------------------------------------------------------
+\subsection{Caudal promedio de la bomba neutralizadora}
+
+Para determinar el caudal real de la bomba utilizada en el sistema de control
+de pH, se realizó una prueba de llenado del tanque hasta su volumen de
+operación máximo de 55~L. El tiempo de llenado registrado fue de 1\,409~s,
+con lo que el caudal promedio queda determinado por:
+
+\begin{equation}
+  Q = \frac{V}{t} = \frac{55\,000~\text{mL}}{1\,409~\text{s}} \approx 39~\text{mL/s}
+\end{equation}
+
+Este valor fue empleado para establecer la relación entre el tiempo de pulso
+$t_{\text{pulso}}$ definido por el controlador difuso y el volumen de neutralizador
+entregado al sistema en cada ciclo de control (véase Tabla~\ref{tab:mf_salida}).
+
+% ---------------------------------------------------------------
+\subsection{Validación del controlador difuso}
+
+La validación en lazo cerrado del controlador difuso se encuentra pendiente de
+realización. El procedimiento planificado consiste en acidificar el medio con vinagre
+para simular el metabolismo del hongo, activar el controlador y registrar el pH en
+función del tiempo. Las métricas de evaluación serán: tiempo de respuesta,
+sobreimpulso y error en estado estacionario.

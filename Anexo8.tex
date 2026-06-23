@@ -1,0 +1,303 @@
+\chapter{Programación de la HMI}
+\label{ap:programacion}
+
+\section*{Diagrama de flujo}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 59: Diagrama de flujo de la programación de la HMI parte uno]\vspace{2cm}}}
+  \caption{Diagrama de flujo de la programación de la HMI parte uno.}
+  \label{fig:flujo_hmi1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 60: Diagrama de flujo de la programación de la HMI parte dos]\vspace{2cm}}}
+  \caption{Diagrama de flujo de la programación de la HMI parte dos.}
+  \label{fig:flujo_hmi2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 61: Diagrama de flujo de la programación de la HMI parte tres]\vspace{2cm}}}
+  \caption{Diagrama de flujo de la programación de la HMI parte tres.}
+  \label{fig:flujo_hmi3}
+\end{figure}
+
+\section*{Máquina de estados}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 62: Máquina de estados completa]\vspace{2cm}}}
+  \caption{Máquina de estados completa.}
+  \label{fig:maquina_estados}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.8\textwidth}{\centering\vspace{2cm}[FIGURA 63: Parte uno de la máquina de estados]\vspace{2cm}}}
+  \caption{Parte uno de la máquina de estados.}
+  \label{fig:estados_p1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.8\textwidth}{\centering\vspace{2cm}[FIGURA 64: Parte dos de la máquina de estados]\vspace{2cm}}}
+  \caption{Parte dos de la máquina de estados.}
+  \label{fig:estados_p2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.8\textwidth}{\centering\vspace{2cm}[FIGURA 65: Parte tres de la máquina de estados]\vspace{2cm}}}
+  \caption{Parte tres de la máquina de estados.}
+  \label{fig:estados_p3}
+\end{figure}
+
+\section*{Mockups de la interfaz HMI}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_1}
+  \caption{Mockup A1 --- Pantalla de inicio.}
+  \label{fig:mockup_a1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_2}
+  \caption{Mockup A2/A33 --- Error de carga del sistema.}
+  \label{fig:mockup_a2a33}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_3}
+  \caption{Mockup A3 --- Menú principal.}
+  \label{fig:mockup_a3}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_4}
+  \caption{Mockup A4 --- Gestión de proyectos.}
+  \label{fig:mockup_a4}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_5}
+  \caption{Mockup A5 --- Configuración de parámetros.}
+  \label{fig:mockup_a5}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_6}
+  \caption{Mockup A6 --- Teclado de entrada.}
+  \label{fig:mockup_a6}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_7}
+  \caption{Mockup A7 --- Nombrar proyecto.}
+  \label{fig:mockup_a7}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_8}
+  \caption{Mockup A8 --- Confirmación de datos.}
+  \label{fig:mockup_a8}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_9}
+  \caption{Mockup A9 --- Lista de proyectos guardados (pág. 1).}
+  \label{fig:mockup_a9}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_10}
+  \caption{Mockup A10 --- Lista de proyectos guardados (pág. 2).}
+  \label{fig:mockup_a10}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_11}
+  \caption{Mockup A11 --- Información de archivo (lista 1).}
+  \label{fig:mockup_a11}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_12}
+  \caption{Mockup A12 --- Información de archivo (lista 2).}
+  \label{fig:mockup_a12}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_13}
+  \caption{Mockup A13 --- Confirmación de carga (archivo 1).}
+  \label{fig:mockup_a13}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_14}
+  \caption{Mockup A14 --- Confirmación de carga (archivo 2).}
+  \label{fig:mockup_a14}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_15}
+  \caption{Mockup A15 --- Calibración de sensores.}
+  \label{fig:mockup_a15}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_16}
+  \caption{Mockup A16 --- Pantalla de operación principal.}
+  \label{fig:mockup_a16}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_17}
+  \caption{Mockup A17 --- Configuración de tabla de visualización.}
+  \label{fig:mockup_a17}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_18}
+  \caption{Mockup A18 --- Proceso finalizado exitosamente.}
+  \label{fig:mockup_a18}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_19}
+  \caption{Mockup A19 --- Pausa del proceso.}
+  \label{fig:mockup_a19}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_20}
+  \caption{Mockup A20 --- Gestión de proyectos fase 2.}
+  \label{fig:mockup_a20}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_21}
+  \caption{Mockup A21 --- Menú de pausa.}
+  \label{fig:mockup_a21}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_22}
+  \caption{Mockup A22 --- Inicio de vaciado nivel 1.}
+  \label{fig:mockup_a22}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_23}
+  \caption{Mockup A23 --- Confirmación de vaciado nivel 1.}
+  \label{fig:mockup_a23}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_24}
+  \caption{Mockup A24 --- Espera vaciado nivel 1.}
+  \label{fig:mockup_a24}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_25}
+  \caption{Mockup A25 --- Inicio de vaciado nivel 2.}
+  \label{fig:mockup_a25}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_26}
+  \caption{Mockup A26 --- Confirmación de vaciado nivel 2.}
+  \label{fig:mockup_a26}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_27}
+  \caption{Mockup A27 --- Proceso finalizado.}
+  \label{fig:mockup_a27}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_28}
+  \caption{Mockup A28 --- Configuración de guardado.}
+  \label{fig:mockup_a28}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_29}
+  \caption{Mockup A29 --- Nombre del archivo a guardar.}
+  \label{fig:mockup_a29}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_30}
+  \caption{Mockup A30 --- Confirmación de guardado.}
+  \label{fig:mockup_a30}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_31}
+  \caption{Mockup A31 --- Recordatorio de limpieza.}
+  \label{fig:mockup_a31}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_32}
+  \caption{Mockup A32 --- Exportación de datos.}
+  \label{fig:mockup_a32}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_33}
+  \caption{Mockup A34 --- Espera vaciado nivel 2.}
+  \label{fig:mockup_a34}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_34}
+  \caption{Mockup A35 --- Alerta de error en monitoreo.}
+  \label{fig:mockup_a35}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mockup_35}
+  \caption{Mockup Extra --- Pantalla adicional.}
+  \label{fig:mockup_extra}
+\end{figure}
+

@@ -1,0 +1,181 @@
+\chapter{Validación de estructura}
+\label{ap:estructura}
+
+\section*{Dimensiones del tanque}
+
+En base a la relación estandarizada de los biorreactores:
+
+\begin{align}
+A_r &= \pi(85)^2 = 22\,698.01\ \text{mm}^2 \\
+A_d &= \pi(38.10)^2 = 4\,560.36\ \text{mm}^2 \\
+\frac{A_d}{A_r} &= \frac{4\,560.36}{22\,698.01} = 0.20
+\end{align}
+
+Para el volumen total del tanque:
+
+\begin{equation}
+V = \frac{\pi(85)^2 \times 700}{1\,000} + \frac{\pi(38.10)^2 \times 343.8}{1\,000} = 17.456\ \text{L}
+\end{equation}
+
+La Tabla~\ref{tab:relaciones_radio} muestra las relaciones del tamaño del radio para el tubo exterior
+de retorno.
+
+\begin{table}[H]
+\centering
+\caption{Tabla de relaciones del tamaño del radio para el tubo exterior de retorno.}
+\label{tab:relaciones_radio}
+\fbox{\parbox{0.9\textwidth}{\centering\vspace{1cm}[TABLA: Ver documento original -- datos de relaciones de radio]\vspace{1cm}}}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 42: Volumen final, quitando el volumen de los sensores de pH, O2 y el foco]\vspace{2cm}}}
+  \caption{Volumen final, quitando el volumen de los sensores de pH, O$_2$ y el foco.}
+  \label{fig:volumen_final}
+\end{figure}
+
+\section*{Validación de pernos}
+
+Para la validación de selección de los tornillos se analizó la conexión de un cilindro
+de acero con un recipiente a presión de acero inoxidable AISI~304 mediante 8~pernos. Un sello de junta
+confinado tiene un diámetro de sellado efectivo de 170~mm. El cilindro almacena
+gas a una presión máxima de 5~bar.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 43: Representación visual del problema de los tornillos]\vspace{2cm}}}
+  \caption{Representación visual del problema de los tornillos.}
+  \label{fig:tornillos}
+\end{figure}
+
+Datos conocidos:
+\begin{itemize}
+  \item Di\'ametro sellado efectivo: $d_{sel} = 170$~mm, espesor tapa: $t = 5$~mm
+  \item $N = 8$~pernos, $P_g = 5$~bar ($0.50$~MPa), especificaci\'on: 5/16-18~UNC~$\times$~1\textonequarter~in, SAE Grado~5
+\end{itemize}
+
+Los c\'alculos completos del modelo de rigidez de Shigley se presentan a
+continuaci\'on, con las propiedades del perno 5/16-18~UNC en pulgadas:
+
+\begin{align}
+d &= 0.3125\ \text{in}, \quad A_t = 0.05219\ \text{in}^2, \quad A_d = 0.07670\ \text{in}^2 \\
+l_d &= 0.375\ \text{in}, \quad l_t = 0.875\ \text{in}, \quad E = 30{\times}10^6\ \text{psi}
+\end{align}
+
+\begin{equation}
+k_b = \frac{A_d A_t E}{A_d l_t + A_t l_d} = 3.106 \times 10^6\ \frac{\text{lbf}}{\text{in}}
+\end{equation}
+
+\begin{equation}
+k_m = 11.085 \times 10^6\ \frac{\text{lbf}}{\text{in}}, \quad
+C = \frac{k_b}{k_b + k_m} = \frac{3.106}{3.106 + 11.085} = 0.2188
+\end{equation}
+
+\begin{equation}
+S_p = 85\,000\ \text{psi} \quad \text{(SAE Grado~5)}, \quad
+F_i = 0.75\, A_t\, S_p = 3{,}340.5\ \text{lbf}
+\end{equation}
+
+\begin{equation}
+P_{total} = 0.50\ \text{MPa} \times \pi\left(\frac{170}{2}\right)^2\ \text{mm}^2
+= 5{,}004.8\ \text{lbf}, \quad P = \frac{P_{total}}{8} = 625.6\ \text{lbf/perno}
+\end{equation}
+
+\begin{align}
+n_p &= \frac{S_p A_t}{C P + F_i} = \frac{85{,}000 \times 0.05219}{0.2188 \times 625.6 + 3{,}340.5} = 1.281 \\
+n_L &= \frac{S_p A_t - F_i}{C P} = \frac{85{,}000 \times 0.05219 - 3{,}340.5}{0.2188 \times 625.6} = 8.133 \\
+n_0 &= \frac{F_i}{P(1-C)} = \frac{3{,}340.5}{625.6 \times (1 - 0.2188)} = 6.836
+\end{align}
+
+Los tres factores de seguridad ($n_p = 1.281$, $n_L = 8.133$, $n_0 = 6.836$)
+superan la unidad, confirmando que 8~tornillos 5/16-18~UNC~$\times$~1\textonequarter~in
+SAE Grado~5 resisten adecuadamente la aplicaci\'on.
+
+\section*{Presión hidrostática}
+
+Para corroborar que el biorreactor soporta el volumen de agua ingresado se
+sometió a un estudio de tensión estática. Se aplicaron condiciones de presión
+hidrostática (densidad del agua: $9.170 \times 10^{-7}$~kg/mm$^3$) y una carga de gravedad
+estándar de $9.807$~m/s$^2$.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{fea_hidro_cargas}
+  \caption{Aplicación de cargas a las caras internas del biorreactor.}
+  \label{fig:cargas_hidrostaticas}
+\end{figure}
+
+Con los resultados a través de la simulación, se comprobó que la estructura del
+biorreactor soporta con un gran margen la cantidad de líquido ingresado, La tensi\'on de von Mises m\'axima fue de $2.36$~MPa,
+resultando en un factor de seguridad m\'inimo de $\mathbf{91.1}$, amplio margen
+frente a cualquier condici\'on de operaci\'on normal.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{fea_hidro_fs}
+  \caption{Resultados del factor de seguridad al aplicar una presión hidrostática.}
+  \label{fig:fs_hidrostatica}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{fea_hidro_vonmises}
+  \caption{Mapa de esfuerzo de von Mises --- presión hidrostática (máx = 2.36~MPa).}
+  \label{fig:hidro_vonmises}
+\end{figure}
+
+\section*{Presión manométrica}
+
+El biorreactor opera con una presi\'on manom\'etrica nominal de 2~bar (0.20~MPa).
+Para la simulaci\'on se aplic\'o una carga conservadora de $\mathbf{0.50~MPa}$ (5~bar)
+a todas las caras internas, representando el peor caso esperado.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{fea_mano_cargas}
+  \caption{Aplicación de cargas de 0.50~MPa (5~bar) a las caras internas del biorreactor.}
+  \label{fig:cargas_manometricas}
+\end{figure}
+
+Los resultados obtenidos mostraron que la estructura soporta esta presi\'on extrema
+con una tensi\'on de von Mises m\'axima de $67.7$~MPa y un factor de seguridad
+m\'inimo de $\mathbf{3.18}$, superando el criterio de dise\'no FS~$\geq 2$. El modelo fue analizado
+utilizando una malla de elementos sólidos parabólicos con un total de 121\,510
+nodos y 61\,028 elementos.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{fea_mano_fs}
+  \caption{Resultados del factor de seguridad al aplicar una presión de 0.50~MPa o 5~bar (FS~mín~=~3.18).}
+  \label{fig:fs_manometrica}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{fea_mano_vonmises}
+  \caption{Mapa de esfuerzo de von Mises --- presión manométrica 0.50~MPa (máx = 67.7~MPa).}
+  \label{fig:mano_vonmises}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{fea_mano_desp}
+  \caption{Mapa de desplazamiento total --- presión manométrica 0.50~MPa.}
+  \label{fig:mano_desp}
+\end{figure}
+
+\section*{Vistas explosionadas}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{3cm}[FIGURA 48: Vista explosionada del biorreactor]\vspace{3cm}}}
+  \caption{Vista explosionada del biorreactor.}
+  \label{fig:explosionada_biorreactor}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{\textwidth}{\centering\vspace{3cm}[FIGURA 49: Vista explosionada de la HMI]\vspace{3cm}}}
+  \caption{Vista explosionada de la HMI.}
+  \label{fig:explosionada_hmi}
+\end{figure}

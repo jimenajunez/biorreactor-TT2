@@ -1,0 +1,163 @@
+\chapter{Selección de componentes, especificaciones técnicas y costos}
+\label{ap:componentes_costos}
+
+\section*{Selección de componentes}
+
+\begin{table}[H]
+\centering
+\caption{Tabla de comparación de componentes de Pantallas.}
+\label{tab:comp_pantallas}
+\begin{tabular}{lllll}
+\toprule
+\textbf{Dispositivo} & \textbf{Tamaño} & \textbf{Resolución} & \textbf{Interfaz} & \textbf{Compat.\ RPi} \\
+\midrule
+Pantalla Táctil LCD  & 7 pulgadas & 1024$\times$600 (HD) & HDMI / USB Touch & Nativa (Plug \& Play) \\
+Display Nextion      & 7 pulgadas & 800$\times$480        & UART (Serial)    & Requiere librería externa \\
+Monitor HDMI Genérico & 10+ pulgadas & 1920$\times$1080 & HDMI             & No suele ser táctil / Grande \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Tabla de comparación de componentes de sensores de nivel.}
+\label{tab:comp_nivel}
+\small
+\begin{tabular}{llllll}
+\toprule
+\textbf{Sensor} & \textbf{Tecnología} & \textbf{Rango} & \textbf{Precisión} & \textbf{Material} & \textbf{Afect.\ por espuma} \\
+\midrule
+VEGAPULS C22     & Radar (80~GHz) & 0--20~m & $\pm 2$~mm & PVDF (Cert.\ FDA) & No (Alta fiabilidad) \\
+JSN-SR04T        & Ultrasónico & 0.2--6~m & $\pm 1$~cm & Plástico/Metal & Sí (Falla con condensación) \\
+Sensor Presión Dif. & Hidrostático & 0--5~m & $\pm 0.5\%$ & Acero Inox & Sí (Contacto directo) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Tabla de comparación de componentes de pH.}
+\label{tab:comp_ph}
+\small
+\begin{tabular}{lllll}
+\toprule
+\textbf{Modelo} & \textbf{Rango Temp.} & \textbf{Material} & \textbf{Presión Máx.} & \textbf{Vida Útil} \\
+\midrule
+RK500-12 Tipo-B3 & 0--100~\textdegree C & 316L y Vidrio reforzado & 1~MPa (Industrial) & Alta ($>$1 año) \\
+Electrodo pH Genérico & 0--60~\textdegree C & Plástico/Vidrio & $<0.2$~MPa & Baja (consumible) \\
+Sensor pH Lab Grade & 0--80~\textdegree C & Vidrio (Cuerpo completo) & Atmosférica & Media \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Tabla de comparación de componentes de OD.}
+\label{tab:comp_od}
+\small
+\begin{tabular}{llllll}
+\toprule
+\textbf{Modelo} & \textbf{Principio} & \textbf{Material} & \textbf{Comunicación} & \textbf{Resolución} & \textbf{Grado Alim.} \\
+\midrule
+RK500-04 Tipo-B & Fluorescencia/Óptico & Acero Inox 316L & RS485 (Modbus) & 0.01~mg/L & Sí \\
+Kit Gravity (DFRobot) & Galvánico & Plástico ABS/Membrana & Analógica (0--5~V) & 0.1~mg/L & No \\
+Atlas Scientific DO & Galvánico & Epoxi/Policarbonato & I2C / UART & 0.01~mg/L & Parcial \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Tabla de comparación de componentes de microcontrolador.}
+\label{tab:comp_microcontrolador}
+\small
+\begin{tabular}{lllll}
+\toprule
+\textbf{Microcontrolador} & \textbf{Núcleo/Frec.} & \textbf{Pines I/O} & \textbf{Conectividad} & \textbf{Ventaja Principal} \\
+\midrule
+Raspberry Pi 3B  & Quad-core A53 1.2~GHz & 26/0 & WiFi, BT, Ethernet, HDMI & Multitarea, HMI, BD Local \\
+ESP32            & Xtensa dual-core 240~MHz & 34/10 & WiFi, Bluetooth & Bajo costo, bajo consumo \\
+RP2040 (Pico)    & Dual ARM Cortex 133~MHz & 26/3  & USB & Facilidad de uso \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{Costos}
+
+\begin{table}[H]
+\centering
+\caption{Tabla de coste final.}
+\label{tab:costos}
+\small
+\begin{tabular}{llrr}
+\toprule
+\textbf{Clasificación} & \textbf{Elemento} & \textbf{Precio (MXN)} & \textbf{Total (MXN)} \\
+\midrule
+Sensor      & Sensor de O$_2$ (incluye temperatura) & \$3,900.00 & \$3,900.00 \\
+Sensor      & Sensor de pH (incluye temperatura)    & \$3,300.00 & \$3,300.00 \\
+Sensor      & Sensor de nivel                       & \$1,163.00 & \$1,163.00 \\
+Sensor      & Válvula de Alivio de Presión Ajustable & \$524.00  & \$524.00 \\
+Actuador    & Bomba de aire                         & \$1,104.60 & \$1,104.60 \\
+Actuador    & Bomba 8/12 L/min (Grado alimenticio)  & \$1,870.00 & \$7,480.00 \\
+Actuador    & Chaqueta térmica                      & \$5,000.00 & \$5,000.00 \\
+HMI         & Pantalla táctil LCD                   & \$729.90   & \$729.90 \\
+HMI         & Raspberry 3B                          & \$817.00   & \$1,090.70 \\
+HMI         & Dimer                                 & \$180.00   & \$360.00 \\
+Electrónica & Fuente de 12V 10A                     & \$200.00   & \$200.00 \\
+Electrónica & Fuente de 5V 3A                       & \$100.00   & \$100.00 \\
+Electrónica & Relay                                 & \$117.00   & \$351.00 \\
+Electrónica & Controlador de servos PCA9685         & \$148.00   & \$148.00 \\
+Electrónica & Relay de estado sólido                & \$123.10   & \$123.10 \\
+Electrónica & Módulo Max485 (RS485)                 & \$57.90    & \$57.90 \\
+Electrónica & Juego de 580 conectores JST PH 2.0mm  & \$281.70   & \$281.70 \\
+Electrónica & Manufactura PCB                       & \$300.00   & \$600.00 \\
+Electrónica & Cable calibre 24                      & \$313.60   & \$313.60 \\
+Estructura  & Foco                                  & \$319.00   & \$319.00 \\
+Estructura  & Vidrio protector                      & \$500.00   & \$500.00 \\
+Estructura  & Hoja de silicón                       & \$380.00   & \$380.00 \\
+Estructura  & Imanes de Neodimio 4$\times$2mm 5 pcs & \$30.00    & \$30.00 \\
+Estructura  & Tanques de almacenamiento de líquidos & \$957.00   & \$1,914.00 \\
+Estructura  & Cople 3/8                             & \$35.00    & \$322.90 \\
+Estructura  & Manguera Grado alimenticio 10m        & \$920.00   & \$1,840.00 \\
+Estructura  & Niple 3/8                             & \$31.00    & \$279.70 \\
+Estructura  & Electroválvula de 3/8                 & \$546.00   & \$1,638.00 \\
+Estructura  & Cople espiga 3/8                      & \$546.00   & \$2,730.00 \\
+Estructura  & Válvulas antirretorno                 & \$1,897.40 & \$11,384.40 \\
+Estructura  & Acero inoxidable AISI 304                            & \$5,000.00 & \$5,000.00 \\
+Estructura  & Acrílico                              & \$1,500.00 & \$1,500.00 \\
+Estructura  & 1 kg de filamento PETG                & \$320.00   & \$320.00 \\
+\midrule
+\multicolumn{3}{r}{\textbf{TOTAL:}} & \textbf{\$54,985.80} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{Especificaciones de componentes}
+
+\noindent Las Figuras 102 a 125 corresponden a las hojas de datos técnicas de los componentes
+seleccionados (sensor de pH, sensor de O$_2$, sensor de nivel, bombas, pantalla,
+Raspberry Pi, etc.). Estas figuras provienen del documento PDF original y deben
+incluirse como imágenes en el archivo final.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{manual_ph_p1}
+  \caption{Hoja de datos sensor de pH RK500-12, parte uno.}
+  \label{fig:hoja_ph1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{manual_ph_p2}
+  \caption{Hoja de datos sensor de pH RK500-12, parte dos.}
+  \label{fig:hoja_ph2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{manual_od_p1}
+  \caption{Hoja de datos sensor de ox\'igeno disuelto RK500-04.}
+  \label{fig:hoja_o2}
+\end{figure}
+
+\noindent\textit{Nota: Las Figuras 105 a 125 corresponden a hojas de datos adicionales de componentes, disponibles en el documento original.}

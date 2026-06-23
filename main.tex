@@ -1,0 +1,174 @@
+% Archivo principal de formato de tesis de Trabajo Terminal
+%======================================================
+% Diseño y construcción de un biorreactor airlift como estación de
+% pruebas para hongos ascomicetos coprófilos
+% UPIIZ - Ingeniería Mecatrónica - Trabajo Terminal I
+%======================================================
+
+\documentclass[11pt,tesis,twoside,openright,spanish]{upiiztt}
+\input{Init}
+
+%======================================================
+%-----------------------Portada------------------------
+%======================================================
+\title{\capitalisewords{Diseño y construcción de un biorreactor airlift como estación de pruebas para hongos ascomicetos coprófilos}}
+\formato{1}
+%Formato de entrega:
+% 1.- Para TT1 y TT2
+% 2.- Para titulación
+
+%======================================================
+% Número de alumnos
+\authnum{3}
+%======================================================
+% Número de asesores
+\asesornum{3}
+%======================================================
+% Nombre completo de los alumnos
+\alumnoA{Jet Ming Adrián Huang Sánchez}
+\alumnoB{María Jimena Júnez Huerta}
+\alumnoC{Jesús Said Zesati Márquez}
+%======================================================
+% Nombre completo de los asesores
+\asesorA{Dr. Umanel Azazael Hernández González}
+\asesorB{M. en C. Flabio Dario Mirelez Delgado}
+\asesorC{M. en P. y M. Jorge Talavera Otero}
+%======================================================
+% Presidente y secretario del jurado
+\presidente{ING Jesús Álvarez Montúfar}
+\secretario{M. en C. Eleazar Pacheco Reyes}
+
+%======================================================
+% Línea de trabajo
+\linea{1}
+%Línea de trabajo:
+% 1.- Diseño e implementación de un sistema robótico, dispositivos o sistemas Mecatrónicos.
+
+%======================================================
+% Mes y año oficial de liberación
+\date{junio de 2026}
+
+%==============================================================
+% INICIA DOCUMENTO
+%==============================================================
+\begin{document}
+    \renewcommand{\listfigurename}{Lista de Figuras}
+    \renewcommand{\listtablename}{Lista de Tablas}
+    \bstctlcite{IEEEexample:BSTcontrol}
+
+% Estilo del documento
+    \thesism
+
+%======================================================
+%-----------------Portada y contraportada--------------
+%======================================================
+\maketitle
+\clearpage
+\pagestyle{empty}
+\newpage~\newpage
+\begin{contraportada}
+\end{contraportada}
+\newpage~\newpage
+\clearpage
+\pagestyle{plain}
+
+%======================================================
+%----------------------Índice--------------------------
+%======================================================
+\pagestyle{empty}
+\tableofcontents\pagestyle{empty}
+\listoffigures
+\cleardoublepage\pagestyle{empty}
+\listoftables
+\cleardoublepage\pagestyle{empty}
+
+%======================================================
+%--------------------Capítulos------------------------
+%======================================================
+\clearpage\pagestyle{plain}
+\pagenumbering{roman}
+
+%======================================================
+%--------------------Resumen--------------------------
+%======================================================
+\cleardoublepage
+\import{./}{resumen.tex}
+\clearpage\pagenumbering{arabic}
+
+%======================================================
+%--------------------Capítulo 1-----------------------
+%======================================================
+\clearpage\pagestyle{plain}
+\import{./}{capitulo1.tex}
+
+%======================================================
+%--------------------Capítulo 2-----------------------
+%======================================================
+\import{./}{capitulo2.tex}
+
+%======================================================
+%--------------------Capítulo 3-----------------------
+%======================================================
+\import{./}{capitulo3.tex}
+
+%======================================================
+%--------------------Capítulo 4-----------------------
+%======================================================
+\import{./}{capitulo4.tex}
+
+%======================================================
+%--------------------Capítulo 5-----------------------
+%======================================================
+\import{./}{capitulo5.tex}
+
+%======================================================
+%--------------------Capítulo 6-----------------------
+%======================================================
+\import{./}{capitulo6.tex}
+
+%======================================================
+%--------------------Capítulo 7-----------------------
+%======================================================
+\import{./}{capitulo7.tex}
+
+%======================================================
+%--------------------Capítulo 8-----------------------
+%======================================================
+\import{./}{capitulo8.tex}
+
+%======================================================
+%--------------------Capítulo 9 — Pruebas y resultados-
+%======================================================
+\import{./}{capitulo_pruebas.tex}
+
+%======================================================
+%--------------------Capítulo 10 — Conclusiones-------
+%======================================================
+\import{./}{capitulo9.tex}
+
+%======================================================
+%--------------------Bibliografía---------------------
+%======================================================
+\import{./}{bibliografia.tex}
+
+%======================================================
+%--------------------Apéndices------------------------
+%======================================================
+\appendix
+\import{./}{Anexo1.tex}
+\import{./}{Anexo2.tex}
+\import{./}{Anexo3.tex}
+\import{./}{Anexo4.tex}
+\import{./}{Anexo5.tex}
+\import{./}{Anexo6.tex}
+\import{./}{Anexo7.tex}
+\import{./}{Anexo8.tex}
+\import{./}{Anexo9.tex}
+\import{./}{Anexo10.tex}
+\import{./}{Anexo11.tex}
+\import{./}{Anexo12.tex}
+
+%======================================================
+% ---------------FINALIZA DOCUMENTO-------------------
+%======================================================
+\end{document}

@@ -1,0 +1,331 @@
+\chapter{Desarrollo del trabajo}\label{cap7}
+
+Para el desarrollo del proyecto se utilizará la metodología de diseño mecatrónico,
+la cual permite desarrollar de forma integral el diseño de sistemas que integran
+componentes mecánicos, eléctricos y de control.
+
+\section{Análisis del problema}
+
+Con el objetivo de analizar las etapas de funcionamiento del sistema en su totalidad,
+se hizo uso de diagramas IDEF0, metodología que permite conceptualizar el
+producto final a desarrollar representándolo como cajas negras con entradas,
+controles y maquinaria que generan una o varias salidas.
+
+\textbf{Diagrama A-0:} Muestra de manera general el sistema biorreactor, así como los
+controles y mecanismos que permitirán llevar a las entradas a las salidas requeridas
+(Figura~\ref{fig:idef0_A0}). Las entradas del proceso serán el inóculo con el ascomiceto, así como
+agua; los mecanismos requeridos son la interfaz HMI, sensores, actuadores y
+controladores, mientras que los controles que guiarán el proceso son tanto los
+parámetros de cultivo como la temperatura, oxigenación y nutrientes. Como salidas
+de este proceso, se obtendrán biomasa, metabolitos secundarios y residuos.
+
+\textbf{Diagrama A0:} Este diagrama descompone la función principal en procesos de
+mayor detalle, contemplando la preparación del biorreactor para asegurar el medio
+optimo de cultivo, el cultivo y monitoreo, para finalmente cosechar vaciar y extraer
+los datos recopilados a lo largo del ciclo de funcionamiento (Figura~\ref{fig:idef0_A0b}).
+
+\textbf{Diagramas A1, A2 y A3:} Estos diagramas muestran de manera aún más detallada
+los procesos de preparación y configuración del biorreactor, el cultivo y monitoreo
+y finalmente la cosecha, vaciado y extracción de datos. (Los diagramas IDEF A1,
+A2 y A3 se encuentran en el Apéndice~\ref{ap:idef0}).
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 1: Diagrama IDEF0, nodo A-0]\vspace{2cm}}}
+  \caption{Diagrama IDEF0, nodo A-0.}
+  \label{fig:idef0_A0}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 2: Diagrama IDEF0, nodo A0]\vspace{2cm}}}
+  \caption{Diagrama IDEF0, nodo A0.}
+  \label{fig:idef0_A0b}
+\end{figure}
+
+\section{Especificaciones de diseño}
+
+\subsection{Necesidades del usuario}
+
+Con base en la investigación documentada en los capítulos III y IV, se identificaron
+las necesidades del usuario final. La Tabla~\ref{tab:necesidades} enlista todas estas necesidades y a
+su vez incluye un índice de importancia relativa, el cual evalúa del 1 al 3 la
+importancia de cada parámetro, representando un valor más bajo una mayor prioridad.
+
+\begin{table}[H]
+\centering
+\caption{Tabla de Necesidad.}
+\label{tab:necesidades}
+\begin{tabular}{clc}
+\toprule
+\textbf{N\textdegree} & \textbf{Necesidad} & \textbf{Importancia relativa} \\
+\midrule
+1  & La estructura debe ser biocompatible con el hongo & 1 \\
+2  & La estructura debe soportar protocolos de limpieza y desinfección sin sufrir degradación & 3 \\
+3  & El sistema debe mantener su contenido protegido frente a la entrada de contaminantes externos y la pérdida de fluidos & 2 \\
+4  & La interfaz debe mostrar información y alertas & 3 \\
+5  & La interfaz debe permitir el monitoreo y ajuste del pH & 2 \\
+6  & La interfaz debe permitir el monitoreo y ajuste de la iluminación & 2 \\
+7  & La interfaz debe permitir el monitoreo y ajuste de la temperatura & 2 \\
+8  & La interfaz debe permitir el monitoreo y ajuste del nivel de llenado del biorreactor & 2 \\
+9  & La interfaz debe permitir el monitoreo y ajuste de la presión & 2 \\
+10 & La base de datos debe permitir que todas las pruebas realizadas al biorreactor sean registradas localmente & 3 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Métricas}
+
+Posteriormente, se elabora la tabla de métricas, la cual facilita la organización de
+la información sobre las necesidades según su nivel de importancia. Esta tabla
+también detalla las necesidades que se satisfacen y especifica las unidades de
+medida correspondientes, como se muestra en la Tabla~\ref{tab:metricas}. En el Apéndice~\ref{ap:necesidades_vs_metricas} se
+presenta la tabla ``Necesidades vs métricas''.
+
+\begin{table}[H]
+\centering
+\caption{Tabla de Métricas.}
+\label{tab:metricas}
+\small
+\begin{tabular}{cclcc}
+\toprule
+\textbf{N\textdegree~Métrica} & \textbf{N\textdegree~Necesidad} & \textbf{Métrica} & \textbf{Nivel importancia} & \textbf{Unidades} \\
+\midrule
+1  & 1  & Material que cumpla la norma USP 87 & 1 & --- \\
+2  & 2  & Lineamientos ASME BPE & 5 & --- \\
+3  & 3  & Tasa de fuga & 1 & m$^3$/s \\
+4  & 3  & Presión diferencial soportada & 2 & bar \\
+5  & 4  & Tiempo máx.\ desde detección de condición crítica hasta alarma & 3 & Segundos \\
+6  & 4  & Periodo de actualización de datos & 2 & Segundos \\
+7  & 10 & Capacidad de almacenamiento & 2 & Gb \\
+8  & 7  & Nivel de temperatura & 1 & \textdegree C \\
+9  & 5  & Nivel de pH & 1 & pH \\
+10 & 9  & Nivel de presión & 1 & atm \\
+11 & 8  & Nivel de agua & 3 & \% \\
+12 & 6  & Nivel de intensidad lumínica & 2 & Lúmenes \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Especificaciones de objetivo}
+
+Finalmente se realiza una tabla en la cual con la información recopilada de los
+anteriores puntos se establece su valor marginal y su valor ideal para cada una de
+las métricas establecidas anteriormente, como se observa en la Tabla~\ref{tab:especificaciones}.
+
+\begin{table}[H]
+\centering
+\caption{Tabla de especificaciones de objetivo.}
+\label{tab:especificaciones}
+\small
+\begin{tabular}{cclccccc}
+\toprule
+\textbf{N\textdegree~Mét.} & \textbf{N\textdegree~Nec.} & \textbf{Métrica} & \textbf{Importancia} & \textbf{Unidades} & \textbf{Valor ideal} & \textbf{Valor marginal} \\
+\midrule
+1  & 1  & Material USP 87         & 1 & ---     & Clase VI      & --- \\
+2  & 2  & Lineamientos ASME BPE   & 5 & ---     & ---           & --- \\
+3  & 3  & Tasa de fuga             & 1 & m$^3$/s & $<0.1$        & $<0.2$ \\
+4  & 3  & Presión diferencial      & 2 & bar     & $>0.3$        & $>0.2$ \\
+5  & 4  & T. máx.\ alarma          & 3 & s       & 1             & 3 \\
+6  & 4  & Periodo actualización    & 2 & s       & 1             & 3 \\
+7  & 10 & Capacidad almacenamiento & 2 & Gb      & 16            & 8 \\
+8  & 7  & Nivel temperatura        & 1 & \textdegree C & 15--40 & 10--45 \\
+9  & 5  & Nivel de pH              & 1 & pH      & 3--7          & 2--8 \\
+10 & 9  & Nivel de presión         & 1 & atm     & 1             & 0.95--1.05 \\
+11 & 8  & Nivel de agua            & 3 & \%      & 95            & 90 \\
+12 & 6  & Intensidad lumínica      & 2 & Lúmenes & 10\,000--20\,000 & 8\,000--25\,000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Generación de posibles soluciones}
+
+\subsection{Concentrado de ideas}
+
+Se utilizaron herramientas de pensamiento convergente para la formulación de
+ideas. La Tabla~\ref{tab:morfologico} muestra el resultado de descomponer el producto esperado en
+sus componentes para después brindar diferentes ideas de elementos que podrían
+satisfacer esta necesidad.
+
+\subsubsection{Pensamiento convergente}
+
+\begin{table}[H]
+\centering
+\caption{Tabla del análisis morfológico para el pensamiento convergente.}
+\label{tab:morfologico}
+\small
+\begin{tabular}{lccc}
+\toprule
+\textbf{Función} & \textbf{Opción 1} & \textbf{Opción 2} & \textbf{Opción 3} \\
+\midrule
+Tanque del biorreactor & Vidrio de borosilicato & Policarbonato autoclavable & Acero inoxidable \\
+Sistema de burbujeo & Burbujeo directo (anillo) & Tubo de tiro interno & Anillo externo desmontable \\
+Uniones herméticas & Conectores de Espiga & Conectores roscados & Empaques \\
+Placa controladora & Arduino & Raspberry Pi & Jetson nano \\
+Interfaz (HMI) & Pantalla LCD & Pantalla táctil & Interfaz web \\
+Control de temperatura & Resistencia calefactora & Manta calefactora & Serpentín con recirculación \\
+Control de pH & Adición manual ácido/base & Mediante reactivos & Bomba peristáltica reversible \\
+Sistema llenado/vaciado & Válvulas manuales & Válvulas solenoides & Inyección manual \\
+Suministro de sustrato & Flujo por gravedad & Bomba peristáltica & --- \\
+Protocolo comunicación & Serial (USB/UART) & CANBUS & SPI \\
+Almacenamiento datos & Tarjeta MicroSD & Memoria USB & Base de datos Nube/Local \\
+Fuente de energía & Adaptador Corriente Alterna & Baterías DC & Corriente alterna \\
+Tipo de iluminación & Tiras de LEDs & Lámparas fluorescentes & Lámpara incandescente \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Pensamiento divergente}
+
+De igual manera, se utilizó una herramienta de pensamiento divergente en el Apéndice~\ref{ap:mapa_mental} (Figura~\ref{fig:mapa_mental}).
+
+\subsection{Diseños conceptuales}
+
+A partir de las opciones derivadas de la caja morfológica, se generaron tres diseños
+conceptuales mediante diversas combinaciones. Estos diseños comparten las
+siguientes características constantes:
+
+\begin{itemize}
+  \item \textbf{Sensores:} Necesariamente los sensores tienen que ser sumergibles y grado alimenticio.
+  \item \textbf{Concentración de gases:} La liberación de gases ocurre en la parte superior del contenedor a través de una válvula de alivio.
+  \item \textbf{Entradas:} El sistema debe contar con dos entradas para semilíquidos para ingresar el hongo, cuatro entradas para líquidos, dos para agua y dos para el etanol utilizado para el control de nivel de nutrientes.
+  \item \textbf{Extracción de líquidos:} El sistema debe de contar con dos compartimentos a diferente nivel para la extracción de los líquidos.
+  \item \textbf{HMI:} La HMI será externa al biorreactor, esta cuenta con una pantalla con todos los datos recopilados además debe contar con un puerto USB con el cual es posible extraer la información y finalmente debe contener todas las conexiones para todos los sensores y actuadores (Figura~\ref{fig:hmi_conceptual}).
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 3: Diseño conceptual del HMI]\vspace{2cm}}}
+  \caption{Diseño conceptual del HMI.}
+  \label{fig:hmi_conceptual}
+\end{figure}
+
+\subsubsection{Diseño conceptual 1}
+
+Para el primer diseño conceptual (Figura~\ref{fig:dc1}) muestra el sistema de control de
+temperatura el cual es un biorreactor de doble pared unido por agarraderas
+centradoras, el contendor interior es el biorreactor, mientras que el exterior es
+utilizado para calentar el biorreactor a través de baño maría. Además el diseño
+cuenta con un flujo interno que pasa a través de un foco cilindro hueco con el cual
+se ilumina el biorreactor.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 4: Diseño conceptual 1]\vspace{2cm}}}
+  \caption{Diseño conceptual 1.}
+  \label{fig:dc1}
+\end{figure}
+
+\subsubsection{Diseño conceptual 2}
+
+El segundo diseño conceptual (Figura~\ref{fig:dc2}) implementa el control de temperatura
+mediante calentamiento por placas inductivas aplicadas directamente al
+biorreactor. Este diseño incluye un tubo externo para el flujo del sistema y, este
+diseño además presenta un foco cilíndrico no hueco en su centro.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 5: Diseño conceptual 2]\vspace{2cm}}}
+  \caption{Diseño conceptual 2.}
+  \label{fig:dc2}
+\end{figure}
+
+\subsubsection{Diseño conceptual 3}
+
+Finalmente el tercer diseño conceptual (Figura~\ref{fig:dc3}) utiliza aire caliente para el control
+de la temperatura. El aire se calienta mediante resistencias y se introduce en el
+biorreactor a través de un burbujeador. Similar al diseño anterior, incluye un tubo
+externo para el flujo del sistema y un foco cilíndrico situado en el centro.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 6: Diseño conceptual 3]\vspace{2cm}}}
+  \caption{Diseño conceptual 3.}
+  \label{fig:dc3}
+\end{figure}
+
+\subsection{Selección de la solución adecuada}
+
+Para analizar y diferenciar las características de cada diseño conceptual, se
+utilizaron tablas de pertenencia y de selección para identificar la solución que
+resuelve mejor el problema.
+
+\subsubsection{Evaluación de pertenencia}
+
+En la Tabla~\ref{tab:pertenencia} se observa la tabla de pertenencia, en donde se comparan los criterios
+y se determina la importancia relativa entre cada uno en comparación al resto. Se
+tomaron criterios de selección tomando en cuenta las necesidades identificadas del
+proyecto:
+
+\begin{itemize}
+  \item \textbf{Sistema de transferencia de calor:} Evalúa la capacidad del sistema de transmitir y mantener la temperatura de la manera más eficiente y controlada, expresada en grados Celsius (\textdegree C).
+  \item \textbf{Flujo:} Evalúa la eficacia con la que el sistema promueve la homogeneidad de nutrientes, expresada en número de Reynolds (Re).
+  \item \textbf{Precisión del sistema de control:} Consiste en la capacidad de los sistemas implementados para lograr una estabilidad de una variable física en un valor deseado. Una ponderación alta representa un menor error de precisión, expresado en porcentaje de error (\%).
+  \item \textbf{Hermeticidad:} Evalúa la integridad de contención del biorreactor para prevenir la entrada de microorganismos y contaminantes externos al medio además de evitar fugas del medio. Una ponderación alta implica un valor bajo de tasa de fuga, este se mide en m$^3$/s.
+  \item \textbf{Biocompatibilidad:} Evalúa que todos los materiales en contacto directo con el medio de cultivo o el microorganismo cumplan con los estándares de biocompatibilidad y no toxicidad. Se prioriza el cumplimiento de normativas como la USP Clase VI.
+  \item \textbf{Costo:} Considera el gasto total para el diseño y construcción del prototipo en pesos mexicanos (MXN). Una ponderación alta se debe a un menor precio.
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Tabla de pertenencia.}
+\label{tab:pertenencia}
+\begin{tabular}{lcccccccc}
+\toprule
+\textbf{Criterios} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} & \textbf{E} & \textbf{F} & \textbf{Total} & \textbf{Pertenencia \%} \\
+\midrule
+A.- Transf.\ calor  & x & 1 & 1 & 1 & 1 & 0 & 4 & 26.67 \\
+B.- Flujo            & 0 & x & 0 & 0 & 1 & 0 & 1 & 6.67 \\
+C.- Precisión control & 0 & 1 & x & 1 & 1 & 1 & 4 & -- \\
+D.- Hermeticidad     & 0 & 1 & 0 & x & 1 & 0 & 2 & -- \\
+E.- Biocompatibilidad & 0 & 0 & 0 & 0 & x & 0 & 0 & -- \\
+F.- Costo            & 1 & 1 & 0 & 1 & 1 & x & 4 & -- \\
+\midrule
+\multicolumn{7}{r}{\textbf{Total:}} & 15 & 100 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Tabla de ponderaciones.}
+\label{tab:ponderaciones}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Criterio} & \textbf{Peso} & \textbf{Descripción} \\
+\midrule
+A.- Sistema de transferencia de calor & 0.0667 & Excelente \\
+B.- Flujo                              & 0.2667 & --- \\
+C.- Precisión del sistema de control   & 0.0667 & --- \\
+D.- Hermeticidad                       & 0.3333 & --- \\
+E.- Biocompatibilidad                  & 0.0333 & --- \\
+F.- Costo                              & 0.0667 & Bueno \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Selección de diseño}
+
+\begin{table}[H]
+\centering
+\caption{Tabla de selección.}
+\label{tab:seleccion}
+\begin{tabular}{lccccccc}
+\toprule
+\textbf{Criterios} & \textbf{Total} & \multicolumn{2}{c}{\textbf{DC1}} & \multicolumn{2}{c}{\textbf{DC2}} & \multicolumn{2}{c}{\textbf{DC3}} \\
+\midrule
+A.- Transf.\ calor    & 0.0667 & 0.75 & 0.05 & 0.90 & 0.06 & 0.50 & 0.033 \\
+B.- Flujo              & 0.2667 & 0.75 & 0.20 & 0.90 & 0.24 & 0.75 & 0.20  \\
+C.- Precisión control  & 0.0667 & 0.90 & 0.06 & 0.90 & 0.06 & 0.50 & 0.033 \\
+D.- Hermeticidad       & 0.3333 & 0.50 & 0.10 & 0.90 & 0.18 & 0.50 & 0.10  \\
+E.- Biocompatibilidad  & 0.0333 & 0.75 & 0.25 & 0.90 & 0.30 & 0.50 & 0.167 \\
+F.- Costo              & 0.0667 & 0.90 & 0.06 & 0.75 & 0.05 & 0.50 & 0.033 \\
+\midrule
+\textbf{TOTAL}         &        & \multicolumn{2}{c}{\textbf{0.72}} & \multicolumn{2}{c}{\textbf{0.89}} & \multicolumn{2}{c}{\textbf{0.57}} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+El resultado de la Tabla~\ref{tab:seleccion} muestra que el diseño conceptual 2 consigue el mayor
+puntaje con relación a los objetivos planteados y las ponderaciones asignadas, por
+lo que será el utilizado para realizar el diseño detallado.

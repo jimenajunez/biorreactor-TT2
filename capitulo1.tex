@@ -1,0 +1,49 @@
+\chapter{Introducción}\label{cap1}
+
+El presente documento expone el diseño detallado de un biorreactor tipo airlift,
+elaborado bajo la metodología de diseño mecatrónico con el fin de crear el entorno
+de experimentación óptimo para el estudio y caracterización del comportamiento de
+un cultivo de hongos ascomicetos coprófilos.
+
+Primeramente, se presentan los objetivos a cumplir con el desarrollo del prototipo,
+seguido de la justificación, en la que se expone la problemática existente y el
+alcance de este. El marco teórico por su parte presenta conceptos y términos que
+conforman las bases teóricas para la comprensión del proyecto. En el estado del
+arte se manejan algunos de los últimos avances de este tipo de tecnología que
+mantienen relación con los objetivos planteados.
+
+En la sección planteamiento del problema se desglosa a profundidad el problema
+a resolver, además de describirse el sistema por medio de diagramas IDEF0, donde
+se describe paso a paso las acciones a realizar para la obtención de una respuesta
+favorable.
+
+Por su parte el apartado diseño detallado se encuentra dividido en diversas
+secciones, comenzando por la creación de la geometría general del tanque,
+seguido del diseño del sistema de control de nutrientes, nivel y temperatura;
+después la programación, etapa en la que se consideran los diagramas de flujo que
+rigen el ciclo lógico del sistema, así como diagramas de estados y bosquejos de la
+interfaz. La sección de diseño de electrónica recopila todos los elementos que
+conforman las etapas de potencia, protocolos de comunicación y microcontrolador,
+todo eso con su respectivo diseño de PCB. En selección de materiales se presentan
+todos los elementos prefabricados que componen el sistema, así como una breve
+explicación del porqué de su elección. Finalmente, el apartado plan de manufactura
+recaba todos los procesos que se llevaran a cabo para la creación del prototipo.
+
+\section{Objetivos}
+
+\subsection{Objetivo General}
+
+Diseñar y construir un biorreactor tipo airlift semiautomatizado que permita al
+usuario realizar pruebas en hongos ascomicetos coprófilos, mediante el ajuste
+previo de las variables temperatura, presión, nivel, y cantidad de nutrientes, así
+como el monitoreo de oxigenación e iluminación, facilitando la investigación y
+determinación de las condiciones óptimas para su cultivo.
+
+\subsection{Objetivos específicos}
+
+\begin{itemize}
+  \item Diseñar y construir una estructura con dimensiones máximas de 80~cm $\times$ 80~cm $\times$ 100~cm, que cuente con compartimentos para la adición de los reactivos implicados en el crecimiento de los ascomicetos.
+  \item Diseñar e implementar un algoritmo de control que gestione las transiciones entre etapas de crecimiento del hongo, ajustando la salida de los actuadores en función de las variables de entrada: temperatura, presión, oxigenación y cantidad de nutrientes.
+  \item Diseñar e integrar un sistema electrónico que incorpore sensores, circuitos de acondicionamiento de señal y actuadores.
+  \item Desarrollar e implementar una interfaz humano-máquina que muestre las variables críticas: temperatura, presión, oxigenación, cantidad de nutrientes, iluminación y nivel. Estas variables deberán actualizarse cada minuto y almacenarse en una base de datos descargable.
+\end{itemize}

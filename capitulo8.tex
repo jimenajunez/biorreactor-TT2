@@ -1,0 +1,998 @@
+\chapter{Diseño detallado}\label{cap8}
+
+Posterior a la selección del diseño conceptual que más se adecua a las
+necesidades del usuario y su importancia relativa, se procedió con el diseño
+detallado del sistema, en el cual se documentan los cálculos, selección de
+componentes y justificaciones teóricas que rigen la geometría del tanque.
+
+El objetivo fue crear las especificaciones técnicas necesarias para la 
+fabricación, ensamblaje y automatización del sistema. El diseño detallado se
+desglosará en los siguientes puntos:
+
+\begin{itemize}
+  \item \textbf{Diseño Geométrico y Mecánico:} Justifica la geometría del tanque principal.
+  \item \textbf{Selección de componentes:} En esta sección se detallan las características que fueron determinantes al seleccionar los componentes que conformarán el sistema.
+  \item \textbf{Integración y CAD:} Se describe la disposición de los elementos hidráulicos y neumáticos, sistema de iluminación e interfaz.
+  \item \textbf{Sistema de Control:} Describe la arquitectura de control, incluye el proceso de diseño de los diferentes tipos de control que se utilizarán en el proyecto.
+  \item \textbf{Programación:} Detalla el algoritmo utilizando, haciendo uso los diagramas de flujo con la estructura del código que rige el comportamiento del sistema.
+  \item \textbf{Sistemas Eléctricos:} Presenta los esquemas de conexión y la integración de los componentes electrónicos como actuadores, sensores y microcontroladores.
+  \item \textbf{Plan de manufactura:} Define la ruta de fabricación, la selección de herramientas y los procesos técnicos de montaje.
+\end{itemize}
+
+\section{Diseño geométrico y mecánico}
+
+\subsection{Dimensiones y estructura del biorreactor}
+
+El cultivo de hongos filamentosos en biorreactores convencionales presenta
+algunas desventajas, entre ellas la adhesión de micelio en las paredes, la baja
+resistencia del hongo a fuerzas cortantes, necesidad de un entorno homogéneo y
+altas tasas de transferencia de oxígeno. La geometría propuesta en este diseño
+busca atacar estas debilidades mediante la adecuación de las dimensiones a las
+necesidades propias del organismo y la incorporación de elementos nuevos.
+
+La configuración de biorreactor tipo airlift (Figura~\ref{fig:airlift_config}) mitiga el estrés por
+cizallamiento, puesto que elimina los elementos mecánicos de agitación. Esta
+configuración se caracteriza por la inyección de gas en la parte inferior y un aro que
+conduce el flujo. El flujo es resultado de la diferencia de densidad entre dos
+regiones, a la región donde se inyecta el gas se le denomina \textit{riser}, mientras que la
+zona donde el fluido recircula hacia la base se llama \textit{downcomer} \cite{Cerrone2024}.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 7: Configuración de un biorreactor tipo airlift]\vspace{2cm}}}
+  \caption{Configuración de un biorreactor tipo airlift \cite{Cerrone2025}.}
+  \label{fig:airlift_config}
+\end{figure}
+
+La configuración convencional mostrada en la Figura~\ref{fig:airlift_config}, tiene la desventaja de que
+requiere una distancia considerable entre nivel de agua y superficie (espacio libre
+superior) para asegurar el flujo \cite{Cerrone2025}, sin embargo, la existencia de esta área libre
+promueve la formación de micelio. Siguiendo el mismo principio, se han
+desarrollado diferentes modificaciones, entre ellas el biorreactor airlift con aro
+externo, el cual al contar con una separación física entre \textit{riser} y \textit{downcomer}, no
+cuenta con la limitante de que el flujo esté relacionado con el área libre superior.
+Además, el espacio que permitiría la recirculación interna se aprovechará para la
+incorporación del sistema de iluminación. La Figura~\ref{fig:partes_airlift} muestra el diseño tipo airlift
+con aro externo.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 8: Partes de un biorreactor tipo airlift con aro externo]\vspace{2cm}}}
+  \caption{Partes de un biorreactor tipo airlift con aro externo.}
+  \label{fig:partes_airlift}
+\end{figure}
+
+Existen algunas relaciones estandarizadas para biorreactores cilíndricos
+(preferidos para evitar el estancamiento). Se prefieren biorreactores con una
+relación entre la altura de la columna de líquido ($H$) y diámetro interno del tanque
+($D$) de aproximadamente 17 para facilitar el flujo. Sin embargo, en esta ocasión la
+relación $H/D$ se mantuvo en aproximadamente 4.17, esto debido al aumento del
+diámetro del tanque para alojar un foco interno concéntrico.
+
+Otra relación encontrada en la bibliografía es el área de la sección transversal del
+\textit{downcomer} ($A_d$, conducto de descenso) con respecto a la del \textit{riser} ($A_r$, columna de
+ascenso y oxigenación) de 0.5 a 1 para aumentar la velocidad de transferencia. En
+esta ocasión, se priorizó mantener una relación $A_d/A_r = 0.2$, sacrificando velocidad de
+transferencia a cambio de que la mayor parte del cultivo se encuentre distribuida
+en el área iluminada. En el Apéndice~\ref{ap:estructura} se contienen los cálculos para la geometría
+del reactor.
+
+Siempre que existen curvaturas en el tanque, la norma ASME BPE sugiere
+mantener ciertas relaciones para facilitar la limpieza CIP del tanque. Este estándar
+define las dimensiones precisas para los accesorios higiénicos utilizados en estas
+aplicaciones. Para el diseño de las líneas de tubería de 80~mm, equivalente nominal
+a 3 pulgadas, se ha consultado la ``Tabla 19'' de dicha norma. De acuerdo con esta
+tabla, para un tamaño de tubería nominal de 3 pulgadas el estándar BPE especifica
+un radio de curvatura 4.5 pulgadas \cite{Huitt2016}.
+
+La Tabla~\ref{tab:medidas_tanque} recopila las dimensiones seleccionadas para la generación de la
+geometría del tanque.
+
+\begin{table}[H]
+\centering
+\caption{Tabla recopiladora de medidas del tanque.}
+\label{tab:medidas_tanque}
+\begin{tabular}{lll}
+\toprule
+\textbf{Nombre} & \textbf{Designación} & \textbf{Valor} \\
+\midrule
+Radio del riser          & $R_r$ & 85~mm \\
+Radio del downcomer      & $R_d$ & 38.1~mm \\
+Altura del tanque        & $H$   & 700~mm \\
+Altura del downcomer     & $H_d$ & 343.8~mm \\
+Radio de curvatura       & $R_B$ & 114.3~mm \\
+Capacidad volumétrica total del tanque & $V$ & 17.256~L \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 9: Simbología de los parámetros utilizados para la geometría del biorreactor]\vspace{2cm}}}
+  \caption{Simbología de los parámetros utilizados para la geometría del biorreactor.}
+  \label{fig:simbologia}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 10: Ensamble completo del biorreactor]\vspace{2cm}}}
+  \caption{Ensamble completo del biorreactor.}
+  \label{fig:ensamble_biorreactor}
+\end{figure}
+
+\subsection{Análisis de esfuerzos y validación estructural}
+
+Para corroborar la integridad física del biorreactor ante las condiciones de
+operación esperadas, se realizó un análisis de elemento finito (FEA). Se evaluaron
+dos escenarios: la presión hidrostática del medio de cultivo y la presión
+manométrica ante la inyección de aire.
+
+Se seleccion\'o el acero inoxidable AISI 304 (18-8) como material estructural del
+tanque, con un espesor de pared de 5~mm. El AISI 304 ofrece excelente resistencia a
+la corrosi\'on en medios acu\'osos, es ampliamente utilizado en la industria
+alimentaria y biotecnol\'ogica \cite{Serviacero}, y cuenta con aprobaci\'on para
+contacto con alimentos y medios de cultivo. Frente al 316L, el AISI 304 presenta
+propiedades mec\'anicas similares ($E = 195{,}000$~MPa, $\sigma_y = 215$~MPa,
+$\sigma_u = 505$~MPa) y resulta m\'as accesible en el mercado nacional, manteniendo
+la inocuidad requerida para la aplicaci\'on.
+
+\textbf{Presi\'on hidrost\'atica.} La tensi\'on de von Mises m\'axima fue de
+$2.36$~MPa, con un \textbf{factor de seguridad m\'inimo de 91.1}, demostrando
+que la pared del tanque soporta el peso del l\'iquido con amplio margen.
+
+\textbf{Presi\'on manom\'etrica.} Aplicando $0.50$~MPa (5~bar) para simular
+condiciones extremas, la tensi\'on de von Mises m\'axima fue de $67.7$~MPa,
+resultando en un \textbf{factor de seguridad m\'inimo de 3.18}, superando
+el criterio de dise\~no $\text{FS} \geq 2$.
+
+La Tabla~\ref{tab:fea_resumen} resume ambos an\'alisis.
+
+\begin{table}[H]
+\centering
+\caption{Resumen de resultados del an\'alisis FEA.}
+\label{tab:fea_resumen}
+\small
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Escenario} & \textbf{Carga} & \textbf{Von Mises m\'ax.} & \textbf{FS m\'in.} \\
+\midrule
+Presi\'on hidrost\'atica & $\rho g h$ & $2.36$~MPa & $91.1$ \\
+Presi\'on manom\'etrica & $0.50$~MPa & $67.7$~MPa & $3.18$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Las Figuras~\ref{fig:fea_hidro_fs} y~\ref{fig:fea_mano_fs} muestran
+los mapas de factor de seguridad obtenidos en cada escenario.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{fea_hidro_fs}
+  \caption{Mapa de factor de seguridad --- presi\'on hidrost\'atica (FS~m\'in~=~91.1).}
+  \label{fig:fea_hidro_fs}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{fea_hidro_vonmises}
+  \caption{Mapa de esfuerzo de von Mises --- presi\'on hidrost\'atica (m\'ax~=~2.36~MPa).}
+  \label{fig:fea_hidro_vonmises}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{fea_mano_fs}
+  \caption{Mapa de factor de seguridad --- presi\'on manom\'etrica 0.50~MPa (FS~m\'in~=~3.18).}
+  \label{fig:fea_mano_fs}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{fea_mano_vonmises}
+  \caption{Mapa de esfuerzo de von Mises --- presi\'on manom\'etrica 0.50~MPa (m\'ax~=~67.7~MPa).}
+  \label{fig:fea_mano_vonmises}
+\end{figure}
+
+El Anexo~\ref{ap:estructura} contiene los informes completos de simulaci\'on.
+
+\subsection{Validaci\'on de pernos}
+
+Para la validaci\'on de la selecci\'on de tornillos se analiz\'o la uni\'on del cilindro
+de acero inoxidable 304 con el recipiente a presi\'on mediante 8~pernos, con un sello
+de junta de di\'ametro efectivo $D = 9.374~\text{in}$ y presi\'on de trabajo de 5~bar.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.75\textwidth}{\centering\vspace{1.5cm}[Diagrama configuraci\'on de tornillos]\vspace{1.5cm}}}
+  \caption{Representaci\'on visual del problema de los tornillos.}
+  \label{fig:diagrama_tornillos}
+\end{figure}
+
+\subsubsection*{Datos conocidos}
+
+\begin{align*}
+    a = b &= \tfrac{5}{16}~\text{in}, \quad
+    N = 8~\text{pernos}, \quad
+    P_g = 5~\text{bar}, \quad
+    D = 9.374~\text{in}\\
+    &\text{Especificaci\'on: } \tfrac{5}{16}\text{-}18~\text{UNC}, \text{ SAE Grado~5}
+\end{align*}
+
+\subsubsection*{Propiedades del material}
+
+\begin{align*}
+    A_t &= 0.0524~\text{in}^2, \quad
+    A_d = 0.07670~\text{in}^2, \quad
+    S_p = 85{,}000~\text{psi}, \quad
+    S_y = 92{,}000~\text{psi}\\
+    E_\text{perno} &= 30\times10^6~\text{psi}, \quad
+    E_\text{miembros} = 27.6\times10^6~\text{psi} \quad \text{(AISI 304)}
+\end{align*}
+
+\subsubsection*{Geometr\'ia y longitud del perno}
+
+\[
+    l = a+b = 0.625~\text{in}, \quad
+    L_T = 2d+\tfrac{1}{4} = 0.875~\text{in}, \quad
+    l_d = 0.375~\text{in}, \quad
+    l_t = 0.25~\text{in}
+    \quad\Rightarrow\quad \boxed{L = 1.25~\text{in}}
+\]
+
+\subsubsection*{Rigideces y constante de uni\'on}
+
+\[
+    k_b = \frac{A_d A_t E_\text{perno}}{A_d l_t + A_t l_d}
+        = \frac{(0.07670)(0.0524)(30\times10^6)}{0.03882}
+    \quad\Rightarrow\quad \boxed{k_b = 3.106\times10^6~\tfrac{\text{lbf}}{\text{in}}}
+\]
+\[
+    k_m = \frac{k_1}{2} = \frac{22.169\times10^6}{2}
+    \quad\Rightarrow\quad \boxed{k_m = 11.085\times10^6~\tfrac{\text{lbf}}{\text{in}}}
+    \qquad
+    C = \frac{k_b}{k_b+k_m} = \frac{3.106}{14.191}
+    \quad\Rightarrow\quad \boxed{C = 0.2188}
+\]
+
+\subsubsection*{Precarga y carga por perno}
+
+\[
+    F_i = 0.75\,A_t\,S_p = 0.75\times0.0524\times85{,}000
+    \quad\Rightarrow\quad \boxed{F_i = 3{,}340.5~\text{lbf}}
+\]
+\[
+    A_\text{sello} = \frac{\pi D^2}{4} = 69.01~\text{in}^2, \quad
+    P = \frac{P_g \cdot A_\text{sello}}{N} = \frac{72.519\times69.01}{8}
+    \quad\Rightarrow\quad \boxed{P = 625.6~\text{lbf/perno}}
+\]
+
+\subsubsection*{Factores de seguridad}
+
+\[
+    n_p = \frac{S_p A_t}{CP+F_i} = \frac{4{,}454}{3{,}477.4}
+    \quad\Rightarrow\quad \boxed{n_p = 1.281}
+\]
+\[
+    n_L = \frac{S_p A_t - F_i}{CP} = \frac{1{,}113.5}{136.9}
+    \quad\Rightarrow\quad \boxed{n_L = 8.133}
+    \qquad
+    n_0 = \frac{F_i}{P(1-C)} = \frac{3{,}340.5}{488.8}
+    \quad\Rightarrow\quad \boxed{n_0 = 6.836}
+\]
+
+\begin{table}[H]
+\centering
+\caption{Resumen de factores de seguridad --- perno $\frac{5}{16}$-18~UNC Grado~5 SAE.}
+\label{tab:factores_seguridad}
+\small
+\begin{tabular}{lcc}
+\toprule
+\textbf{Factor} & \textbf{Valor} & \textbf{Criterio} \\
+\midrule
+Fluencia $n_p$              & 1.281 & $> 1$ \checkmark \\
+Carga $n_L$                 & 8.133 & $> 1$ \checkmark \\
+Separaci\'on de uni\'on $n_0$ & 6.836 & $> 1$ \checkmark \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Los tres factores superan el criterio de aceptaci\'on, confirmando que
+\textbf{8 tornillos $\frac{5}{16}$-18~UNC $\times$ 1\textonehalf~in, Grado~5 SAE}
+son adecuados para la aplicaci\'on.
+
+\section{Selección de componentes}
+
+\subsection{Sensor de oxígeno y temperatura RK500-04 Tipo-B}
+
+La Figura~\ref{fig:sensor_od} muestra el sensor de oxígeno y temperatura RK500-04, sensor
+seleccionado debido a su alta confiabilidad, material biocompatible y características
+eléctricas y de comunicación adaptables al sistema planteado. Dado que la
+oxigenación es un factor determinante para asegurar la vida del organismo, es
+requerido contar con una medición fiel en todo momento. Se escogió este modelo
+entre otras opciones más económicas principalmente por el material de grado
+alimenticio y su alta resolución.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 11: Sensor de temperatura RK500-04]\vspace{1.5cm}}}
+  \caption{Sensor de temperatura RK500-04.}
+  \label{fig:sensor_od}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Especificaciones sensor de OD.}
+\label{tab:sensor_od}
+\begin{tabular}{ll}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Resolución sensor OD          & 0.01~mg/L \\
+Resolución sensor temperatura & 0.1~\textdegree C \\
+Material                      & 316L \\
+Alimentación                  & 7--30~V \\
+Salida                        & RS485 / 4--20~mA \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Sensor de pH RK500-12 Tipo-B3}
+
+En tanto al sensor de pH, se seleccionó un modelo de grado industrial debido a su resolución, sencilla auto calibración, rosca y materiales inocuos. Además de
+operar en un amplio rango de temperatura y presión, sus características de
+alimentación y presentación de la salida se adecuan a las necesidades de este
+proyecto. La Figura~\ref{fig:sensor_ph} muestra el sensor de pH seleccionado.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 12: Sensor de pH RK500-12 Tipo-B3]\vspace{1.5cm}}}
+  \caption{Sensor de pH RK500-12 Tipo-B3.}
+  \label{fig:sensor_ph}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Especificaciones del sensor de pH RK500-12 Tipo-B3.}
+\label{tab:sensor_ph}
+\begin{tabular}{ll}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Resolución sensor pH          & 0.01~pH \\
+Resolución sensor temperatura & 0.1~\textdegree C \\
+Temperatura de operación      & 0--100~\textdegree C \\
+Presión de operación          & 1~MPa \\
+Material                      & 316L y vidrio \\
+Rosca                         & PG13.5 \\
+Alimentación                  & 7--28~V \\
+Salida                        & RS485 / 4--20~mA \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Sensor de nivel VEGAPULS C22}
+
+La medición de nivel del líquido requiere efectuarse sin contacto, ser fiable y de
+alta precisión, además de abarcar un rango de 0 a 71~cm. La Figura~\ref{fig:sensor_nivel} muestra el
+sensor seleccionado.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 13: Sensor de nivel VEGAPULS C22]\vspace{1.5cm}}}
+  \caption{Sensor de nivel VEGAPULS C22.}
+  \label{fig:sensor_nivel}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Especificaciones del sensor nivel VEGAPULS C22.}
+\label{tab:sensor_nivel}
+\begin{tabular}{ll}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Rango de medición        & 0 a 20~m \\
+Precisión                & $\pm 2$~mm \\
+Temperatura de operación & $-40$ a $80$~\textdegree C \\
+Presión de operación     & 300~kPa \\
+Material                 & PVDF con certificado higiénico FDA \\
+Rosca                    & 1\,½~NPT \\
+Alimentación             & 12--35~V \\
+Salida                   & RS485 / 4--20~mA \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Válvula de alivio de presión}
+
+La válvula seleccionada regula y libera la presión dentro del tanque, está
+manufacturada en cobre de grado alimenticio e incluye manómetro y conectores.
+La Figura~\ref{fig:valvula} muestra el componente seleccionado.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 14: Válvula de alivio y presión]\vspace{1.5cm}}}
+  \caption{Válvula de alivio y presión.}
+  \label{fig:valvula}
+\end{figure}
+
+\subsection{Compresor bomba de aire}
+
+Se seleccionó una bomba de aire con características superiores a las requeridas
+para obtener el caudal adecuado, esto debido a la posibilidad de escalamiento a
+futuro. La Figura~\ref{fig:bomba_aire} muestra la bomba seleccionada.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 15: Compresor bomba de aire]\vspace{1.5cm}}}
+  \caption{Compresor bomba de aire.}
+  \label{fig:bomba_aire}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Especificaciones del compresor bomba de aire.}
+\label{tab:bomba_aire}
+\begin{tabular}{ll}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Caudal máximo & 65~l/min \\
+Potencia      & 46~W \\
+Alimentación  & 110~V \\
+Presión       & 0.027~MPa \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Bomba de agua}
+
+Se seleccionó una bomba de cerveza fabricada en acero inoxidable 304, lo cual
+asegura su inocuidad y durabilidad. La Figura~\ref{fig:bomba_agua} muestra la bomba seleccionada.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 16: Bomba de agua]\vspace{1.5cm}}}
+  \caption{Bomba de agua.}
+  \label{fig:bomba_agua}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Especificaciones de la bomba de agua.}
+\label{tab:bomba_agua}
+\begin{tabular}{ll}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Caudal nominal                 & 8/12~L/min \\
+Potencia de salida             & 10~W \\
+Resistencia a altas temperatura & Hasta 140~\textdegree C \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Manta calefactora}
+
+Para seleccionar una manta con la potencia adecuada se realizaron los siguientes
+cálculos, considerando:
+
+\begin{itemize}
+  \item Temperatura ambiente del agua: 18~\textdegree C
+  \item Temperatura máxima: 40~\textdegree C
+  \item Tiempo requerido: 1 hora con 10 minutos = 4\,200~s
+  \item Calor específico del agua: $C_p = 4.186$~kJ/(kg$\cdot$K)
+  \item Volumen de agua: 17~L $\approx$ 17~kg
+\end{itemize}
+
+\begin{equation}
+Q = m \cdot c \cdot \Delta T = 17 \cdot 4.186 \cdot (40 - 18) = 1\,565.56 \text{ kJ}
+\end{equation}
+
+\begin{equation}
+P = \frac{Q}{t} = \frac{1\,565.56 \text{ kJ}}{4\,200 \text{ s}} = 372.75 \text{ W}
+\end{equation}
+
+Las características principales de la manta seleccionada se encuentran en la Tabla~\ref{tab:manta}.
+
+\begin{table}[H]
+\centering
+\caption{Especificaciones de la manta térmica.}
+\label{tab:manta}
+\begin{tabular}{ll}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Material             & Silicona \\
+Voltaje              & 110~V \\
+Potencia             & 450~W \\
+Rango de temperatura & 30--110~\textdegree C \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Disco difusor}
+
+En la industria, existen numerosos estudios para el modelado de sistemas de
+burbujeo, por lo que componentes estándar son comúnmente utilizados para
+asegurar una distribución homogénea del oxígeno en el tanque. Por esta razón, se
+optó por implementar un componente comercial estandarizado en lugar de un
+diseño de manufactura propia. El elemento comercial seleccionado fue un disco
+difusor de material sinterizado con dimensiones de 3~in $\times$ 1~in.
+
+\subsection{Raspberry Pi 3B}
+
+El control del biorreactor requiere la ejecución simultánea de la adquisición de datos
+de los diferentes sensores, activación de actuadores, manipulación de lazos de
+control PI y difuso, así como la actualización constante del interfaz humano-máquina.
+Por ello se seleccionó la Raspberry Pi 3B. La Figura~\ref{fig:raspberry} muestra el microprocesador
+seleccionado.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 17: Raspberry Pi 3B]\vspace{1.5cm}}}
+  \caption{Raspberry Pi 3B.}
+  \label{fig:raspberry}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Especificaciones del Raspberry Pi 3B.}
+\label{tab:raspberry}
+\begin{tabular}{ll}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Arquitectura       & 64-bit (ARMv8) \\
+Procesador         & Quad-Core 1.2~GHz ARM Cortex-A53 \\
+GPU                & Broadcom VideoCore IV \\
+Puertos de video   & HMI, DSI \\
+Pines de E/S (GPIO) & 40 pines \\
+Alimentación       & 5~V \\
+Conectividad       & LAN, BLE, Ethernet \\
+Almacenamiento     & Ranura para microSD \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Pantalla táctil LCD}
+
+Con el objetivo de brindar una interfaz intuitiva para el personal de investigación,
+se seleccionó una pantalla táctil de 7 pulgadas como HMI. La pantalla táctil
+seleccionada (Figura~\ref{fig:pantalla}) está pensada para el desarrollo en Raspberry Pi, cuenta
+con un tiempo de respuesta de 5~ms para una navegación fluida y conectividad vía
+HDMI con una resolución HD (1024 $\times$ 600 píxeles).
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 18: Pantalla táctil LCD]\vspace{1.5cm}}}
+  \caption{Pantalla táctil LCD.}
+  \label{fig:pantalla}
+\end{figure}
+
+\subsection{Tira LED}
+
+Se busca recrear condiciones de iluminación similares a las existentes bajo la
+sombra de un matorral xerófilo en el estado de Zacatecas. Se conoce que la
+radiación fotosintéticamente activa (RFA) en el estado es alta, de aproximadamente
+$819.52\ \mu$mol/m$^2$/s \cite{Escobedo2020}, y que el microambiente generado bajo la sombra de estos
+matorrales tiene en promedio una RFA 44.1\% menor \cite{Sanchez2024}. Por lo tanto, el objetivo
+lumínico del sistema será de aproximadamente $458.1152\ \mu$mol/m$^2$/s. La tira LED
+seleccionada (Figura~\ref{fig:tira_led}) está basada en Chip on Board, lo que asegura una luz uniforme
+y una alta densidad de fuentes (480~LEDs/m).
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 19: Tira LED]\vspace{1.5cm}}}
+  \caption{Tira LED.}
+  \label{fig:tira_led}
+\end{figure}
+
+\section{Integración y CAD}
+
+\subsection{Conexión neumática e hidráulica}
+
+Se utilizaron tres tipos de conexiones para el sistema neumático del biorreactor,
+ocho conexiones en total. La primera iniciando de la parte interior del biorreactor la
+cual tiene un niple de 1/4 a 3/8, seguido de una válvula antirretorno de 3/8, la cual
+va conectada a un cople espiga con el que se conecta a la manguera de silicón y
+de ahí al motor; estas conexiones se realizan cuatro veces en total: dos veces para
+ingresar el agua al biorreactor y otras dos veces para ingresar el etanol.
+
+La segunda conexión se utiliza para el vaciado y la regulación del nivel del agua,
+entonces el sistema está conformado nuevamente por un niple de 1/4 a 3/8, unido
+a una electroválvula de giro, seguida de un cople espiga y finalmente este se
+conecta a la manguera de silicón. Este sistema de conexiones se utiliza tres veces:
+dos para el sistema de salida de líquidos y una para la regulación del nivel de agua.
+
+La última conexión es una bomba de aire la cual proporciona al sistema la presión
+que será suministrada al biorreactor mediante una piedra difusora; esta está
+conectada con coples para mantener el biorreactor oxigenado.
+
+\subsection{Sistema de iluminación}
+
+Se busca dotar de una iluminación homogénea al tanque, por lo que se planteó
+incorporar la fuente de luz en un tubo concéntrico al interior del sistema. Debido a
+que no existen fuentes de grado alimenticio, se realizó un encapsulado de la tira
+LED seleccionada. Este elemento se compone de dos partes: un cilindro hueco de
+vidrio y una pieza de uni\'on roscada a la tapa.
+
+La pieza de uni\'on est\'a dise\~nada en acero inoxidable AISI~304;
+sin embargo, en el prototipo actual se fabric\'o mediante impresi\'on 3D en
+ABS (Acrilonitrilo Butadieno Estireno) por restricciones de recursos. El ABS es
+adecuado para esta aplicaci\'on transitoria por las siguientes razones: (1)~es
+resistente a temperaturas de hasta 80~\textdegree C, suficiente para el rango de
+operaci\'on del biorreactor; (2)~no est\'a en contacto directo con el medio de
+cultivo, ya que el encapsulado de vidrio act\'ua como barrera; y (3)~presenta
+buena resistencia mec\'anica para soportar la carga del cilindro de vidrio y el
+sello herm\'etico necesario. La Figura~\ref{fig:foco_union} muestra el dise\'no
+CAD de estos componentes.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 20: Foco con la unión metálica roscada]\vspace{2cm}}}
+  \caption{Foco con la unión metálica roscada.}
+  \label{fig:foco_union}
+\end{figure}
+
+Para alcanzar el objetivo de iluminación planteado se requiere la relación de
+conversión de leds de alto índice de reproducción cromática a lux, donde:
+$1\ \mu$mol $\approx 70$ Lux.
+
+\begin{equation}
+\text{Lux} \approx 458.1152\ \mu\text{mol} \times 70 \frac{\text{Lux}}{\mu\text{mol}} = 32\,068\ \text{Lux}
+\end{equation}
+
+Para cubrir el cilindro interno, con altura interna $h = 0.7$~m y radio interno $r = 0.085$~m:
+
+\begin{equation}
+\text{Área de exposición} = 2\pi r h = 2\pi \times 0.085 \times 0.7 = 0.37\ \text{m}^2
+\end{equation}
+
+Dado que 1~Lux = 1~Lumen/m$^2$:
+\begin{equation}
+\text{Lúmenes} = 32\,068\ \text{Lux} \times 0.37\ \text{m}^2 = 11\,865\ \text{lúmenes}
+\end{equation}
+
+Debido a que la tira LED seleccionada emite 1\,155~lúmenes/m, se requerirán
+aproximadamente 10~m de la misma para cubrir el tanque completo.
+La Figura~\ref{fig:foco_biorreactor} muestra la incorporación del sistema de iluminación al tanque.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 21: Incorporación del foco al biorreactor]\vspace{2cm}}}
+  \caption{Incorporación del foco al biorreactor.}
+  \label{fig:foco_biorreactor}
+\end{figure}
+
+\subsection{Dimensiones y estructura de la unidad de control y HMI}
+
+El diseño de este módulo compone dos funciones principales, albergar la
+electrónica y proporcionar al usuario una interfaz con el sistema.
+La carcasa está conformada principalmente por paneles de acrílico, unidos por un
+conjunto de bloques de PETG y tornillos, tuercas y arandelas M3, además de
+soportes en las 4 esquinas y una pantalla de 7 pulgadas acoplada en la parte
+superior (Figura~\ref{fig:hmi_ensamble}).
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 22: Ensamble completo de la HMI]\vspace{2cm}}}
+  \caption{Ensamble completo de la HMI.}
+  \label{fig:hmi_ensamble}
+\end{figure}
+
+La Figura~\ref{fig:sistema_total} muestra el sistema biorreactor en su totalidad.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 23: Biorreactor y HMI]\vspace{2cm}}}
+  \caption{Biorreactor y HMI.}
+  \label{fig:sistema_total}
+\end{figure}
+
+\section{Sistema de instrumentación y control}
+
+\subsection{Control de pH}
+
+La respuesta no lineal del pH ante la adición de compuestos neutralizadores
+dificulta su control mediante métodos convencionales. Por ello se optó por utilizar
+lógica difusa tipo Mamdani (SISO) para el controlador. El sistema cuenta con una
+entrada (error de pH) y una salida (tiempo de activación de la bomba neutralizadora),
+operando únicamente sobre errores positivos, dado que la acidificación del medio es
+consecuencia natural del metabolismo del hongo. Un pre-filtro descarta errores
+negativos ($e \leq 0$) y un segundo filtro de seguridad inhabilita la acción cuando el
+nivel del líquido supera el límite máximo establecido. La Figura~\ref{fig:control_ph} muestra el
+diagrama de bloques del sistema de control.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Figuras/diagrama_control_pH.jpg}
+  \caption{Diagrama de bloques del control de pH.}
+  \label{fig:control_ph}
+\end{figure}
+
+El error se define como:
+\begin{equation}
+  e(t) = \text{pH}_{\text{setpoint}} - \text{pH}_{\text{actual}}
+\end{equation}
+
+El rango de control de interés es de 4 a 7.5 unidades de pH, por lo que el universo
+del discurso de la entrada se define como $e \in [0, 6]$ unidades de pH. La salida del
+controlador es el tiempo de pulso $t_{\text{pulso}} \in [0, 7]$~s durante el cual la bomba opera
+al 100\% de su capacidad; al emplear una potencia fija se obtiene un caudal
+predecible sin necesidad de caracterizar la respuesta de la bomba ante distintos
+valores de PWM.
+
+Se definieron cinco conjuntos difusos para la variable de entrada a partir de la
+caracterización experimental del comportamiento del pH (véase Cap.~\ref{cap:pruebas}). Los datos
+capturados demostraron que la ganancia del sistema es considerablemente menor en
+la zona ácida ($e > 3$, ganancia $\approx 0.006$~pH/ciclo) en comparación con la zona
+intermedia, lo que justifica el uso de conjuntos asimétricos. La Tabla~\ref{tab:mf_entrada} especifica
+las funciones de membresía de la variable de entrada y la Tabla~\ref{tab:mf_salida} las de la salida.
+
+\begin{table}[H]
+\centering
+\caption{Funciones de membresía de la variable de entrada --- Error de pH.}
+\label{tab:mf_entrada}
+\small
+\begin{tabular}{lllllll}
+\toprule
+\textbf{Etiqueta} & \textbf{Nombre} & \textbf{Tipo} & \textbf{$a$} & \textbf{$b$} & \textbf{$c$} & \textbf{$d$} \\
+\midrule
+N   & Neutro            & trimf  & 0.0 & 0.0 & 0.4 & --- \\
+PE  & Error Pequeño     & trimf  & 0.2 & 0.6 & 1.2 & --- \\
+ME  & Error Medio       & trimf  & 1.0 & 1.8 & 2.8 & --- \\
+GE  & Error Grande      & trimf  & 2.3 & 3.5 & 5.0 & --- \\
+MG  & Error Muy Grande  & trapmf & 4.0 & 5.0 & 6.0 & 6.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Funciones de membresía de la variable de salida --- Tiempo de pulso $t_{\text{pulso}}$ [s].}
+\label{tab:mf_salida}
+\small
+\begin{tabular}{llllllll}
+\toprule
+\textbf{Etiqueta} & \textbf{Nombre} & \textbf{Tipo} & \textbf{$a$} & \textbf{$b$} & \textbf{$c$} & \textbf{$d$} & \textbf{Volumen aprox.} \\
+\midrule
+OFF   & Sin acci\'on   & trimf  & 0.0 & 0.0 & 0.7 & ---  & 0~mL \\
+POCO  & Pulso corto    & trimf  & 0.0 & 1.4 & 2.8 & ---  & $\approx 55$~mL \\
+MEDIO & Pulso medio    & trimf  & 2.1 & 3.5 & 4.9 & ---  & $\approx 137$~mL \\
+MUCHO & Pulso largo    & trimf  & 4.2 & 5.6 & 7.0 & ---  & $\approx 218$~mL \\
+MAX   & Pulso m\'aximo & trapmf & 6.3 & 7.0 & 7.0 & 7.0 & $\approx 275$~mL \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Las reglas que relacionan la magnitud del error con la acción de control se presentan
+en la Tabla~\ref{tab:reglas_ph}. La inferencia es de tipo Mamdani y la defusificación se realiza
+mediante el método de Centro de Gravedad (CoG), con un tiempo de muestreo
+$T_s = 30$~s.
+
+\begin{table}[H]
+\centering
+\caption{Base de reglas del controlador difuso de pH.}
+\label{tab:reglas_ph}
+\small
+\begin{tabular}{clll}
+\toprule
+\textbf{Regla} & \textbf{Si error es\ldots} & \textbf{Entonces $t_{\text{pulso}}$ es\ldots} & \textbf{Volumen aprox.} \\
+\midrule
+1 & N  (Neutro)           & OFF   (0~s)   & 0~mL \\
+2 & PE (Error Pequeño)    & POCO  (1.4~s) & $\approx 55$~mL \\
+3 & ME (Error Medio)      & MEDIO (3.5~s) & $\approx 137$~mL \\
+4 & GE (Error Grande)     & MUCHO (5.6~s) & $\approx 218$~mL \\
+5 & MG (Error Muy Grande) & MAX   (7.0~s) & $\approx 275$~mL \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Control de nivel}
+
+El control de pH opera incorporando volumen de contenido al tanque, por lo que es
+necesario administrar el nivel de líquido para evitar desbordamientos. Para
+gestionar el nivel de líquido se diseñó un lazo de control con histéresis. La lógica
+de estados de este sistema opera de la siguiente manera:
+
+\begin{enumerate}
+  \item \textbf{Operación normal:} Si el nivel se encuentra por debajo del límite (95\%), el sistema opera con normalidad. Se habilita el control de pH.
+  \item \textbf{Vaciado:} Si el nivel alcanza el 95\% de la capacidad total, se deshabilita el control de pH y se activa la bomba de drenado.
+  \item \textbf{Histéresis:} El sistema vuelve a su operación habitual una vez que el nivel del tanque desciende del 85\%.
+\end{enumerate}
+
+Se cuenta con una banda de histéresis del 10\% para asegurar un tiempo suficiente
+para la estabilización de la mezcla mediante el control de pH, así como para evitar
+la oscilación continua de la bomba de drenado. La Figura~\ref{fig:control_nivel} muestra la lógica
+de supervisión y control por histéresis del nivel.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 25: Diagrama de control de nivel]\vspace{2cm}}}
+  \caption{Diagrama de control de nivel.}
+  \label{fig:control_nivel}
+\end{figure}
+
+\subsection{Control de temperatura}
+
+El diseño del control de temperatura comenzó con la realización de una prueba a
+lazo abierto aplicando un escalón unitario (fuente de calor constante) a un
+recipiente con agua mientras se registró el cambio en la temperatura a lo largo del
+tiempo con un sensor. La información recabada se utilizó para graficar la respuesta
+transitoria de la planta (Figura~\ref{fig:planta_temp}).
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 26: Caracterización de la planta de temperatura (temperatura \textdegree C vs tiempo s)]\vspace{2cm}}}
+  \caption{Caracterización de la planta de temperatura.}
+  \label{fig:planta_temp}
+\end{figure}
+
+Al observar la gráfica de salida, se identificó un sistema de primer orden con
+retardo, por lo que se pudo aproximar la planta utilizando la relación planteada por
+Ziegler y Nichols:
+
+\begin{equation}
+G(s) = \frac{K e^{-Ls}}{\tau s + 1}
+\end{equation}
+
+Se determinaron además los parámetros $K = 20$, $L = 20$~s y $\tau = 1350$, los cuales
+permitieron describir la planta y formular el control. La Figura~\ref{fig:respuesta_pid} muestra una
+comparativa entre el comportamiento real del sistema, la planta aproximada y la
+salida tras la aplicación del bloque de control PID.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 27: Comportamiento real del sistema, planta aproximada y respuesta PID]\vspace{2cm}}}
+  \caption{Comportamiento real del sistema, planta aproximada y respuesta PID.}
+  \label{fig:respuesta_pid}
+\end{figure}
+
+Para la obtención de las constantes $K_p$ y $K_i$, el método de Ziegler-Nichols resultó
+inestable y agresivo debido a que el retardo era despreciable en comparación con
+su constante de tiempo ($\tau$). Por ello, se optó por el método de Asignación de Polos.
+La ganancia proporcional se calculó utilizando el Criterio de Saturación al Arranque:
+
+\begin{equation}
+K_p = \frac{1}{\Delta T_{max}} = \frac{1}{60} = 0.0166 \approx 0.017
+\end{equation}
+
+Para el cálculo de la ganancia integral se igualó el Tiempo Integral ($\tau_i$) a la
+Constante de Tiempo del proceso ($\tau$) para cancelar el polo dominante:
+
+\begin{equation}
+K_i = \frac{K_p}{\tau} = \frac{0.017}{1350} = 12.59 \times 10^{-6}
+\end{equation}
+
+La acción derivativa fue omitida debido a la naturaleza lenta de los procesos
+térmicos. Por lo tanto, la función de transferencia del controlador puede
+representarse como:
+
+\begin{equation}
+C(s) = 0.017 \cdot \frac{1350s + 1}{1350s}
+\end{equation}
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 28: Diagrama de bloques del control de temperatura]\vspace{2cm}}}
+  \caption{Diagrama de bloques del control de temperatura.}
+  \label{fig:bloques_temp}
+\end{figure}
+
+Donde $K_p = 0.017$ y $K_i = 12.59 \times 10^{-6}$.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 29: Simulación del sistema ante un setpoint de 20]\vspace{2cm}}}
+  \caption{Simulación del sistema ante un setpoint de 20.}
+  \label{fig:sim_sp20}
+\end{figure}
+
+\section{Programación}
+
+Para la realización del programa del biorreactor se tomó como base el diagrama de
+la Figura~\ref{fig:flujo_simplificado} el cual muestra de manera sencilla los pasos generales que debe
+realizar el programa.
+
+\begin{figure}[H]
+  \centering
+  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 30: Diagrama de flujo simplificado de la programación del biorreactor]\vspace{2cm}}}
+  \caption{Diagrama de flujo simplificado de la programación del biorreactor.}
+  \label{fig:flujo_simplificado}
+\end{figure}
+
+A continuación se muestra la máquina de estados que utiliza el sistema (Tablas~\ref{tab:estados1} y~\ref{tab:estados2}).
+
+\begin{longtable}{p{2.5cm}p{1.5cm}p{1.5cm}p{7cm}}
+\caption{Tabla de la máquina de estados parte uno.}
+\label{tab:estados1}\\
+\toprule
+\textbf{Estado Actual} & \textbf{Estado Sig.} & \textbf{Señal} & \textbf{Descripción / Acción de Salida} \\
+\midrule
+\endfirsthead
+\multicolumn{4}{c}{\tablename\ \thetable{} -- continuación}\\
+\toprule
+\textbf{Estado Actual} & \textbf{Estado Sig.} & \textbf{Señal} & \textbf{Descripción / Acción de Salida} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+A1 (Inicio)       & A2 & 2 & Error en carga del sistema. \\
+                  & A3 & 1 & Carga exitosa. Ir a Menú Principal. \\
+A2 (Error Carga)  & A1 & 1 & Reintento. \\
+A3 (Menú Ppal)    & A4 & 1 & Ir a Gestión de Proyectos (``Nuevo'' / ``Guardados''). \\
+                  & A32 & 2 & Exportación de datos. \\
+A4 (Gestión)      & A5 & 2 & ``Nuevo Proyecto''. Ir a configuración de parámetros. \\
+                  & A9 & 1 & ``Datos Guardados''. Ir a Lista Página. \\
+                  & A3 & 6 & ``Volver''. Regresar al Menú Principal. \\
+A5 (Param 1)      & A6 & 1,2,3,4 & Tocar campo de texto. Ir a Teclado. \\
+                  & A7 & 5 & ``Siguiente''. Ir a nombrar proyecto. \\
+                  & A4 & 6 & ``Volver''. Regresar a Gestión. \\
+A6 (Teclado)      & A5 & 6 & ``Volver''. Quitar teclados. \\
+                  & A7 & 5 & ``Enter''. Confirmar nombre proyecto. \\
+A7 (Nombrar)      & A6 & 6 & ``Volver''. Regresar a Teclado. \\
+                  & A8 & 5 & ``Aceptar''. Ir a Resumen de datos. \\
+A8 (Confirmar)    & A15 & 5 & ``Confirmar Todo''. Ir a Calibración. \\
+                  & A7 & 6 & ``Volver''. Editar nombre/datos. \\
+A9 (Lista Pág 1)  & A10 & 4 & ``Siguiente Pág''. Ver más archivos. \\
+                  & A11 & 1,2,3 & Seleccionar archivo de esta lista. \\
+                  & A4 & 6 & ``Volver''. Regresar a Gestión. \\
+A10 (Lista Pág 2) & A9 & 6 & ``Anterior Pág''. Volver a lista. \\
+                  & A12 & 1,2,3 & Seleccionar archivo de esta lista. \\
+A11 (Info Arch.\ 1) & A13 & 5 & ``Cargar''. Pre-cargar datos archivo. \\
+                  & A9 & 6 & ``Volver''. Regresar a Lista. \\
+A12 (Info Arch.\ 2) & A14 & 5 & ``Cargar''. Pre-cargar datos archivo 2. \\
+                  & A10 & 6 & ``Volver''. Regresar a Lista. \\
+A13 (Confirmar 1) & A15 & 5 & Confirmar carga. Ir a Calibración. \\
+                  & A11 & 6 & ``Cancelar''. Volver a Info Archivo. \\
+A14 (Confirmar 2) & A15 & 5 & Confirmar carga. Ir a Calibración. \\
+                  & A12 & 6 & ``Cancelar''. Volver a Info Archivo. \\
+A15 (Calibración) & A16 & 5 & ``No''. Omitir/Verificación directa. \\
+                  & A33 & 2 & Error en carga del sistema. \\
+\end{longtable}
+
+\begin{longtable}{p{2.5cm}p{1.5cm}p{1.5cm}p{7cm}}
+\caption{Tabla de la máquina de estados parte dos.}
+\label{tab:estados2}\\
+\toprule
+\textbf{Estado Actual} & \textbf{Estado Sig.} & \textbf{Señal} & \textbf{Descripción / Acción de Salida} \\
+\midrule
+\endfirsthead
+\multicolumn{4}{c}{\tablename\ \thetable{} -- continuación}\\
+\toprule
+\textbf{Estado Actual} & \textbf{Estado Sig.} & \textbf{Señal} & \textbf{Descripción / Acción de Salida} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+A16 (Check Inicio)  & A17 & 3 & ``Configuración de tabla''. Selección de tabla a mostrar. \\
+                    & A19 & 1 & ``Pausa/Detener''. \\
+                    & A18 & 5 & ``Proceso finalizado''. Se terminó de manera exitosa el proceso cultivo. \\
+A17 (Proc. Calibración) & A16 & 6 & ``Tabla seleccionada''. Regresar al menú de operaciones. \\
+A18 (Verificación)  & A20 & 5 & Ir a Gestión de Proyectos 2. \\
+A19 (Pausa)         & A20 & 5 & Ir a Gestión de Proyectos 2. \\
+A33 (Alerta Error)  & A15 & 1 & Confirmar carga. Ir a Calibración. \\
+A20 (Gestión 2)     & A21 & 5 & ``Enter''. Confirmar configuración deseada. \\
+                    & A35 & 1 & Loop de monitoreo (Lectura sensores). \\
+A35 (Alerta Error)  & A20 & 6 & Confirmar carga. Ir a Calibración. \\
+A21 (Menú Pausa)    & A20 & 6 & Ir a Gestión de Proyectos 2. \\
+                    & A22 & 5 & ``Comenzar Extracción''. Iniciar vaciado. \\
+A22 (Vaciado N1)    & A23 & 5 & Ir a confirmar N1. \\
+A23 (Confirmar N1)  & A24 & 5 & ``Aceptar''. Iniciar vaciado Nivel 1. \\
+                    & A22 & 6 & ``Atrás''. Regresar a estado anterior. \\
+A24 (Espere N1)     & A25 & 5 & Proceso activo. Ir a pantalla de Espera 1. \\
+A25 (Vaciado N2)    & A26 & 5 & Ir a confirmar N2. \\
+A26 (Confirmar N2)  & A34 & 5 & ``Aceptar''. Iniciar vaciado Nivel 2. \\
+                    & A25 & 6 & ``Atrás''. Regresar a estado anterior. \\
+A34 (Espere N2)     & A27 & 5 & Proceso activo. Ir a pantalla de finalización. \\
+A27 (Finalizado)    & A28 & 5 & Pantalla de guardado. \\
+A28 (Config.\ guardado) & A31 & 5 & ``No''. Ir directo a Limpieza. \\
+                    & A29 & 1 & ``Sí''. Ir a procesar guardado. \\
+A29 (Nombrar Archivo) & A30 & 1 & Confirmaci\'on de guardado. \\
+A30 (Confirm.\ guardado) & A31 & 5 & ``Aceptar''. Ejecutar guardado. Ir a Limpieza. \\
+                    & A29 & 6 & ``Cancelar''. Regresar a nombrar archivo. \\
+A31 (Limpieza)      & A3  & 5 & Limpieza completada. Ir a Men\'u Principal. \\
+A32 (Exportaci\'on) & A3  & 6 & Exportaci\'on completada. Volver a men\'u. \\
+\bottomrule
+\end{longtable}
