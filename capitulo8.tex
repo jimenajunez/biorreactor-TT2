@@ -39,7 +39,7 @@ zona donde el fluido recircula hacia la base se llama \textit{downcomer} \cite{C
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 7: Configuración de un biorreactor tipo airlift]\vspace{2cm}}}
+  \includegraphics[width=0.9\textwidth]{airlift_configuracion}
   \caption{Configuración de un biorreactor tipo airlift \cite{Cerrone2025}.}
   \label{fig:airlift_config}
 \end{figure}
@@ -57,7 +57,7 @@ con aro externo.
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 8: Partes de un biorreactor tipo airlift con aro externo]\vspace{2cm}}}
+  \includegraphics[width=0.9\textwidth]{airlift_partes}
   \caption{Partes de un biorreactor tipo airlift con aro externo.}
   \label{fig:partes_airlift}
 \end{figure}
@@ -92,7 +92,9 @@ geometría del tanque.
 \centering
 \caption{Tabla recopiladora de medidas del tanque.}
 \label{tab:medidas_tanque}
-\begin{tabular}{lll}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{@{} X l l @{}}
 \toprule
 \textbf{Nombre} & \textbf{Designación} & \textbf{Valor} \\
 \midrule
@@ -103,12 +105,12 @@ Altura del downcomer     & $H_d$ & 343.8~mm \\
 Radio de curvatura       & $R_B$ & 114.3~mm \\
 Capacidad volumétrica total del tanque & $V$ & 17.256~L \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 9: Simbología de los parámetros utilizados para la geometría del biorreactor]\vspace{2cm}}}
+  \includegraphics[width=0.9\textwidth]{simbologia_geometria}
   \caption{Simbología de los parámetros utilizados para la geometría del biorreactor.}
   \label{fig:simbologia}
 \end{figure}
@@ -151,6 +153,7 @@ La Tabla~\ref{tab:fea_resumen} resume ambos an\'alisis.
 \centering
 \caption{Resumen de resultados del an\'alisis FEA.}
 \label{tab:fea_resumen}
+\renewcommand{\arraystretch}{1.3}
 \small
 \begin{tabular}{lrrr}
 \toprule
@@ -284,6 +287,7 @@ de junta de di\'ametro efectivo $D = 9.374~\text{in}$ y presi\'on de trabajo de 
 \centering
 \caption{Resumen de factores de seguridad --- perno $\frac{5}{16}$-18~UNC Grado~5 SAE.}
 \label{tab:factores_seguridad}
+\renewcommand{\arraystretch}{1.3}
 \small
 \begin{tabular}{lcc}
 \toprule
@@ -314,7 +318,7 @@ alimenticio y su alta resolución.
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 11: Sensor de temperatura RK500-04]\vspace{1.5cm}}}
+  \includegraphics[width=0.7\textwidth]{sensor_od_rk500}
   \caption{Sensor de temperatura RK500-04.}
   \label{fig:sensor_od}
 \end{figure}
@@ -323,7 +327,9 @@ alimenticio y su alta resolución.
 \centering
 \caption{Especificaciones sensor de OD.}
 \label{tab:sensor_od}
-\begin{tabular}{ll}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
 \toprule
 \textbf{Parámetro} & \textbf{Valor} \\
 \midrule
@@ -333,7 +339,7 @@ Material                      & 316L \\
 Alimentación                  & 7--30~V \\
 Salida                        & RS485 / 4--20~mA \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsection{Sensor de pH RK500-12 Tipo-B3}
@@ -345,7 +351,7 @@ proyecto. La Figura~\ref{fig:sensor_ph} muestra el sensor de pH seleccionado.
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 12: Sensor de pH RK500-12 Tipo-B3]\vspace{1.5cm}}}
+  \includegraphics[width=0.7\textwidth]{sensor_ph_rk500}
   \caption{Sensor de pH RK500-12 Tipo-B3.}
   \label{fig:sensor_ph}
 \end{figure}
@@ -354,7 +360,9 @@ proyecto. La Figura~\ref{fig:sensor_ph} muestra el sensor de pH seleccionado.
 \centering
 \caption{Especificaciones del sensor de pH RK500-12 Tipo-B3.}
 \label{tab:sensor_ph}
-\begin{tabular}{ll}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
 \toprule
 \textbf{Parámetro} & \textbf{Valor} \\
 \midrule
@@ -367,7 +375,7 @@ Rosca                         & PG13.5 \\
 Alimentación                  & 7--28~V \\
 Salida                        & RS485 / 4--20~mA \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsection{Sensor de nivel VEGAPULS C22}
@@ -387,7 +395,9 @@ sensor seleccionado.
 \centering
 \caption{Especificaciones del sensor nivel VEGAPULS C22.}
 \label{tab:sensor_nivel}
-\begin{tabular}{ll}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
 \toprule
 \textbf{Parámetro} & \textbf{Valor} \\
 \midrule
@@ -400,7 +410,7 @@ Rosca                    & 1\,½~NPT \\
 Alimentación             & 12--35~V \\
 Salida                   & RS485 / 4--20~mA \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsection{Válvula de alivio de presión}
@@ -411,7 +421,7 @@ La Figura~\ref{fig:valvula} muestra el componente seleccionado.
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 14: Válvula de alivio y presión]\vspace{1.5cm}}}
+  \includegraphics[width=0.7\textwidth]{valvula_alivio}
   \caption{Válvula de alivio y presión.}
   \label{fig:valvula}
 \end{figure}
@@ -424,7 +434,7 @@ futuro. La Figura~\ref{fig:bomba_aire} muestra la bomba seleccionada.
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 15: Compresor bomba de aire]\vspace{1.5cm}}}
+  \includegraphics[width=0.7\textwidth]{bomba_aire}
   \caption{Compresor bomba de aire.}
   \label{fig:bomba_aire}
 \end{figure}
@@ -433,7 +443,9 @@ futuro. La Figura~\ref{fig:bomba_aire} muestra la bomba seleccionada.
 \centering
 \caption{Especificaciones del compresor bomba de aire.}
 \label{tab:bomba_aire}
-\begin{tabular}{ll}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
 \toprule
 \textbf{Parámetro} & \textbf{Valor} \\
 \midrule
@@ -442,7 +454,7 @@ Potencia      & 46~W \\
 Alimentación  & 110~V \\
 Presión       & 0.027~MPa \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsection{Bomba de agua}
@@ -452,7 +464,7 @@ asegura su inocuidad y durabilidad. La Figura~\ref{fig:bomba_agua} muestra la bo
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 16: Bomba de agua]\vspace{1.5cm}}}
+  \includegraphics[width=0.7\textwidth]{bomba_agua}
   \caption{Bomba de agua.}
   \label{fig:bomba_agua}
 \end{figure}
@@ -461,7 +473,9 @@ asegura su inocuidad y durabilidad. La Figura~\ref{fig:bomba_agua} muestra la bo
 \centering
 \caption{Especificaciones de la bomba de agua.}
 \label{tab:bomba_agua}
-\begin{tabular}{ll}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
 \toprule
 \textbf{Parámetro} & \textbf{Valor} \\
 \midrule
@@ -469,7 +483,7 @@ Caudal nominal                 & 8/12~L/min \\
 Potencia de salida             & 10~W \\
 Resistencia a altas temperatura & Hasta 140~\textdegree C \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsection{Manta calefactora}
@@ -499,7 +513,9 @@ Las características principales de la manta seleccionada se encuentran en la Ta
 \centering
 \caption{Especificaciones de la manta térmica.}
 \label{tab:manta}
-\begin{tabular}{ll}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
 \toprule
 \textbf{Parámetro} & \textbf{Valor} \\
 \midrule
@@ -508,7 +524,7 @@ Voltaje              & 110~V \\
 Potencia             & 450~W \\
 Rango de temperatura & 30--110~\textdegree C \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsection{Disco difusor}
@@ -530,7 +546,7 @@ seleccionado.
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 17: Raspberry Pi 3B]\vspace{1.5cm}}}
+  \includegraphics[width=0.7\textwidth]{raspberry_pi}
   \caption{Raspberry Pi 3B.}
   \label{fig:raspberry}
 \end{figure}
@@ -539,7 +555,9 @@ seleccionado.
 \centering
 \caption{Especificaciones del Raspberry Pi 3B.}
 \label{tab:raspberry}
-\begin{tabular}{ll}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
 \toprule
 \textbf{Parámetro} & \textbf{Valor} \\
 \midrule
@@ -552,7 +570,7 @@ Alimentación       & 5~V \\
 Conectividad       & LAN, BLE, Ethernet \\
 Almacenamiento     & Ranura para microSD \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsection{Pantalla táctil LCD}
@@ -565,7 +583,7 @@ HDMI con una resolución HD (1024 $\times$ 600 píxeles).
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 18: Pantalla táctil LCD]\vspace{1.5cm}}}
+  \includegraphics[width=0.7\textwidth]{pantalla_lcd}
   \caption{Pantalla táctil LCD.}
   \label{fig:pantalla}
 \end{figure}
@@ -583,7 +601,7 @@ y una alta densidad de fuentes (480~LEDs/m).
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 19: Tira LED]\vspace{1.5cm}}}
+  \includegraphics[width=0.7\textwidth]{tira_led}
   \caption{Tira LED.}
   \label{fig:tira_led}
 \end{figure}
@@ -734,7 +752,9 @@ las funciones de membresía de la variable de entrada y la Tabla~\ref{tab:mf_sal
 \centering
 \caption{Funciones de membresía de la variable de entrada --- Error de pH.}
 \label{tab:mf_entrada}
+\renewcommand{\arraystretch}{1.3}
 \small
+\adjustbox{max width=\textwidth}{%
 \begin{tabular}{lllllll}
 \toprule
 \textbf{Etiqueta} & \textbf{Nombre} & \textbf{Tipo} & \textbf{$a$} & \textbf{$b$} & \textbf{$c$} & \textbf{$d$} \\
@@ -746,13 +766,16 @@ GE  & Error Grande      & trimf  & 2.3 & 3.5 & 5.0 & --- \\
 MG  & Error Muy Grande  & trapmf & 4.0 & 5.0 & 6.0 & 6.0 \\
 \bottomrule
 \end{tabular}
+}
 \end{table}
 
 \begin{table}[H]
 \centering
 \caption{Funciones de membresía de la variable de salida --- Tiempo de pulso $t_{\text{pulso}}$ [s].}
 \label{tab:mf_salida}
+\renewcommand{\arraystretch}{1.3}
 \small
+\adjustbox{max width=\textwidth}{%
 \begin{tabular}{llllllll}
 \toprule
 \textbf{Etiqueta} & \textbf{Nombre} & \textbf{Tipo} & \textbf{$a$} & \textbf{$b$} & \textbf{$c$} & \textbf{$d$} & \textbf{Volumen aprox.} \\
@@ -764,6 +787,7 @@ MUCHO & Pulso largo    & trimf  & 4.2 & 5.6 & 7.0 & ---  & $\approx 218$~mL \\
 MAX   & Pulso m\'aximo & trapmf & 6.3 & 7.0 & 7.0 & 7.0 & $\approx 275$~mL \\
 \bottomrule
 \end{tabular}
+}
 \end{table}
 
 Las reglas que relacionan la magnitud del error con la acción de control se presentan
@@ -775,6 +799,7 @@ $T_s = 30$~s.
 \centering
 \caption{Base de reglas del controlador difuso de pH.}
 \label{tab:reglas_ph}
+\renewcommand{\arraystretch}{1.3}
 \small
 \begin{tabular}{clll}
 \toprule
