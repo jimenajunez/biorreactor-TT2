@@ -6,26 +6,21 @@
 En base a la relación estandarizada de los biorreactores:
 
 \begin{align}
-A_r &= \pi(85)^2 = 22\,698.01\ \text{mm}^2 \\
-A_d &= \pi(38.10)^2 = 4\,560.36\ \text{mm}^2 \\
-\frac{A_d}{A_r} &= \frac{4\,560.36}{22\,698.01} = 0.20
+A_r &= \pi(107.5mm)^2 = 36\,305.115\ \text{mm}^2 \\
+A_d &= \pi(48.26mm)^2 = 7\,316.87\ \text{mm}^2 \\
+\frac{A_d}{A_r} &= \frac{7\,316.87}{36\,305.115} = 0.201
 \end{align}
 
-Para el volumen total del tanque:
 
-\begin{equation}
-V = \frac{\pi(85)^2 \times 700}{1\,000} + \frac{\pi(38.10)^2 \times 343.8}{1\,000} = 17.456\ \text{L}
-\end{equation}
-
-La Tabla~\ref{tab:relaciones_radio} muestra las relaciones del tamaño del radio para el tubo exterior
+La Tabla~\ref{fig:radio_curvatura} muestra las relaciones del tamaño del radio de curvatura del tubo exterior
 de retorno.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{relaciones_radio_curvatura}
+	\caption{Tabla de relaciones del tamaño del radio para el tubo exterior de retorno.}
+	\label{fig:radio_curvatura}
+\end{figure}
 
-\begin{table}[H]
-\centering
-\caption{Tabla de relaciones del tamaño del radio para el tubo exterior de retorno.}
-\label{tab:relaciones_radio}
-\fbox{\parbox{0.9\textwidth}{\centering\vspace{1cm}[TABLA: Ver documento original -- datos de relaciones de radio]\vspace{1cm}}}
-\end{table}
 
 \begin{figure}[H]
   \centering
@@ -162,6 +157,17 @@ nodos y 61\,028 elementos.
   \includegraphics[width=\textwidth]{fea_mano_desp}
   \caption{Mapa de desplazamiento total --- presión manométrica 0.50~MPa.}
   \label{fig:mano_desp}
+\end{figure}
+
+\section*{Dise\~no de ranura para o-ring}
+
+Las uniones modulares del biorreactor incorporan sellos de o-ring tipo cara (\textit{face seal}). Las dimensiones de las ranuras se definieron con base en la carta de dise\~no de Parker para sellos de cara (Figura~\ref{fig:tabla_oring}). Para los o-rings de sección transversal 3/16~in se utilizó una profundidad de ranura de 0.157~$\pm$~0.05~in y un ancho de ranura de 0.280~$\pm$~0.010~in, mientras que para los de sección 1/4~in se especificó una profundidad de 0.206~$\pm$~0.005~in y un ancho de 0.352~$\pm$~0.010~in, con radio de ranura de 0.0175~$\pm$~0.0075~in en ambos casos.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{tabla_oring}
+  \caption{Carta de dise\~no de ranura para o-ring tipo sello de cara (Parker O-Ring Handbook).}
+  \label{fig:tabla_oring}
 \end{figure}
 
 \section*{Vistas explosionadas}

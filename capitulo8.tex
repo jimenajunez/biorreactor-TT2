@@ -39,7 +39,7 @@ zona donde el fluido recircula hacia la base se llama \textit{downcomer} \cite{C
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.9\textwidth]{airlift_configuracion}
+  \includegraphics[width=0.3\textwidth]{airlift_configuracion}
   \caption{Configuración de un biorreactor tipo airlift \cite{Cerrone2025}.}
   \label{fig:airlift_config}
 \end{figure}
@@ -57,33 +57,34 @@ con aro externo.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.9\textwidth]{airlift_partes}
+  \includegraphics[width=0.6\textwidth]{airlift_partes}
   \caption{Partes de un biorreactor tipo airlift con aro externo.}
   \label{fig:partes_airlift}
 \end{figure}
 
 Existen algunas relaciones estandarizadas para biorreactores cilíndricos
 (preferidos para evitar el estancamiento). Se prefieren biorreactores con una
-relación entre la altura de la columna de líquido ($H$) y diámetro interno del tanque
-($D$) de aproximadamente 17 para facilitar el flujo. Sin embargo, en esta ocasión la
-relación $H/D$ se mantuvo en aproximadamente 4.17, esto debido al aumento del
-diámetro del tanque para alojar un foco interno concéntrico.
+relación entre la altura total ($H$) y diámetro interno del tanque
+($D$) de entre 3 y 15 para facilitar el flujo. En esta ocasión la
+relación $H/D$ se mantuvo en aproximadamente 5.08 ($H $= 1\,093~mm, $D$ = 215~mm),
+esto debido al aumento del diámetro del tanque para alojar el tubo de tiro concéntrico
+con el sistema de iluminación integrado \cite{Moresi2025}.
 
 Otra relación encontrada en la bibliografía es el área de la sección transversal del
 \textit{downcomer} ($A_d$, conducto de descenso) con respecto a la del \textit{riser} ($A_r$, columna de
 ascenso y oxigenación) de 0.5 a 1 para aumentar la velocidad de transferencia. En
-esta ocasión, se priorizó mantener una relación $A_d/A_r = 0.2$, sacrificando velocidad de
-transferencia a cambio de que la mayor parte del cultivo se encuentre distribuida
-en el área iluminada. En el Apéndice~\ref{ap:estructura} se contienen los cálculos para la geometría
+esta ocasión, se obtuvo una relación $A_d/A_r$ = 0.201, donde la mayor parte del volumen
+de cultivo se distribuye en la zona anular del \textit{riser}, iluminada desde el centro
+por el sistema integrado en el interior del tubo de tiro. En el Anexo~\ref{ap:estructura} se contienen los cálculos para la geometría
 del reactor.
 
 Siempre que existen curvaturas en el tanque, la norma ASME BPE sugiere
 mantener ciertas relaciones para facilitar la limpieza CIP del tanque. Este estándar
 define las dimensiones precisas para los accesorios higiénicos utilizados en estas
-aplicaciones. Para el diseño de las líneas de tubería de 80~mm, equivalente nominal
-a 3 pulgadas, se ha consultado la ``Tabla 19'' de dicha norma. De acuerdo con esta
-tabla, para un tamaño de tubería nominal de 3 pulgadas el estándar BPE especifica
-un radio de curvatura 4.5 pulgadas \cite{Huitt2016}.
+aplicaciones. Para el diseño de las líneas de tubería de 96.52~mm, equivalente nominal
+a 3.8 pulgadas, se ha consultado la Tabla \ref{fig:radio_curvatura} (Anexo~\ref{ap:estructura}) extraída de dicha norma. De acuerdo con esta
+tabla, para un tamaño de tubería nominal de 4 pulgadas el estándar BPE especifica
+un radio de curvatura de 6 pulgadas \cite{Huitt2016}.
 
 La Tabla~\ref{tab:medidas_tanque} recopila las dimensiones seleccionadas para la generación de la
 geometría del tanque.
@@ -98,29 +99,34 @@ geometría del tanque.
 \toprule
 \textbf{Nombre} & \textbf{Designación} & \textbf{Valor} \\
 \midrule
-Radio del riser          & $R_r$ & 85~mm \\
-Radio del downcomer      & $R_d$ & 38.1~mm \\
-Altura del tanque        & $H$   & 700~mm \\
-Altura del downcomer     & $H_d$ & 343.8~mm \\
-Radio de curvatura       & $R_B$ & 114.3~mm \\
-Capacidad volumétrica total del tanque & $V$ & 17.256~L \\
+Radio interno del tanque (\textit{riser}) & $R_r$ & 136~mm \\
+Radio interno del tubo de tiro (\textit{downcomer}) & $R_d$ & 48.26~mm \\
+Altura de la zona de cultivo & $H$ & 1093~mm \\
+Altura del tubo de tiro  & $H_d$ & 670.2~mm \\
+Radio de curvatura       & $R_B$ & 152.4~mm \\
+Capacidad volumétrica total del tanque & $V$ & 45~L \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.9\textwidth]{simbologia_geometria}
+  \includegraphics[width=0.6\textwidth]{simbologia_geometria}
   \caption{Simbología de los parámetros utilizados para la geometría del biorreactor.}
   \label{fig:simbologia}
 \end{figure}
-
+Una vez obtenidos estos parámetros, se realizó el modelo CAD del tanque final, en el cual se incorporaron divisiones para asegurar la modularidad del contenedor y facilitar su limpieza.
+Todas las uniones contemplan su respectiva brida de sujección, ranura y o-ring; las dimensiones de las ranuras para o-ring se detallan en el Anexo~\ref{ap:estructura}.
+Al modelo se le incorporaron también las roscas que conectan el tanque con los accesorios exteriores, para ello se utilizó roscado NPT \footnote{National Pipe Thread Taper (NPT): estándar estadounidense de rosca cónica para tuberías, utilizado en conexiones de líquidos, gases, vapor y fluidos hidráulicos.}. 
+El modelo CAD con todos los elementos mencionados en esta sección se presenta en la Figura~\ref{fig:solotanque}.
 \begin{figure}[H]
-  \centering
-  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 10: Ensamble completo del biorreactor]\vspace{2cm}}}
-  \caption{Ensamble completo del biorreactor.}
-  \label{fig:ensamble_biorreactor}
+	\centering
+	\includegraphics[width=0.6\textwidth]{CAD_tanque}
+	\caption{Diseño CAD para tanque del biorreactor.}
+	\label{fig:solotanque}
 \end{figure}
+
+Los planos de fabricación del biorreactor con acotado completo se presentan en el Anexo~\ref{ap:planos}.
 
 \subsection{Análisis de esfuerzos y validación estructural}
 
@@ -130,20 +136,20 @@ dos escenarios: la presión hidrostática del medio de cultivo y la presión
 manométrica ante la inyección de aire.
 
 Se seleccion\'o el acero inoxidable AISI 304 (18-8) como material estructural del
-tanque, con un espesor de pared de 5~mm. El AISI 304 ofrece excelente resistencia a
+tanque, con un espesor de pared de 3.5~mm. El AISI 304 ofrece excelente resistencia a
 la corrosi\'on en medios acu\'osos, es ampliamente utilizado en la industria
 alimentaria y biotecnol\'ogica \cite{Serviacero}, y cuenta con aprobaci\'on para
 contacto con alimentos y medios de cultivo. Frente al 316L, el AISI 304 presenta
-propiedades mec\'anicas similares ($E = 195{,}000$~MPa, $\sigma_y = 215$~MPa,
-$\sigma_u = 505$~MPa) y resulta m\'as accesible en el mercado nacional, manteniendo
+propiedades mec\'anicas similares ( E = 195{,}000~MPa, $\sigma_y$ = 215~MPa,
+$\sigma_u $= 505~MPa) y resulta m\'as accesible en el mercado nacional, manteniendo
 la inocuidad requerida para la aplicaci\'on.
 
 \textbf{Presi\'on hidrost\'atica.} La tensi\'on de von Mises m\'axima fue de
-$2.36$~MPa, con un \textbf{factor de seguridad m\'inimo de 91.1}, demostrando
+2.36~MPa, con un \textbf{factor de seguridad m\'inimo de 91.1}, demostrando
 que la pared del tanque soporta el peso del l\'iquido con amplio margen.
 
-\textbf{Presi\'on manom\'etrica.} Aplicando $0.50$~MPa (5~bar) para simular
-condiciones extremas, la tensi\'on de von Mises m\'axima fue de $67.7$~MPa,
+\textbf{Presi\'on manom\'etrica.} Aplicando 0.50~MPa (5~bar) para simular
+condiciones extremas, la tensi\'on de von Mises m\'axima fue de 67.7~MPa,
 resultando en un \textbf{factor de seguridad m\'inimo de 3.18}, superando
 el criterio de dise\~no $\text{FS} \geq 2$.
 
@@ -159,8 +165,8 @@ La Tabla~\ref{tab:fea_resumen} resume ambos an\'alisis.
 \toprule
 \textbf{Escenario} & \textbf{Carga} & \textbf{Von Mises m\'ax.} & \textbf{FS m\'in.} \\
 \midrule
-Presi\'on hidrost\'atica & $\rho g h$ & $2.36$~MPa & $91.1$ \\
-Presi\'on manom\'etrica & $0.50$~MPa & $67.7$~MPa & $3.18$ \\
+Presi\'on hidrost\'atica & $\rho g h$ & 2.36~MPa & 91.1 \\
+Presi\'on manom\'etrica & 0.50~MPa & 67.7~MPa & 3.18 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -302,7 +308,7 @@ Separaci\'on de uni\'on $n_0$ & 6.836 & $> 1$ \checkmark \\
 
 Los tres factores superan el criterio de aceptaci\'on, confirmando que
 \textbf{8 tornillos $\frac{5}{16}$-18~UNC $\times$ 1\textonehalf~in, Grado~5 SAE}
-son adecuados para la aplicaci\'on.
+son adecuados para la aplicaci\'on. Las tolerancias dimensionales de los agujeros pasados y roscas empleadas en el ensamblaje se especifican en el Anexo~\ref{ap:manufactura}.
 
 \section{Selección de componentes}
 
