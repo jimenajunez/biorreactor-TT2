@@ -460,6 +460,8 @@ Temperatura máx. & 200~\textdegree C \\
 \end{tabularx}
 \end{table}
 
+El resto de los componentes seleccionados para el sistema, junto con sus tablas comparativas y hojas de datos (\textit{datasheets}), se encuentran detallados en el Apéndice~\ref{ap:componentes_costos}.
+
 \section{Integración y CAD}
 
 \subsection{Conexión neumática e hidráulica}
@@ -507,28 +509,38 @@ CAD de estos componentes.
   \label{fig:foco_union}
 \end{figure}
 
-Para alcanzar el objetivo de iluminación planteado se requiere la relación de
-conversión de leds de alto índice de reproducción cromática a lux, donde:
-$1\ \mu$mol $\approx 70$ Lux.
+Para definir la iluminación del tanque se tomó como referencia empírica la luz natural
+bajo la copa de un árbol, condición que se midió con un luxómetro obteniendo un
+promedio de 478~Lux (mínimo 461~Lux, máximo 506~Lux). Este valor se adopta como
+objetivo de operación. A partir de la relación de conversión de LEDs de alto índice de
+reproducción cromática ($1~\mu$mol $\approx 70$~Lux), la densidad de flujo fotónico
+equivalente es:
 
 \begin{equation}
-\text{Lux} \approx 458.1152\ \mu\text{mol} \times 70 \frac{\text{Lux}}{\mu\text{mol}} = 32\,068\ \text{Lux}
+\mu\text{mol} \approx 478\ \text{Lux} \div 70\ \frac{\text{Lux}}{\mu\text{mol}} \approx 6.83\ \mu\text{mol/m}^2\text{/s}
 \end{equation}
 
-Para cubrir el cilindro interno, con altura interna $h = 0.7$~m y radio interno $r = 0.085$~m:
+Para cubrir el cilindro interno, con altura interna $h = 0.7$~m y radio interno $r = 0.085$~m,
+el área a iluminar es:
 
 \begin{equation}
 \text{Área de exposición} = 2\pi r h = 2\pi \times 0.085 \times 0.7 = 0.37\ \text{m}^2
 \end{equation}
 
-Dado que 1~Lux = 1~Lumen/m$^2$:
+Dado que 1~Lux = 1~Lumen/m$^2$, el flujo luminoso requerido para alcanzar el objetivo es:
+
 \begin{equation}
-\text{Lúmenes} = 32\,068\ \text{Lux} \times 0.37\ \text{m}^2 = 11\,865\ \text{lúmenes}
+\text{Lúmenes} = 478\ \text{Lux} \times 0.37\ \text{m}^2 \approx 177\ \text{lúmenes}
 \end{equation}
 
-Debido a que la tira LED seleccionada emite 1\,155~lúmenes/m, se requerirán
-aproximadamente 10~m de la misma para cubrir el tanque completo.
-La Figura~\ref{fig:foco_biorreactor} muestra la incorporación del sistema de iluminación al tanque.
+La tira LED seleccionada emite 1\,155~lúmenes/m, por lo que el flujo necesario resulta
+bajo respecto a su capacidad. En consecuencia, la longitud de tira no queda determinada
+por la intensidad, sino por el requisito de iluminación homogénea a lo largo del cilindro:
+la tira se distribuye para cubrir toda la altura del tubo y la intensidad se regula mediante
+modulación por ancho de pulso (PWM) hasta igualar el objetivo de 478~Lux. La
+caracterización del foco confirma este margen de control: al variar el PWM, la salida
+medida abarca un rango de 0 a 594~Lux, superando holgadamente el objetivo de
+operación. La Figura~\ref{fig:foco_biorreactor} muestra la incorporación del sistema de iluminación al tanque.
 
 \begin{figure}[H]
   \centering

@@ -1,69 +1,78 @@
 \chapter{Validación del control aplicado}
 \label{ap:control}
 
-\section*{Gráficas de diferentes setpoints para el control de temperatura}
+\section*{Control de temperatura}
+
+\section*{Control de pH}
+
+\section*{Control de nivel}
+
+\section*{Control de luz}
+
+Para la prueba, el sensor de luz (luxómetro) se colocó en el fondo del tanque, encontrándose este vacío, de modo que registrara la iluminancia que llega al punto más alejado de la fuente. El foco encapsulado se utilizó como fuente de luz, siendo este alimentado mediante una señal PWM de 12 bits de resolución (rango de 0 a 4095) a 12\,V. El barrido se realizó incrementando el ciclo de trabajo del PWM desde 0\,\% hasta 100\,\% en pasos de 10\,\%, lo que equivale a incrementos de aproximadamente 410 unidades sobre la escala de 4095. En cada nivel se registró la iluminancia medida en lux, con lo que se obtuvo la curva de respuesta del foco. Las Figuras~\ref{fig:pwm_barrido_completo} y~\ref{fig:pwm_barrido_zoom} muestran el mismo barrido a dos escalas verticales distintas. Se observa que la iluminancia aumenta de forma creciente y escalonada conforme se incrementa el ciclo de trabajo: cada peldaño corresponde a un incremento del 10\,\% en el PWM. Con el foco apagado (0\,\%) la lectura es de 0\,Lux, y la intensidad sube progresivamente hasta un máximo de 594\,Lux al 100\,\% del ciclo de trabajo, con un promedio de 134\,Lux a lo largo de todo el barrido.
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 50: Simulación del sistema ante un setpoint de 40]\vspace{2cm}}}
-  \caption{Simulación del sistema ante un setpoint de 40.}
-  \label{fig:sim_sp40}
+  \includegraphics[width=0.9\textwidth]{pwm_barrido_completo}
+  \caption{Barrido completo del PWM (0--100\,\%). Respuesta desde 0\,Lux hasta el máximo.}
+  \label{fig:pwm_barrido_completo}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 51: Simulación del sistema ante un setpoint de 70]\vspace{2cm}}}
-  \caption{Simulación del sistema ante un setpoint de 70.}
-  \label{fig:sim_sp70}
+  \includegraphics[width=0.9\textwidth]{pwm_barrido_zoom}
+  \caption{Acercamiento del barrido (zona superior), donde se aprecian los peldaños de cada incremento.}
+  \label{fig:pwm_barrido_zoom}
 \end{figure}
 
-\section*{Validación del control de pH}
+La Tabla~\ref{tab:pwm_niveles} resume los niveles de PWM aplicados y su valor sobre la escala de 12 bits.
 
-\begin{figure}[H]
-  \centering
-  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 52: Funciones de membresía de la entrada]\vspace{2cm}}}
-  \caption{Funciones de membresía de la entrada.}
-  \label{fig:membresia_entrada}
-\end{figure}
+\begin{table}[H]
+\centering
+\caption{Niveles de PWM aplicados y su valor sobre la escala de 12 bits.}
+\label{tab:pwm_niveles}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabular}{@{} r r l @{}}
+\toprule
+\textbf{PWM (\%)} & \textbf{Valor (0--4095)} & \textbf{Lux medido} \\
+\midrule
+0   & 0    & 0 \\
+10  & 410  & --- \\
+20  & 819  & --- \\
+30  & 1229 & --- \\
+40  & 1638 & --- \\
+50  & 2048 & --- \\
+60  & 2457 & --- \\
+70  & 2867 & --- \\
+80  & 3276 & --- \\
+90  & 3686 & --- \\
+100 & 4095 & $\approx$\,594 (máx.) \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\begin{figure}[H]
-  \centering
-  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 53: Diagrama de bloques del sistema de inferencia difusa Mamdani Tipo 1 para el subsistema 2]\vspace{2cm}}}
-  \caption{Diagrama de bloques del sistema de inferencia difusa Mamdani Tipo 1 para el subsistema 2.}
-  \label{fig:mamdani_sub2}
-\end{figure}
+El foco responde de manera creciente y controlable a la señal PWM, alcanzando aproximadamente 594\,Lux al 100\,\% del ciclo de trabajo. Esto confirma que la intensidad luminosa puede regularse por software para fijar el punto de operación deseado del biorreactor (por ejemplo, alrededor de 478\,Lux, valor de referencia medido bajo condiciones naturales).
 
-\begin{figure}[H]
-  \centering
-  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 54: Funciones de membresía de salida del subsistema 1]\vspace{2cm}}}
-  \caption{Funciones de membresía de salida del subsistema 1.}
-  \label{fig:membresia_salida1}
-\end{figure}
+\subsection*{Caracterización del foco}
 
-\begin{figure}[H]
-  \centering
-  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 55: Inferencia de las reglas para el control del subsistema 1]\vspace{2cm}}}
-  \caption{Inferencia de las reglas para el control del subsistema 1.}
-  \label{fig:inferencia_sub1}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 56: Diagrama de bloques del sistema de inferencia difusa Mamdani Tipo 1 para el subsistema 2 (detalle)]\vspace{2cm}}}
-  \caption{Diagrama de bloques del sistema de inferencia difusa Mamdani Tipo 1 para el subsistema 2 (detalle).}
-  \label{fig:mamdani_sub2b}
-\end{figure}
+A partir del registro del barrido se extrajo el nivel de iluminancia de cada peldaño y se promedió su valor estable, obteniendo los diez puntos que se reportan en la Tabla~\ref{tab:pwm_niveles}. Estos valores muestran una relación creciente y aproximadamente lineal entre el ciclo de trabajo del PWM y la iluminancia registrada por el sensor, tal como se observa en la Figura~\ref{fig:pwm_curva_ajuste}.
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 57: Funciones de membresía de salida del subsistema 2]\vspace{2cm}}}
-  \caption{Funciones de membresía de salida del subsistema 2.}
-  \label{fig:membresia_salida2}
+  \includegraphics[width=0.8\textwidth]{pwm_curva_ajuste}
+  \caption{Iluminancia media de cada nivel en función del ciclo de trabajo del PWM y recta de ajuste.}
+  \label{fig:pwm_curva_ajuste}
 \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 58: Inferencia de las reglas para el control del subsistema 2]\vspace{2cm}}}
-  \caption{Inferencia de las reglas para el control del subsistema 2.}
-  \label{fig:inferencia_sub2}
-\end{figure}
+El ajuste de los puntos por mínimos cuadrados arroja la siguiente ecuación característica del foco, donde $E$ es la iluminancia en Lux y $d$ el ciclo de trabajo del PWM en porcentaje:
+
+\begin{equation}
+E \approx 5.83 \times d + 38 \qquad (R^2 = 0.988)
+\end{equation}
+
+El coeficiente de determinación $R^2 = 0.988$ confirma el comportamiento lineal del foco a lo largo de todo el rango. Expresada sobre la escala de 12 bits del PWM ($D$, de 0 a 4095), la relación equivale a $E \approx 0.142 \times D + 38$. De forma inversa, el ciclo de trabajo necesario para fijar una iluminancia objetivo se obtiene despejando $d$:
+
+\begin{equation}
+d \approx \frac{E - 38}{5.83}
+\end{equation}
