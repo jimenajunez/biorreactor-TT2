@@ -67,6 +67,7 @@
 \usepackage{capt-of}
 \usepackage{ifthen}
 \usepackage{float}
+\usepackage{pdflscape}
 \usepackage{xurl}
 \usepackage{import}
 \usepackage{graphicx}
@@ -135,6 +136,20 @@
 
 \sodef\spaceout{}{0pt plus 1fil}{.8em plus 1fil}{0pt}
 \definecolor{upiizcolor}{RGB}{113,48,70}
+
+% Colores y macros para cronogramas Gantt (Anexo1 y Anexo2)
+\definecolor{myyellow}{HTML}{FFC000}
+\definecolor{mygreen}{HTML}{00B050}
+\definecolor{myblue}{HTML}{00B0F0}
+\definecolor{mygray}{rgb}{0.816,0.816,0.816}
+\definecolor{myred}{rgb}{0.851,0,0}
+\newcommand{\cg}{\cellcolor{mygreen}}
+\newcommand{\cb}{\cellcolor{myblue}}
+\newcommand{\cy}{\cellcolor{myyellow}}
+\newcommand{\cgr}{\cellcolor{mygray}}
+\newcommand{\cred}{\cellcolor{myred}}
+\newcommand{\ck}{\cellcolor{black!85}}
+\newcolumntype{C}{>{\centering\arraybackslash}p{0.35cm}}
 
 \usepackage{datatool}
 \newcommand{\sortitem}[1]{

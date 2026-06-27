@@ -22,12 +22,6 @@ de retorno.
 \end{figure}
 
 
-\begin{figure}[H]
-  \centering
-  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 42: Volumen final, quitando el volumen de los sensores de pH, O2 y el foco]\vspace{2cm}}}
-  \caption{Volumen final, quitando el volumen de los sensores de pH, O$_2$ y el foco.}
-  \label{fig:volumen_final}
-\end{figure}
 
 \section*{Validación de pernos}
 
@@ -38,7 +32,7 @@ gas a una presión máxima de 5~bar.
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 43: Representación visual del problema de los tornillos]\vspace{2cm}}}
+  \includegraphics[width=\textwidth]{tornillos_rep_visual}
   \caption{Representación visual del problema de los tornillos.}
   \label{fig:tornillos}
 \end{figure}
@@ -159,29 +153,136 @@ nodos y 61\,028 elementos.
   \label{fig:mano_desp}
 \end{figure}
 
-\section*{Dise\~no de ranura para o-ring}
+\section*{Diseño para tolerancias de agujeros pasados y roscados}
 
-Las uniones modulares del biorreactor incorporan sellos de o-ring tipo cara (\textit{face seal}). Las dimensiones de las ranuras se definieron con base en la carta de dise\~no de Parker para sellos de cara (Figura~\ref{fig:tabla_oring}). Para los o-rings de sección transversal 3/16~in se utilizó una profundidad de ranura de 0.157~$\pm$~0.05~in y un ancho de ranura de 0.280~$\pm$~0.010~in, mientras que para los de sección 1/4~in se especificó una profundidad de 0.206~$\pm$~0.005~in y un ancho de 0.352~$\pm$~0.010~in, con radio de ranura de 0.0175~$\pm$~0.0075~in en ambos casos.
+Para garantizar las dimensiones de los agujeros pasados para la tornillería de 5/16, 1/2, 5/8 y 3/4~de pulgada se utilizaron las especificaciones según la norma ASME~B18.2.8. De acuerdo con la Tabla~2 del estándar para un ajuste normal (\textit{Normal Fit}), se estableció el uso de brocas nominales de 11/32, 9/16, 11/16 y 13/16~de pulgada. En los planos de fabricación, los diámetros se acotaron utilizando los tamaños mínimos de la herramienta correspondientes a 0.344, 0.562, 0.688 y 0.812~pulgadas. Para asegurar que el mecanizado se mantenga dentro de la norma, se aplicó una tolerancia de $+0.010$~pulgadas para los barrenos de 5/16'', 1/2'' y 5/8'', mientras que para el barreno de 3/4'' se utilizó una tolerancia de $+0.012$~pulgadas; esto garantiza que en ningún caso se excedan los límites máximos permisibles de 0.354, 0.572, 0.698 y 0.824~pulgadas dictados por el estándar~\cite{ASME_B18_2_8}. Mientras que para las dimensiones de los agujeros pasados para los elementos de fijación métricos M5, se realizó con la Tabla~3 del estándar para un ajuste normal (\textit{Normal Fit}), donde se estableció el uso de una broca nominal de 5.5~mm~\cite{ASME_B18_2_8}.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.9\textwidth]{tabla_oring}
-  \caption{Carta de dise\~no de ranura para o-ring tipo sello de cara (Parker O-Ring Handbook).}
-  \label{fig:tabla_oring}
+  \includegraphics[width=0.9\textwidth]{tabla_2}
+  \caption{Tabla~2 de la norma ASME~B18.2.8: agujeros de paso para tornillería en pulgadas~\cite{ASME_B18_2_8}.}
+  \label{fig:tabla_2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{tabla_3}
+  \caption{Tabla~3 de la norma ASME~B18.2.8: agujeros de paso para elementos de fijación métricos~\cite{ASME_B18_2_8}.}
+  \label{fig:tabla_3}
+\end{figure}
+
+Para garantizar el sellado hermético en las conexiones, las tolerancias de las roscas cónicas para tubería de 1/4 y 3/4~de pulgada se definieron utilizando las especificaciones de la norma ASME~B1.20.1. De acuerdo con el estándar para roscas NPT (\textit{National Pipe Taper}), se estableció el uso de 18~hilos por pulgada (TPI) para la conexión de 1/4'' y de 14~hilos por pulgada para la de 3/4''. Esto garantiza que la variación máxima en el acoplamiento no exceda el límite permisible de $\pm 1$~vuelta de rosca respecto al plano de apriete manual (\textit{hand-tight plane}), asegurando la interferencia necesaria en los flancos para lograr el sellado dictado por la norma~\cite{ASME_B1_20_1}.
+
+\section*{Diseño de ranura para O-ring}
+
+Para garantizar el sellado hermético mediante juntas tóricas (O-rings) con secciones transversales nominales de 3/16 y 1/4~de pulgada, se utilizaron las especificaciones de diseño según el Parker O-Ring Handbook. De acuerdo con las tablas del estándar para aplicaciones de sellado estático, se estableció la geometría de las ranuras (\textit{glands}) (G) considerando las secciones transversales reales de los anillos de $0.280 \pm 0.010$ y $0.352 \pm 0.010$~pulgadas. En los planos de fabricación, la profundidad (L) de la ranura se acotó utilizando la dimensión recomendada de $0.157 \pm 0.05$~pulgadas para el O-ring de 3/16'' y de $0.206 \pm 0.005$~pulgadas para el de 1/4''~\cite{parker_oring}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{tabla_orings}
+  \caption{Carta de diseño de ranura para O-ring tipo sello de cara (Parker O-Ring Handbook)~\cite{parker_oring}.}
+  \label{fig:tabla_orings}
 \end{figure}
 
 \section*{Vistas explosionadas}
 
+% ── Ensamble biorreactor (7 páginas) ───────────────────────────────────────
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{\textwidth}{\centering\vspace{3cm}[FIGURA 48: Vista explosionada del biorreactor]\vspace{3cm}}}
-  \caption{Vista explosionada del biorreactor.}
-  \label{fig:explosionada_biorreactor}
+  \includegraphics[width=\textwidth,page=1]{ensamble_biorreactor}
+  \caption{Vista explosionada del biorreactor completo.}
+  \label{fig:ensamble_biorreactor_completo}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{\textwidth}{\centering\vspace{3cm}[FIGURA 49: Vista explosionada de la HMI]\vspace{3cm}}}
-  \caption{Vista explosionada de la HMI.}
-  \label{fig:explosionada_hmi}
+  \includegraphics[width=\textwidth,page=2]{ensamble_biorreactor}
+  \caption{Vista explosionada del biorreactor, parte 1.}
+  \label{fig:ensamble_biorreactor_p1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,page=3]{ensamble_biorreactor}
+  \caption{Vista explosionada del biorreactor, parte 2.}
+  \label{fig:ensamble_biorreactor_p2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,page=4]{ensamble_biorreactor}
+  \caption{Vista explosionada del biorreactor, parte 3.}
+  \label{fig:ensamble_biorreactor_p3}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,page=5]{ensamble_biorreactor}
+  \caption{Vista explosionada del biorreactor, parte 4.}
+  \label{fig:ensamble_biorreactor_p4}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,page=6]{ensamble_biorreactor}
+  \caption{Vista explosionada del biorreactor, parte 5.}
+  \label{fig:ensamble_biorreactor_p5}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,page=7]{ensamble_biorreactor}
+  \caption{Vista explosionada del biorreactor, parte 6.}
+  \label{fig:ensamble_biorreactor_p6}
+\end{figure}
+
+% ── Ensamble HMI (6 páginas) ───────────────────────────────────────────────
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,page=1]{ensamble_hmi}
+  \caption{Vista explosionada de la HMI completa.}
+  \label{fig:ensamble_hmi_completa}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,page=2]{ensamble_hmi}
+  \caption{Vista explosionada de la HMI, parte 1.}
+  \label{fig:ensamble_hmi_p1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,page=3]{ensamble_hmi}
+  \caption{Vista explosionada de la HMI, parte 2.}
+  \label{fig:ensamble_hmi_p2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,page=4]{ensamble_hmi}
+  \caption{Vista explosionada de la HMI, parte 3.}
+  \label{fig:ensamble_hmi_p3}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,page=5]{ensamble_hmi}
+  \caption{Vista explosionada de la HMI, parte 4.}
+  \label{fig:ensamble_hmi_p4}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,page=6]{ensamble_hmi}
+  \caption{Vista explosionada de la HMI, parte 5.}
+  \label{fig:ensamble_hmi_p5}
+\end{figure}
+
+% ── Ensamble bombas (1 página) ─────────────────────────────────────────────
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth,page=1]{ensamble_bombas}
+  \caption{Vista explosionada de las bombas.}
+  \label{fig:ensamble_bombas}
 \end{figure}

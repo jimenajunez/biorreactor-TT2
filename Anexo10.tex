@@ -1014,3 +1014,76 @@ incluirse como imágenes en el archivo final.
 %------------------------------------------------------------------
 \section*{Tabla de costos}
 %------------------------------------------------------------------
+
+La Tabla~\ref{tab:presupuesto} presenta el desglose de costos de todos los componentes adquiridos para el diseño y construcción del biorreactor. Los precios se expresan en pesos mexicanos (MXN).
+
+\begingroup
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{longtable}{@{} l p{4.8cm} c r r r r @{}}
+\caption{Presupuesto del biorreactor airlift (precios en MXN).}
+\label{tab:presupuesto} \\
+\toprule
+\textbf{Clasificación} & \textbf{Componente} & \textbf{Cant.} &
+\textbf{Precio} & \textbf{Impuestos} & \textbf{Envío} & \textbf{Total} \\
+\midrule
+\endfirsthead
+
+\multicolumn{7}{c}{\tablename~\thetable{} \textit{(continuación)}} \\[4pt]
+\toprule
+\textbf{Clasificación} & \textbf{Componente} & \textbf{Cant.} &
+\textbf{Precio} & \textbf{Impuestos} & \textbf{Envío} & \textbf{Total} \\
+\midrule
+\endhead
+
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+% ---- Sensores ----
+Sensor & Sensor de O\textsubscript{2} (incluye temperatura) & 1 & \$3{,}900.00 & --- & --- & \$3{,}900.00 \\
+Sensor & Sensor de pH (incluye temperatura)                 & 1 & \$3{,}300.00 & --- & --- & \$3{,}300.00 \\
+Sensor & Sensor de nivel                                    & 1 & \$1{,}163.00 & --- & --- & \$1{,}163.00 \\
+Sensor & Válvula de alivio de presión ajustable             & 1 &   \$524.00   & --- & --- &   \$524.00   \\
+\midrule
+% ---- Actuadores ----
+Actuador & Bomba de aire                                    & 1 & \$1{,}104.60 & --- & --- & \$1{,}104.60 \\
+Actuador & Bomba 8/12\,L/min (grado alimenticio)            & 4 & \$1{,}870.00 & --- & --- & \$7{,}480.00 \\
+Actuador & Chaqueta térmica                                 & 1 & \$5{,}000.00 & --- & --- & \$5{,}000.00 \\
+\midrule
+% ---- HMI ----
+HMI & Pantalla táctil LCD                                   & 1 &   \$729.90   & ---        & ---      &   \$729.90   \\
+HMI & Raspberry Pi 3B                                       & 1 &   \$817.00   & \$273.74   & ---      & \$1{,}090.74 \\
+HMI & Dimer                                                 & 2 &   \$180.00   & ---        & ---      &   \$360.00   \\
+HMI & Fuente 12\,V / 10\,A                                  & 1 &   \$200.00   & ---        & ---      &   \$200.00   \\
+HMI & Fuente 5\,V / 3\,A                                    & 1 &   \$100.00   & ---        & ---      &   \$100.00   \\
+HMI & Relay                                                 & 3 &   \$117.00   & ---        & ---      &   \$351.00   \\
+\midrule
+% ---- Electrónico ----
+Electrónico & Controlador de servos PCA9685                 & 1 &   \$148.00   & ---        & ---        &   \$148.00 \\
+Electrónico & Relay de estado sólido                        & 1 &   \$123.10   & ---        & ---        &   \$123.10 \\
+Electrónico & Módulo MAX485 (comunicación RS485)             & 1 &    \$57.99   & ---        & ---        &    \$57.99 \\
+Electrónico & Conectores JST PH 2.0\,mm (580\,pzs)          & 1 &   \$281.74   & ---        & ---        &   \$281.74 \\
+Electrónico & Manufactura PCB                               & 1 &   \$300.00   & \$150.00   & \$150.00   &   \$600.00 \\
+Electrónico & Cable calibre 24                              & 1 &   \$313.68   & ---        & ---        &   \$313.68 \\
+\midrule
+% ---- Estructura ----
+Estructura & Foco                                           & 1 &   \$319.00   & --- & --- &    \$319.00  \\
+Estructura & Vidrio protector                               & 1 &   \$500.00   & --- & --- &    \$500.00  \\
+Estructura & Hoja de silicón                                & 1 &   \$380.00   & --- & --- &    \$380.00  \\
+Estructura & Imanes de neodimio 4$\times$2\,mm (5\,pzs)    & 1 &    \$30.00   & --- & --- &     \$30.00  \\
+Estructura & Tanques de almacenamiento de líquidos          & 2 &   \$957.00   & --- & --- & \$1{,}914.00 \\
+Estructura & Cople 3/8                                      & 9 &    \$35.88   & --- & --- &    \$322.92  \\
+Estructura & Manguera grado alimenticio (10\,m)             & 2 &   \$920.00   & --- & --- & \$1{,}840.00 \\
+Estructura & Niple 3/8                                      & 9 &    \$31.08   & --- & --- &    \$279.72  \\
+Estructura & Electroválvula 3/8                             & 3 &   \$546.00   & --- & --- & \$1{,}638.00 \\
+Estructura & Cople espiga 3/8                               & 5 &   \$546.00   & --- & --- & \$2{,}730.00 \\
+Estructura & Válvulas antirretorno                          & 6 & \$1{,}897.41 & --- & --- & \$11{,}384.46 \\
+Estructura & Acero inoxidable 316\,L                        & 1 & \$5{,}000.00 & --- & --- & \$5{,}000.00  \\
+Estructura & Acrílico                                       & 1 & \$1{,}500.00 & --- & --- & \$1{,}500.00  \\
+Estructura & Filamento PETG (1\,kg)                         & 1 &   \$320.00   & --- & --- &    \$320.00  \\
+\midrule
+\multicolumn{6}{r}{\textbf{Total}} & \textbf{\$54{,}985.85} \\
+\end{longtable}
+\endgroup

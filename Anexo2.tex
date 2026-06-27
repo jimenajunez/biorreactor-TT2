@@ -1,40 +1,99 @@
 \chapter{Cronograma de Trabajo Terminal II}
 \label{ap:cronogramaII}
 
+% ── Parte 1: actividades 1–10 ──────────────────────────────────────────────
 \begin{table}[H]
-\centering
-\caption{Cronograma de trabajo de Trabajo Terminal II.}
-\label{tab:cronograma2}
-\small
-\adjustbox{max width=\textwidth}{%
-\begin{tabular}{clcccccccccccccccccccccccc}
-\toprule
-\textbf{No.} & \textbf{Actividad} & \multicolumn{4}{c}{\textbf{Feb}} & \multicolumn{4}{c}{\textbf{Mar}} & \multicolumn{4}{c}{\textbf{Abr}} & \multicolumn{4}{c}{\textbf{May}} & \multicolumn{4}{c}{\textbf{Jun}} & \multicolumn{4}{c}{\textbf{Jul}} \\
-\midrule
-1  & Documentación & & & & & & & & & & & & & & & & & & & & & & & & \\
-2  & Adquisición de materiales & & & & & & & & & & & & & & & & & & & & & & & & \\
-3  & Pruebas de sensores y actuadores & & & & & & & & & & & & & & & & & & & & & & & & \\
-4  & Construcción del tanque & & & & & & & & & & & & & & & & & & & & & & & & \\
-5  & Construcción del sistema mecánico & & & & & & & & & & & & & & & & & & & & & & & & \\
-6  & Construcción del sistema eléctrico & & & & & & & & & & & & & & & & & & & & & & & & \\
-7  & Elaboración del programa & & & & & & & & & & & & & & & & & & & & & & & & \\
-8  & Construcción de la HMI & & & & & & & & & & & & & & & & & & & & & & & & \\
-9  & Incorporación de sensores & & & & & & & & & & & & & & & & & & & & & & & & \\
-10 & Incorporación del sistema mecánico & & & & & & & & & & & & & & & & & & & & & & & & \\
-11 & Incorporación del sistema eléctrico & & & & & & & & & & & & & & & & & & & & & & & & \\
-12 & Incorporación de la HMI & & & & & & & & & & & & & & & & & & & & & & & & \\
-13 & Pruebas de funcionamiento & & & & & & & & & & & & & & & & & & & & & & & & \\
-14 & Ajustes y correcciones & & & & & & & & & & & & & & & & & & & & & & & & \\
-15 & Presentación del proyecto & & & & & & & & & & & & & & & & & & & & & & & & \\
-16 & Reunión con asesores & & & & & & & & & & & & & & & & & & & & & & & & \\
-\bottomrule
-\end{tabular}
-}
+	\centering
+	\caption{Cronograma de trabajo de Trabajo Terminal II (parte 1).}
+	\label{tab:cronograma2a}
+	\small
+	\adjustbox{width=\textwidth}{%
+		\setlength{\arrayrulewidth}{0.6pt}
+		\setlength{\tabcolsep}{3pt}
+		\renewcommand{\arraystretch}{1.4}
+		\begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|p{3.5cm}|*{24}{C|}}
+			\hline
+			\rowcolor{myyellow} \multicolumn{26}{|c|}{\textbf{Cronograma para TT2}} \\ \hline
+			\rowcolor{myyellow} & & \multicolumn{4}{c|}{\textbf{Febrero}} & \multicolumn{4}{c|}{\textbf{Marzo}} & \multicolumn{4}{c|}{\textbf{Abril}} & \multicolumn{4}{c|}{\textbf{Mayo}} & \multicolumn{4}{c|}{\textbf{Junio}} & \multicolumn{4}{c|}{\textbf{Julio}} \\ \cline{3-26}
+			\rowcolor{myyellow} \multirow{-2}{*}{\textbf{No.}} & \multirow{-2}{*}{\textbf{Actividad}} & \textbf{S1} & \textbf{S2} & \textbf{S3} & \textbf{S4} & \textbf{S1} & \textbf{S2} & \textbf{S3} & \textbf{S4} & \textbf{S1} & \textbf{S2} & \textbf{S3} & \textbf{S4} & \textbf{S1} & \textbf{S2} & \textbf{S3} & \textbf{S4} & \textbf{S1} & \textbf{S2} & \textbf{S3} & \textbf{S4} & \textbf{S1} & \textbf{S2} & \textbf{S3} & \textbf{S4} \\ \hline
+			% 1
+			\multirow{2}{0.5cm}{1} & \multirow{2}{3.5cm}{Documentación} & \cg & \cg & \cg & \cg & \cg & \cg & \cg & \cg & \cg & \cg & \cg & \cg & \cg & \cg & \cg & \cg & \cg & & & & & & & \\ \cline{3-26}
+			& &\cb & \cb & \cb & \cb & & & & & & & \cb & & & & & & & & \cb & \cb & \cb & \cb & \cb & \cb \\ \hline
+			% 2
+			\multirow{2}{0.5cm}{2} & \multirow{2}{3.5cm}{Adquisición de materiales} & \cg & \cg & \cg & \cg & & & & & & & & & & & & & & & & & & & & \\ \cline{3-26}
+			& &\cb & \cb & \cb & \cb & \cb & & & & & \cb & \cb & & \cb & \cb & & \cb & \cb & & \cb & \cb & & & & \\ \hline
+			% 3
+			\multirow{2}{0.5cm}{3} & \multirow{2}{3.5cm}{Pruebas de sensores y actuadores} & & & & \cg & \cg & \cg & & & & & & & & & & & & & & & & & & \\ \cline{3-26}
+			& && & & & & & & & & \cb & & & & & & & \cb & \cb & \cb & \cb & \cb & & & \\ \hline
+			% 4
+			\multirow{2}{0.5cm}{4} & \multirow{2}{3.5cm}{Construcción del tanque} & & & \cg & \cg & \cg & \cg & \cg & \cg & \cg & \cg & & & & & & & & & & & & & & \\ \cline{3-26}
+			& && & & \cb & & & & & & \cb & \cb & & \cb & \cb & & & \cb & \cb & & & & & & \\ \hline
+			% 5
+			\multirow{2}{0.5cm}{5} & \multirow{2}{3.5cm}{Construcción del sistema hidráulico} & & & & & \cg & \cg & \cg & \cg & & & & & & & & & & & & & & & & \\ \cline{3-26}
+			& && & & & & & & & & & & & & & & & & & \cb & \cb & & & & \\ \hline
+			% 6
+			\multirow{2}{0.5cm}{6} & \multirow{2}{3.5cm}{Construcción del sistema eléctrico} & & & & & \cg & \cg & \cg & \cg & \cg & \cg & & & & & & & & & & & & & & \\ \cline{3-26}
+			& && & & & & & & & & & & & & & & \cb & \cb & & & & & & & \\ \hline
+			% 7
+			\multirow{2}{0.5cm}{7} & \multirow{2}{3.5cm}{Elaboración del programa} & & & & \cg & \cg & & & & \cg & \cg & & & & & & & & & & & & & & \\ \cline{3-26}
+			& && & & \cb & & & & & \cb & \cb & & & & & & & \cb & \cb & \cb & \cb & & & & \\ \hline
+			% 8
+			\multirow{2}{0.5cm}{8} & \multirow{2}{3.5cm}{Sintonización de controladores} & & & & & & \cg & \cg & \cg & & & & & & & & & & & & & & & & \\ \cline{3-26}
+			& && & & & & & & & & & & & & & & & & & \cb & \cb & \cb & & & \\ \hline
+			% 9
+			\multirow{2}{0.5cm}{9} & \multirow{2}{3.5cm}{Construcción de la HMI} & & & & & & & \cg & \cg & & & & & & & & & & & & & & & & \\ \cline{3-26}
+			& && & & & & & & & & & & & & & & & \cb & \cb & \cb & & & & & \\ \hline
+			% 10
+			\multirow{2}{0.5cm}{10} & \multirow{2}{3.5cm}{Incorporación de la HMI} & & & & & & & & & & \cg & \cg & \cg & & & & & & & & & & & & \\ \cline{3-26}
+			& && & & & & & & & & & & & & & & & \cb & \cb & \cb & \cb & & & & \\ \hline
+		\end{tabular}
+	}
 \end{table}
 
-\begin{figure}[H]
-  \centering
-  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 37: Cronograma de trabajo de Trabajo Terminal II]\vspace{2cm}}}
-  \caption{Cronograma de trabajo de Trabajo Terminal II.}
-  \label{fig:cronograma2}
-\end{figure}
+\newpage
+
+% ── Parte 2: actividades 11–19 ─────────────────────────────────────────────
+\begin{table}[H]
+	\centering
+	\caption{Cronograma de trabajo de Trabajo Terminal II (parte 2).}
+	\label{tab:cronograma2b}
+	\small
+	\adjustbox{width=\textwidth}{%
+		\setlength{\arrayrulewidth}{0.6pt}
+		\setlength{\tabcolsep}{3pt}
+		\renewcommand{\arraystretch}{1.4}
+		\begin{tabular}{|>{\centering\arraybackslash}p{0.5cm}|p{3.5cm}|*{24}{C|}}
+			\hline
+			\rowcolor{myyellow} \multicolumn{26}{|c|}{\textbf{Cronograma para TT2 (continuación)}} \\ \hline
+			\rowcolor{myyellow} & & \multicolumn{4}{c|}{\textbf{Febrero}} & \multicolumn{4}{c|}{\textbf{Marzo}} & \multicolumn{4}{c|}{\textbf{Abril}} & \multicolumn{4}{c|}{\textbf{Mayo}} & \multicolumn{4}{c|}{\textbf{Junio}} & \multicolumn{4}{c|}{\textbf{Julio}} \\ \cline{3-26}
+			\rowcolor{myyellow} \multirow{-2}{*}{\textbf{No.}} & \multirow{-2}{*}{\textbf{Actividad}} & \textbf{S1} & \textbf{S2} & \textbf{S3} & \textbf{S4} & \textbf{S1} & \textbf{S2} & \textbf{S3} & \textbf{S4} & \textbf{S1} & \textbf{S2} & \textbf{S3} & \textbf{S4} & \textbf{S1} & \textbf{S2} & \textbf{S3} & \textbf{S4} & \textbf{S1} & \textbf{S2} & \textbf{S3} & \textbf{S4} & \textbf{S1} & \textbf{S2} & \textbf{S3} & \textbf{S4} \\ \hline
+			% 11
+			\multirow{2}{0.5cm}{11} & \multirow{2}{3.5cm}{Incorporación de sensores} & & & & & & & & & & \cg & \cg & \cg & & & & & & & & & & & & \\ \cline{3-26}
+			& && & & & & & & & & & & & & & & \cb & \cb & \cb & & & & & & \\ \hline
+			% 12
+			\multirow{2}{0.5cm}{12} & \multirow{2}{3.5cm}{Incorporación del sistema hidráulico} & & & & & & & & & & \cg & \cg & \cg & & & & & & & & & & & & \\ \cline{3-26}
+			& && & & & & & & & & & & & & & & & \cb & \cb & \cb & \cb & & & & \\ \hline
+			% 13
+			\multirow{2}{0.5cm}{13} & \multirow{2}{3.5cm}{Incorporación del sistema eléctrico} & & & & & & & & & & \cg & \cg & \cg & & & & & & & & & & & & \\ \cline{3-26}
+			& && & & & & & & & & & & & & & & \cb & \cb & \cb & & & & & & \\ \hline
+			% 14
+			\multirow{2}{0.5cm}{14} & \multirow{2}{3.5cm}{Incorporación de sistemas de control} & & & & & & & & & & \cg & \cg & \cg & & & & & & & & & & & & \\ \cline{3-26}
+			& && & & & & & & & & & & & & & & & & \cb & \cb & \cb & \cb & & & \\ \hline
+			% 15
+			\multirow{2}{0.5cm}{15} & \multirow{2}{3.5cm}{Pruebas de funcionamiento} & & & & & & & & & & & & & \cg & \cg & \cg & & & & & & & & & \\ \cline{3-26}
+			& && & & & & & & & & & & & & & & & & & \cb & \cb & \cb & \cb & & \\ \hline
+			% 16
+			\multirow{2}{0.5cm}{16} & \multirow{2}{3.5cm}{Ajustes y correcciones} & & & & & & & & & & & & & \cg & \cg & \cg & \cg & & & & & & & & \\ \cline{3-26}
+			& && & & & & & & & & & & & & & & & & & & \cb & \cb & & & \\ \hline
+			% 17
+			\multirow{2}{0.5cm}{17} & \multirow{2}{3.5cm}{Entrega de reporte a asesores} & & & & & & & & & & & & & & & & & \cg & & & & & & & \\ \cline{3-26}
+			& && & & & & & & & & & & & & & & & & & & \cb & & & & \\ \hline
+			% 18
+			\multirow{2}{0.5cm}{18} & \multirow{2}{3.5cm}{Presentación del proyecto} & & & & & & & & & & & & & & & & & & & \cg & & & & & \\ \cline{3-26}
+			& && & & & & & & & & & & & & & & & & & & & & \cb & & \\ \hline
+			% 19
+			\multirow{2}{0.5cm}{19} & \multirow{2}{3.5cm}{Reunión con asesores} & \cg & & \cg & & \cg & & \cg & & \cg & \cg & \cg & \cg & & \cg & \cg & \cg & \cg & & & & & & & \\ \cline{3-26}
+			& &\cb & & \cb & & & & & & & & \cb & & & & & & & & & \cb & & & & \\ \hline
+		\end{tabular}
+	}
+\end{table}
