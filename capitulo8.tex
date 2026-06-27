@@ -99,12 +99,12 @@ geometría del tanque.
 \toprule
 \textbf{Nombre} & \textbf{Designación} & \textbf{Valor} \\
 \midrule
-Radio interno del tanque (\textit{riser}) & $R_r$ & 136~mm \\
+Radio interno del tanque (\textit{riser}) & $R_r$ & 107.5~mm \\
 Radio interno del tubo de tiro (\textit{downcomer}) & $R_d$ & 48.26~mm \\
 Altura de la zona de cultivo & $H$ & 1093~mm \\
 Altura del tubo de tiro  & $H_d$ & 670.2~mm \\
 Radio de curvatura       & $R_B$ & 152.4~mm \\
-Capacidad volumétrica total del tanque & $V$ & 45~L \\
+Capacidad volumétrica total del tanque & $V$ & 55~L \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -130,436 +130,55 @@ Los planos de fabricación del biorreactor con acotado completo se presentan en 
 
 \subsection{Análisis de esfuerzos y validación estructural}
 
-Para corroborar la integridad física del biorreactor ante las condiciones de
-operación esperadas, se realizó un análisis de elemento finito (FEA). Se evaluaron
-dos escenarios: la presión hidrostática del medio de cultivo y la presión
-manométrica ante la inyección de aire.
+Para corroborar la integridad física del biorreactor ante las condiciones de operación esperadas, se realizó un análisis de elemento finito (FEA). Se evaluaron dos escenarios: la presión hidrostática del medio de cultivo y la presión manométrica ante la inyección de aire.
 
-Se seleccion\'o el acero inoxidable AISI 304 (18-8) como material estructural del
-tanque, con un espesor de pared de 3.5~mm. El AISI 304 ofrece excelente resistencia a
-la corrosi\'on en medios acu\'osos, es ampliamente utilizado en la industria
-alimentaria y biotecnol\'ogica \cite{Serviacero}, y cuenta con aprobaci\'on para
-contacto con alimentos y medios de cultivo. Frente al 316L, el AISI 304 presenta
-propiedades mec\'anicas similares ( E = 195{,}000~MPa, $\sigma_y$ = 215~MPa,
-$\sigma_u $= 505~MPa) y resulta m\'as accesible en el mercado nacional, manteniendo
-la inocuidad requerida para la aplicaci\'on.
+Se considera una estructura fabricada en acero inoxidable AISI~304 (18-8), material ampliamente utilizado en la industria alimentaria y biotecnológica debido a su inocuidad y resistencia a la corrosión~\cite{Serviacero}; además de un espesor de pared de 3.5~mm para el tanque.
 
-\textbf{Presi\'on hidrost\'atica.} La tensi\'on de von Mises m\'axima fue de
-2.36~MPa, con un \textbf{factor de seguridad m\'inimo de 91.1}, demostrando
-que la pared del tanque soporta el peso del l\'iquido con amplio margen.
+Para el análisis hidrostático se consideraron la densidad del medio y la aceleración gravitacional, arrojando un factor de seguridad mínimo de 91.1, demostrando que el contenedor soporta el peso del líquido con un margen de seguridad considerable.
 
-\textbf{Presi\'on manom\'etrica.} Aplicando 0.50~MPa (5~bar) para simular
-condiciones extremas, la tensi\'on de von Mises m\'axima fue de 67.7~MPa,
-resultando en un \textbf{factor de seguridad m\'inimo de 3.18}, superando
-el criterio de dise\~no $\text{FS} \geq 2$.
+En tanto al análisis de la presión manométrica, se sometió al modelo a una carga de 0.50~MPa (5~bar) para evaluar su comportamiento ante fallas en las válvulas de alivio, donde se obtuvo un factor de seguridad mínimo de 3.18, superando el criterio de diseño FS~$\geq 2$.
 
-La Tabla~\ref{tab:fea_resumen} resume ambos an\'alisis.
+El Anexo~\ref{ap:estructura} reúne el proceso de simulación del comportamiento del modelo ante las cargas expresadas, así como los resultados obtenidos.
+
+\subsection{Selección de pernos}
+
+Para garantizar la integridad hermética y estructural del biorreactor ante una presión interna de 5~bar, se realizó un análisis de fatiga y precarga en los pernos de sujeción. El diseño utiliza una configuración de 8~pernos $\tfrac{5}{16}$-18~UNC, SAE Grado~5, distribuidos en un diámetro de sellado de 170~mm.
+
+Se utilizó el modelo de rigidez de juntas de Shigley para determinar el factor de seguridad a la fluencia, carga y separación de la unión. El Anexo~\ref{ap:estructura} recopila los cálculos efectuados, mientras que la Tabla~\ref{tab:factores_seguridad} recopila los resultados de seguridad obtenidos.
 
 \begin{table}[H]
 \centering
-\caption{Resumen de resultados del an\'alisis FEA.}
-\label{tab:fea_resumen}
-\renewcommand{\arraystretch}{1.3}
-\small
-\begin{tabular}{lrrr}
-\toprule
-\textbf{Escenario} & \textbf{Carga} & \textbf{Von Mises m\'ax.} & \textbf{FS m\'in.} \\
-\midrule
-Presi\'on hidrost\'atica & $\rho g h$ & 2.36~MPa & 91.1 \\
-Presi\'on manom\'etrica & 0.50~MPa & 67.7~MPa & 3.18 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Las Figuras~\ref{fig:fea_hidro_fs} y~\ref{fig:fea_mano_fs} muestran
-los mapas de factor de seguridad obtenidos en cada escenario.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.95\textwidth]{fea_hidro_fs}
-  \caption{Mapa de factor de seguridad --- presi\'on hidrost\'atica (FS~m\'in~=~91.1).}
-  \label{fig:fea_hidro_fs}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.95\textwidth]{fea_hidro_vonmises}
-  \caption{Mapa de esfuerzo de von Mises --- presi\'on hidrost\'atica (m\'ax~=~2.36~MPa).}
-  \label{fig:fea_hidro_vonmises}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.95\textwidth]{fea_mano_fs}
-  \caption{Mapa de factor de seguridad --- presi\'on manom\'etrica 0.50~MPa (FS~m\'in~=~3.18).}
-  \label{fig:fea_mano_fs}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.95\textwidth]{fea_mano_vonmises}
-  \caption{Mapa de esfuerzo de von Mises --- presi\'on manom\'etrica 0.50~MPa (m\'ax~=~67.7~MPa).}
-  \label{fig:fea_mano_vonmises}
-\end{figure}
-
-El Anexo~\ref{ap:estructura} contiene los informes completos de simulaci\'on.
-
-\subsection{Validaci\'on de pernos}
-
-Para la validaci\'on de la selecci\'on de tornillos se analiz\'o la uni\'on del cilindro
-de acero inoxidable 304 con el recipiente a presi\'on mediante 8~pernos, con un sello
-de junta de di\'ametro efectivo $D = 9.374~\text{in}$ y presi\'on de trabajo de 5~bar.
-
-\begin{figure}[H]
-  \centering
-  \fbox{\parbox{0.75\textwidth}{\centering\vspace{1.5cm}[Diagrama configuraci\'on de tornillos]\vspace{1.5cm}}}
-  \caption{Representaci\'on visual del problema de los tornillos.}
-  \label{fig:diagrama_tornillos}
-\end{figure}
-
-\subsubsection*{Datos conocidos}
-
-\begin{align*}
-    a = b &= \tfrac{5}{16}~\text{in}, \quad
-    N = 8~\text{pernos}, \quad
-    P_g = 5~\text{bar}, \quad
-    D = 9.374~\text{in}\\
-    &\text{Especificaci\'on: } \tfrac{5}{16}\text{-}18~\text{UNC}, \text{ SAE Grado~5}
-\end{align*}
-
-\subsubsection*{Propiedades del material}
-
-\begin{align*}
-    A_t &= 0.0524~\text{in}^2, \quad
-    A_d = 0.07670~\text{in}^2, \quad
-    S_p = 85{,}000~\text{psi}, \quad
-    S_y = 92{,}000~\text{psi}\\
-    E_\text{perno} &= 30\times10^6~\text{psi}, \quad
-    E_\text{miembros} = 27.6\times10^6~\text{psi} \quad \text{(AISI 304)}
-\end{align*}
-
-\subsubsection*{Geometr\'ia y longitud del perno}
-
-\[
-    l = a+b = 0.625~\text{in}, \quad
-    L_T = 2d+\tfrac{1}{4} = 0.875~\text{in}, \quad
-    l_d = 0.375~\text{in}, \quad
-    l_t = 0.25~\text{in}
-    \quad\Rightarrow\quad \boxed{L = 1.25~\text{in}}
-\]
-
-\subsubsection*{Rigideces y constante de uni\'on}
-
-\[
-    k_b = \frac{A_d A_t E_\text{perno}}{A_d l_t + A_t l_d}
-        = \frac{(0.07670)(0.0524)(30\times10^6)}{0.03882}
-    \quad\Rightarrow\quad \boxed{k_b = 3.106\times10^6~\tfrac{\text{lbf}}{\text{in}}}
-\]
-\[
-    k_m = \frac{k_1}{2} = \frac{22.169\times10^6}{2}
-    \quad\Rightarrow\quad \boxed{k_m = 11.085\times10^6~\tfrac{\text{lbf}}{\text{in}}}
-    \qquad
-    C = \frac{k_b}{k_b+k_m} = \frac{3.106}{14.191}
-    \quad\Rightarrow\quad \boxed{C = 0.2188}
-\]
-
-\subsubsection*{Precarga y carga por perno}
-
-\[
-    F_i = 0.75\,A_t\,S_p = 0.75\times0.0524\times85{,}000
-    \quad\Rightarrow\quad \boxed{F_i = 3{,}340.5~\text{lbf}}
-\]
-\[
-    A_\text{sello} = \frac{\pi D^2}{4} = 69.01~\text{in}^2, \quad
-    P = \frac{P_g \cdot A_\text{sello}}{N} = \frac{72.519\times69.01}{8}
-    \quad\Rightarrow\quad \boxed{P = 625.6~\text{lbf/perno}}
-\]
-
-\subsubsection*{Factores de seguridad}
-
-\[
-    n_p = \frac{S_p A_t}{CP+F_i} = \frac{4{,}454}{3{,}477.4}
-    \quad\Rightarrow\quad \boxed{n_p = 1.281}
-\]
-\[
-    n_L = \frac{S_p A_t - F_i}{CP} = \frac{1{,}113.5}{136.9}
-    \quad\Rightarrow\quad \boxed{n_L = 8.133}
-    \qquad
-    n_0 = \frac{F_i}{P(1-C)} = \frac{3{,}340.5}{488.8}
-    \quad\Rightarrow\quad \boxed{n_0 = 6.836}
-\]
-
-\begin{table}[H]
-\centering
-\caption{Resumen de factores de seguridad --- perno $\frac{5}{16}$-18~UNC Grado~5 SAE.}
+\caption{Tabla de los resultados de los factores de seguridad.}
 \label{tab:factores_seguridad}
 \renewcommand{\arraystretch}{1.3}
 \small
-\begin{tabular}{lcc}
+\begin{tabular}{llcc}
 \toprule
-\textbf{Factor} & \textbf{Valor} & \textbf{Criterio} \\
+\textbf{Factor de seguridad} & \textbf{Símbolo} & \textbf{Valor obtenido} & \textbf{Criterio de aceptación} \\
 \midrule
-Fluencia $n_p$              & 1.281 & $> 1$ \checkmark \\
-Carga $n_L$                 & 8.133 & $> 1$ \checkmark \\
-Separaci\'on de uni\'on $n_0$ & 6.836 & $> 1$ \checkmark \\
+A la fluencia                & $n_p$ & 1.281 & $> 1$ \\
+A la carga                   & $n_L$ & 8.133 & $> 1$ \\
+A la separación de la unión  & $n_0$ & 6.836 & $> 1.2$ (\textit{para evitar fugas}) \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Los tres factores superan el criterio de aceptaci\'on, confirmando que
-\textbf{8 tornillos $\frac{5}{16}$-18~UNC $\times$ 1\textonehalf~in, Grado~5 SAE}
-son adecuados para la aplicaci\'on. Las tolerancias dimensionales de los agujeros pasados y roscas empleadas en el ensamblaje se especifican en el Anexo~\ref{ap:manufactura}.
-
 \section{Selección de componentes}
 
-\subsection{Sensor de oxígeno y temperatura RK500-04 Tipo-B}
+\subsection{Raspberry Pi (4B)}
 
-La Figura~\ref{fig:sensor_od} muestra el sensor de oxígeno y temperatura RK500-04, sensor
-seleccionado debido a su alta confiabilidad, material biocompatible y características
-eléctricas y de comunicación adaptables al sistema planteado. Dado que la
-oxigenación es un factor determinante para asegurar la vida del organismo, es
-requerido contar con una medición fiel en todo momento. Se escogió este modelo
-entre otras opciones más económicas principalmente por el material de grado
-alimenticio y su alta resolución.
+El control del biorreactor requiere la ejecución simultánea de la adquisición de datos de los diferentes sensores, activación de actuadores, manipulación de lazos de control PI y difuso, así como la actualización constante del interfaz humano-máquina. Por ello se seleccionó la Raspberry Pi 4B, ya que su arquitectura permite la gestión de múltiples tareas. Además de contar con soporte para protocolos de video, permite el uso de tarjetas microSD, por lo que se podrá contar con una base de datos local y facilita su exportación. Otra de las ventajas es el lenguaje de programación, puesto que al trabajar con Qt/QML y C++ se facilita el desarrollo de la interfaz. La Figura~\ref{fig:raspberry} muestra el microprocesador seleccionado mientras que en la Tabla~\ref{tab:raspberry} se muestran sus características más importantes.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth]{sensor_od_rk500}
-  \caption{Sensor de temperatura RK500-04.}
-  \label{fig:sensor_od}
-\end{figure}
-
-\begin{table}[H]
-\centering
-\caption{Especificaciones sensor de OD.}
-\label{tab:sensor_od}
-\renewcommand{\arraystretch}{1.3}
-\small
-\begin{tabularx}{\textwidth}{@{} l X @{}}
-\toprule
-\textbf{Parámetro} & \textbf{Valor} \\
-\midrule
-Resolución sensor OD          & 0.01~mg/L \\
-Resolución sensor temperatura & 0.1~\textdegree C \\
-Material                      & 316L \\
-Alimentación                  & 7--30~V \\
-Salida                        & RS485 / 4--20~mA \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\subsection{Sensor de pH RK500-12 Tipo-B3}
-
-En tanto al sensor de pH, se seleccionó un modelo de grado industrial debido a su resolución, sencilla auto calibración, rosca y materiales inocuos. Además de
-operar en un amplio rango de temperatura y presión, sus características de
-alimentación y presentación de la salida se adecuan a las necesidades de este
-proyecto. La Figura~\ref{fig:sensor_ph} muestra el sensor de pH seleccionado.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.7\textwidth]{sensor_ph_rk500}
-  \caption{Sensor de pH RK500-12 Tipo-B3.}
-  \label{fig:sensor_ph}
-\end{figure}
-
-\begin{table}[H]
-\centering
-\caption{Especificaciones del sensor de pH RK500-12 Tipo-B3.}
-\label{tab:sensor_ph}
-\renewcommand{\arraystretch}{1.3}
-\small
-\begin{tabularx}{\textwidth}{@{} l X @{}}
-\toprule
-\textbf{Parámetro} & \textbf{Valor} \\
-\midrule
-Resolución sensor pH          & 0.01~pH \\
-Resolución sensor temperatura & 0.1~\textdegree C \\
-Temperatura de operación      & 0--100~\textdegree C \\
-Presión de operación          & 1~MPa \\
-Material                      & 316L y vidrio \\
-Rosca                         & PG13.5 \\
-Alimentación                  & 7--28~V \\
-Salida                        & RS485 / 4--20~mA \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\subsection{Sensor de nivel VEGAPULS C22}
-
-La medición de nivel del líquido requiere efectuarse sin contacto, ser fiable y de
-alta precisión, además de abarcar un rango de 0 a 71~cm. La Figura~\ref{fig:sensor_nivel} muestra el
-sensor seleccionado.
-
-\begin{figure}[H]
-  \centering
-  \fbox{\parbox{0.7\textwidth}{\centering\vspace{1.5cm}[FIGURA 13: Sensor de nivel VEGAPULS C22]\vspace{1.5cm}}}
-  \caption{Sensor de nivel VEGAPULS C22.}
-  \label{fig:sensor_nivel}
-\end{figure}
-
-\begin{table}[H]
-\centering
-\caption{Especificaciones del sensor nivel VEGAPULS C22.}
-\label{tab:sensor_nivel}
-\renewcommand{\arraystretch}{1.3}
-\small
-\begin{tabularx}{\textwidth}{@{} l X @{}}
-\toprule
-\textbf{Parámetro} & \textbf{Valor} \\
-\midrule
-Rango de medición        & 0 a 20~m \\
-Precisión                & $\pm 2$~mm \\
-Temperatura de operación & $-40$ a $80$~\textdegree C \\
-Presión de operación     & 300~kPa \\
-Material                 & PVDF con certificado higiénico FDA \\
-Rosca                    & 1\,½~NPT \\
-Alimentación             & 12--35~V \\
-Salida                   & RS485 / 4--20~mA \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\subsection{Válvula de alivio de presión}
-
-La válvula seleccionada regula y libera la presión dentro del tanque, está
-manufacturada en cobre de grado alimenticio e incluye manómetro y conectores.
-La Figura~\ref{fig:valvula} muestra el componente seleccionado.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.7\textwidth]{valvula_alivio}
-  \caption{Válvula de alivio y presión.}
-  \label{fig:valvula}
-\end{figure}
-
-\subsection{Compresor bomba de aire}
-
-Se seleccionó una bomba de aire con características superiores a las requeridas
-para obtener el caudal adecuado, esto debido a la posibilidad de escalamiento a
-futuro. La Figura~\ref{fig:bomba_aire} muestra la bomba seleccionada.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.7\textwidth]{bomba_aire}
-  \caption{Compresor bomba de aire.}
-  \label{fig:bomba_aire}
-\end{figure}
-
-\begin{table}[H]
-\centering
-\caption{Especificaciones del compresor bomba de aire.}
-\label{tab:bomba_aire}
-\renewcommand{\arraystretch}{1.3}
-\small
-\begin{tabularx}{\textwidth}{@{} l X @{}}
-\toprule
-\textbf{Parámetro} & \textbf{Valor} \\
-\midrule
-Caudal máximo & 65~l/min \\
-Potencia      & 46~W \\
-Alimentación  & 110~V \\
-Presión       & 0.027~MPa \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\subsection{Bomba de agua}
-
-Se seleccionó una bomba de cerveza fabricada en acero inoxidable 304, lo cual
-asegura su inocuidad y durabilidad. La Figura~\ref{fig:bomba_agua} muestra la bomba seleccionada.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.7\textwidth]{bomba_agua}
-  \caption{Bomba de agua.}
-  \label{fig:bomba_agua}
-\end{figure}
-
-\begin{table}[H]
-\centering
-\caption{Especificaciones de la bomba de agua.}
-\label{tab:bomba_agua}
-\renewcommand{\arraystretch}{1.3}
-\small
-\begin{tabularx}{\textwidth}{@{} l X @{}}
-\toprule
-\textbf{Parámetro} & \textbf{Valor} \\
-\midrule
-Caudal nominal                 & 8/12~L/min \\
-Potencia de salida             & 10~W \\
-Resistencia a altas temperatura & Hasta 140~\textdegree C \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\subsection{Manta calefactora}
-
-Para seleccionar una manta con la potencia adecuada se realizaron los siguientes
-cálculos, considerando:
-
-\begin{itemize}
-  \item Temperatura ambiente del agua: 18~\textdegree C
-  \item Temperatura máxima: 40~\textdegree C
-  \item Tiempo requerido: 1 hora con 10 minutos = 4\,200~s
-  \item Calor específico del agua: $C_p = 4.186$~kJ/(kg$\cdot$K)
-  \item Volumen de agua: 17~L $\approx$ 17~kg
-\end{itemize}
-
-\begin{equation}
-Q = m \cdot c \cdot \Delta T = 17 \cdot 4.186 \cdot (40 - 18) = 1\,565.56 \text{ kJ}
-\end{equation}
-
-\begin{equation}
-P = \frac{Q}{t} = \frac{1\,565.56 \text{ kJ}}{4\,200 \text{ s}} = 372.75 \text{ W}
-\end{equation}
-
-Las características principales de la manta seleccionada se encuentran en la Tabla~\ref{tab:manta}.
-
-\begin{table}[H]
-\centering
-\caption{Especificaciones de la manta térmica.}
-\label{tab:manta}
-\renewcommand{\arraystretch}{1.3}
-\small
-\begin{tabularx}{\textwidth}{@{} l X @{}}
-\toprule
-\textbf{Parámetro} & \textbf{Valor} \\
-\midrule
-Material             & Silicona \\
-Voltaje              & 110~V \\
-Potencia             & 450~W \\
-Rango de temperatura & 30--110~\textdegree C \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\subsection{Disco difusor}
-
-En la industria, existen numerosos estudios para el modelado de sistemas de
-burbujeo, por lo que componentes estándar son comúnmente utilizados para
-asegurar una distribución homogénea del oxígeno en el tanque. Por esta razón, se
-optó por implementar un componente comercial estandarizado en lugar de un
-diseño de manufactura propia. El elemento comercial seleccionado fue un disco
-difusor de material sinterizado con dimensiones de 3~in $\times$ 1~in.
-
-\subsection{Raspberry Pi 3B}
-
-El control del biorreactor requiere la ejecución simultánea de la adquisición de datos
-de los diferentes sensores, activación de actuadores, manipulación de lazos de
-control PI y difuso, así como la actualización constante del interfaz humano-máquina.
-Por ello se seleccionó la Raspberry Pi 3B. La Figura~\ref{fig:raspberry} muestra el microprocesador
-seleccionado.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.7\textwidth]{raspberry_pi}
-  \caption{Raspberry Pi 3B.}
+  \includegraphics[width=0.5\textwidth]{raspberry_4b}
+  \caption{Raspberry Pi (4B).}
   \label{fig:raspberry}
 \end{figure}
 
 \begin{table}[H]
 \centering
-\caption{Especificaciones del Raspberry Pi 3B.}
+\caption{Tabla descriptiva de Raspberry Pi (4B).}
 \label{tab:raspberry}
 \renewcommand{\arraystretch}{1.3}
 \small
@@ -567,50 +186,279 @@ seleccionado.
 \toprule
 \textbf{Parámetro} & \textbf{Valor} \\
 \midrule
-Arquitectura       & 64-bit (ARMv8) \\
-Procesador         & Quad-Core 1.2~GHz ARM Cortex-A53 \\
-GPU                & Broadcom VideoCore IV \\
-Puertos de video   & HMI, DSI \\
-Pines de E/S (GPIO) & 40 pines \\
-Alimentación       & 5~V \\
-Conectividad       & LAN, BLE, Ethernet \\
-Almacenamiento     & Ranura para microSD \\
+Descripción    & Procesador de cuatro núcleos a 1.5~GHz, 1~GB de RAM LPDDR4, Gigabit Ethernet, Wifi de doble banda y dos puertos micro-HDMI. \\
+Voltaje        & 5~V DC \\
+Corriente      & 3~A \\
+Potencia       & 25~W \\
+Memoria        & 2~GB \\
+Almacenamiento & 128~GB \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Sensor de oxígeno y temperatura RK500-04 Tipo-B}
+
+El sensor de oxígeno y temperatura RK500-04 fue seleccionado debido a su alta confiabilidad, material biocompatible y características eléctricas y de comunicación adaptables al sistema planteado. Dado que la oxigenación es un factor determinante para asegurar la vida del organismo, es requerido contar con una medición fiel en todo momento. Se escogió este modelo entre otras opciones más económicas principalmente por el material de grado alimenticio y su alta resolución, la cual permite mediciones más precisas. La Figura~\ref{fig:sensor_od} muestra el sensor seleccionado mientras que en la Tabla~\ref{tab:sensor_od} se muestran sus características más importantes.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{sensor_od_rk500}
+  \caption{Sensor de oxígeno disuelto y temperatura RK500-04.}
+  \label{fig:sensor_od}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Tabla descriptiva de sensor RK500-04.}
+\label{tab:sensor_od}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Descripción          & Sensor de oxígeno disuelto (OD) con principio de fluorescencia y membrana de oxígeno. Ofrece tiempo de respuesta corto, alta precisión y rendimiento estable. \\
+Voltaje              & 7--30~V DC \\
+Corriente            & 12.5~mA \\
+Potencia             & 0.15~W \\
+Rango OD             & 0--50~mg/L \\
+Rango de temperatura & 0--60~\textdegree C \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Sensor de pH RK500-12 Tipo-B3}
+
+En tanto al sensor de pH, se seleccionó un modelo de grado industrial debido a su exactitud, su sencilla auto calibración, rosca y materiales inocuos. Además de operar en un amplio rango de temperatura y presión, sus características de alimentación y presentación de la salida se adecuan a las necesidades de este proyecto. Este sensor cuenta con sensor de temperatura incorporado. La Figura~\ref{fig:sensor_ph} muestra el sensor de pH seleccionado, mientras que la Tabla~\ref{tab:sensor_ph} recopila sus principales características de interés.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{sensor_ph_rk500}
+  \caption{Sensor de pH RK500-12 Tipo-B3.}
+  \label{fig:sensor_ph}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Tabla descriptiva de sensor de pH RK500-12 Tipo-B3.}
+\label{tab:sensor_ph}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Descripción          & Sensor de pH industrial con tecnología de última generación. Fabricado con vidrio y acero inoxidable 316L. Incluye sensor de temperatura integrado. \\
+Voltaje              & 7--30~V DC \\
+Corriente            & 12.5~mA \\
+Potencia             & 0.15~W \\
+Rango pH             & 0--14 \\
+Rango de temperatura & 0--100~\textdegree C \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Sensor de nivel SparkFun Pulsed Coherent Radar --- Acconeer XM125}
+
+La medición de nivel del líquido requiere efectuarse sin contacto, ser fiable y de alta precisión, además de abarcar un rango de 10 a 120~cm, contar con un acople adecuado, salida compatible y material inocuo. Todas estas características se satisfacen con el sensor seleccionado, el cual se muestra en la Figura~\ref{fig:sensor_nivel}. La Tabla~\ref{tab:sensor_nivel} muestra las características técnicas del sensor de mayor relevancia.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{sensor_xm125}
+  \caption{SparkFun Pulsed Coherent Radar Sensor --- Acconeer XM125.}
+  \label{fig:sensor_nivel}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Tabla descriptiva de SparkFun Pulsed Coherent Radar Sensor --- Acconeer XM125.}
+\label{tab:sensor_nivel}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Descripción & Con firmware de detección de distancia I\textsuperscript{2}C, detecta la posición de objetos y su distancia al sensor mediante detección de presencia e intrapresencia. \\
+Voltaje     & 3.3--5~V \\
+Corriente   & 0.6~A \\
+RAM         & 68~kB \\
+ROM         & 128~kB \\
+Frecuencia  & 60~GHz \\
+Potencia    & 1.98~W \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \subsection{Pantalla táctil LCD}
 
-Con el objetivo de brindar una interfaz intuitiva para el personal de investigación,
-se seleccionó una pantalla táctil de 7 pulgadas como HMI. La pantalla táctil
-seleccionada (Figura~\ref{fig:pantalla}) está pensada para el desarrollo en Raspberry Pi, cuenta
-con un tiempo de respuesta de 5~ms para una navegación fluida y conectividad vía
-HDMI con una resolución HD (1024 $\times$ 600 píxeles).
+Con el objetivo de brindar una interfaz intuitiva para el personal de investigación, se seleccionó una pantalla táctil de 7 pulgadas como HMI. La pantalla táctil seleccionada (Figura~\ref{fig:pantalla}) está pensada para el desarrollo en Raspberry Pi, cuenta con un tiempo de respuesta de 5~ms para una navegación fluida y conectividad vía HDMI con una resolución HD (1024 $\times$ 600 píxeles). La Tabla~\ref{tab:pantalla} resume sus características principales.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth]{pantalla_lcd}
+  \includegraphics[width=0.5\textwidth]{pantalla_lcd}
   \caption{Pantalla táctil LCD.}
   \label{fig:pantalla}
 \end{figure}
 
-\subsection{Tira LED}
+\begin{table}[H]
+\centering
+\caption{Tabla descriptiva de pantalla táctil LCD.}
+\label{tab:pantalla}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Descripción & Pantalla de 7 pulgadas con resolución de 1024$\times$600, configurable hasta 1920$\times$1080 mediante ajustes de software. \\
+Voltaje     & 5~V \\
+Corriente   & 0.6~A \\
+Potencia    & 3~W \\
+Resolución  & 1024 $\times$ 600 \\
+Tamaño      & 7~pulgadas \\
+Tecnología  & IPS \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
-Se busca recrear condiciones de iluminación similares a las existentes bajo la
-sombra de un matorral xerófilo en el estado de Zacatecas. Se conoce que la
-radiación fotosintéticamente activa (RFA) en el estado es alta, de aproximadamente
-$819.52\ \mu$mol/m$^2$/s \cite{Escobedo2020}, y que el microambiente generado bajo la sombra de estos
-matorrales tiene en promedio una RFA 44.1\% menor \cite{Sanchez2024}. Por lo tanto, el objetivo
-lumínico del sistema será de aproximadamente $458.1152\ \mu$mol/m$^2$/s. La tira LED
-seleccionada (Figura~\ref{fig:tira_led}) está basada en Chip on Board, lo que asegura una luz uniforme
-y una alta densidad de fuentes (480~LEDs/m).
+\subsection{Válvula de alivio de presión}
+
+La válvula seleccionada regula y libera la presión dentro del tanque, está manufacturada en cobre de grado alimenticio e incluye manómetro y conectores, lo cual facilita su uso e instalación. A continuación, la Figura~\ref{fig:valvula} muestra el componente seleccionado.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth]{tira_led}
+  \includegraphics[width=0.5\textwidth]{valvula_alivio}
+  \caption{Válvula de alivio y presión.}
+  \label{fig:valvula}
+\end{figure}
+
+\subsection{Compresor bomba de aire}
+
+Se seleccionó una bomba de aire con características superiores a las requeridas para obtener el caudal adecuado, esto debido a la posibilidad de escalamiento a futuro con diferentes configuraciones de burbujeo. A continuación, la Figura~\ref{fig:bomba_aire} muestra la bomba seleccionada, mientras que la Tabla~\ref{tab:bomba_aire} recopila sus principales características.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{bomba_aire}
+  \caption{Compresor bomba de aire.}
+  \label{fig:bomba_aire}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Tabla descriptiva de compresor bomba de aire.}
+\label{tab:bomba_aire}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Descripción & Bomba de aire electromagnética ACO-003. Sin aceite ni contaminación de aire. Cilindros y pistones de materiales resistentes y duraderos. \\
+Flujo       & 65~L/min \\
+Voltaje     & 110/220~V AC \\
+Corriente   & 0.41~A \\
+Potencia    & 46~W \\
+Frecuencia  & 60~Hz \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Bomba de acoplamiento magnético (MP15RM)}
+
+Se seleccionó una bomba de cerveza fabricada en acero inoxidable 304, lo cual asegura su inocuidad y durabilidad. En la Figura~\ref{fig:bomba_agua} se muestra la bomba seleccionada, mientras que en la Tabla~\ref{tab:bomba_agua} se muestran algunas características relevantes.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{bomba_mp15rm}
+  \caption{Bomba de acoplamiento magnético (MP15RM).}
+  \label{fig:bomba_agua}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Tabla descriptiva de bomba de acoplamiento magnético (MP15RM).}
+\label{tab:bomba_agua}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Descripción & Ideal para sistemas de circulación superficial. Soporta hasta 105~\textdegree C. Operación silenciosa (3~dB). \\
+Flujo       & 8--12~L/min \\
+Voltaje     & 110/220~V AC \\
+Corriente   & 0.1~A \\
+Potencia    & 10~W \\
+Frecuencia  & 60~Hz \\
+Velocidad   & 2600--3000~RPM \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Tira LED}
+
+Se seleccionó una tira LED de triple fila con chip SMD 3528 y alto índice de reproducción cromática (CRI 95+) para garantizar iluminación de alta fidelidad de color en el sistema. Opera a 12~V DC y ofrece luz blanca diurna de 6000~K con 360~LEDs por metro, proporcionando hasta 878 lúmenes por rollo y una vida útil superior a 50{,}000 horas. Su diseño flexible permite cortarla cada 6 LEDs para adaptarla a la longitud requerida sin afectar su funcionamiento. La Figura~\ref{fig:tira_led} muestra la tira LED seleccionada mientras que en la Tabla~\ref{tab:tira_led} se muestran sus características más importantes.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{tira_led}
   \caption{Tira LED.}
   \label{fig:tira_led}
 \end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Tabla descriptiva de Tira LED.}
+\label{tab:tira_led}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Descripción & Tira de triple fila, chip SMD 3528, 360~LEDs/m, CRI~95+, luz blanca diurna 6000~K. Flexible y recortable cada 6~LEDs. \\
+Voltaje     & 12~V DC \\
+Corriente   & 2.4~A \\
+Potencia    & 28.8~W \\
+Color       & Blanco diurno (6000~K) \\
+CRI         & $\geq 95$ \\
+LEDs        & 360~LEDs/m \\
+Temperatura & $-20$ a 50~\textdegree C \\
+Lúmenes     & 878~lm/rollo \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Manta Calefactora}
+
+Para el sistema de calefacción del biorreactor se seleccionó un cable calefactor de fibra de carbono 12K, el cual emplea tecnología de calefacción por infrarrojo lejano para una transferencia de calor eficiente y uniforme a lo largo de toda su longitud. Este cable opera en un amplio rango de voltaje (0--220~V), posee una resistencia de 33~$\Omega$/m y está recubierto de goma de silicona, lo que le confiere durabilidad y resistencia ante temperaturas de hasta 200~\textdegree C. La Figura~\ref{fig:cable_calefactor} muestra el cable calefactor seleccionado mientras que en la Tabla~\ref{tab:cable_calefactor} se muestran sus características más importantes.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{cable_calefactor}
+  \caption{Cable Calefactor de Carbono 12K.}
+  \label{fig:cable_calefactor}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Tabla descriptiva de Cable Calefactor de Carbono 12K.}
+\label{tab:cable_calefactor}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} \\
+\midrule
+Descripción      & Cable de calefacción con fibra de carbono 12K, 33~$\Omega$/m. Tecnología de infrarrojo lejano. Recubierto en goma de silicona. \\
+Voltaje          & 0--220~V \\
+Corriente        & 0.87~A/m \\
+Potencia         & 25~W/m \\
+Temperatura máx. & 200~\textdegree C \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 \section{Integración y CAD}
 
@@ -654,8 +502,8 @@ CAD de estos componentes.
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 20: Foco con la unión metálica roscada]\vspace{2cm}}}
-  \caption{Foco con la unión metálica roscada.}
+  \includegraphics[width=0.35\textwidth]{foco}
+  \caption{Foco con la unión impresa roscada.}
   \label{fig:foco_union}
 \end{figure}
 
@@ -684,7 +532,7 @@ La Figura~\ref{fig:foco_biorreactor} muestra la incorporación del sistema de il
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 21: Incorporación del foco al biorreactor]\vspace{2cm}}}
+  \includegraphics[width=0.4\textwidth]{lateral}
   \caption{Incorporación del foco al biorreactor.}
   \label{fig:foco_biorreactor}
 \end{figure}
@@ -700,17 +548,28 @@ superior (Figura~\ref{fig:hmi_ensamble}).
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 22: Ensamble completo de la HMI]\vspace{2cm}}}
+  \includegraphics[width=0.4\textwidth]{hmi}
   \caption{Ensamble completo de la HMI.}
   \label{fig:hmi_ensamble}
 \end{figure}
 
-La Figura~\ref{fig:sistema_total} muestra el sistema biorreactor en su totalidad.
+\subsection{Dimensiones y estructura de la unidad de bombas de agua y aire}
+
+El diseño de este módulo contiene dos bombas de líquido grado alimenticio con las cuales se puede ingresar la sustancia así como la bomba de aire (Figura~\ref{fig:bombas_ensamble}).
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 23: Biorreactor y HMI]\vspace{2cm}}}
-  \caption{Biorreactor y HMI.}
+  \includegraphics[width=0.4\textwidth]{bombas}
+  \caption{Ensamble completo de la estación de las bombas.}
+  \label{fig:bombas_ensamble}
+\end{figure}
+
+Por otra parte, la Figura~\ref{fig:sistema_total} muestra el sistema biorreactor en su totalidad.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.4\textwidth]{completo}
+  \caption{Ensamble completo del biorreactor.}
   \label{fig:sistema_total}
 \end{figure}
 
@@ -840,7 +699,7 @@ de supervisión y control por histéresis del nivel.
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 25: Diagrama de control de nivel]\vspace{2cm}}}
+  \includegraphics[width=0.9\textwidth]{diagrama_control_nivel}
   \caption{Diagrama de control de nivel.}
   \label{fig:control_nivel}
 \end{figure}
@@ -928,102 +787,55 @@ realizar el programa.
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 30: Diagrama de flujo simplificado de la programación del biorreactor]\vspace{2cm}}}
+  \includegraphics[width=0.4\textwidth]{diagrama_flujo_simplificado}
   \caption{Diagrama de flujo simplificado de la programación del biorreactor.}
   \label{fig:flujo_simplificado}
 \end{figure}
 
-A continuación se muestra la máquina de estados que utiliza el sistema (Tablas~\ref{tab:estados1} y~\ref{tab:estados2}).
+\section{Sistemas eléctricos}
 
-\begin{longtable}{p{2.5cm}p{1.5cm}p{1.5cm}p{7cm}}
-\caption{Tabla de la máquina de estados parte uno.}
-\label{tab:estados1}\\
-\toprule
-\textbf{Estado Actual} & \textbf{Estado Sig.} & \textbf{Señal} & \textbf{Descripción / Acción de Salida} \\
-\midrule
-\endfirsthead
-\multicolumn{4}{c}{\tablename\ \thetable{} -- continuación}\\
-\toprule
-\textbf{Estado Actual} & \textbf{Estado Sig.} & \textbf{Señal} & \textbf{Descripción / Acción de Salida} \\
-\midrule
-\endhead
-\bottomrule
-\endfoot
-A1 (Inicio)       & A2 & 2 & Error en carga del sistema. \\
-                  & A3 & 1 & Carga exitosa. Ir a Menú Principal. \\
-A2 (Error Carga)  & A1 & 1 & Reintento. \\
-A3 (Menú Ppal)    & A4 & 1 & Ir a Gestión de Proyectos (``Nuevo'' / ``Guardados''). \\
-                  & A32 & 2 & Exportación de datos. \\
-A4 (Gestión)      & A5 & 2 & ``Nuevo Proyecto''. Ir a configuración de parámetros. \\
-                  & A9 & 1 & ``Datos Guardados''. Ir a Lista Página. \\
-                  & A3 & 6 & ``Volver''. Regresar al Menú Principal. \\
-A5 (Param 1)      & A6 & 1,2,3,4 & Tocar campo de texto. Ir a Teclado. \\
-                  & A7 & 5 & ``Siguiente''. Ir a nombrar proyecto. \\
-                  & A4 & 6 & ``Volver''. Regresar a Gestión. \\
-A6 (Teclado)      & A5 & 6 & ``Volver''. Quitar teclados. \\
-                  & A7 & 5 & ``Enter''. Confirmar nombre proyecto. \\
-A7 (Nombrar)      & A6 & 6 & ``Volver''. Regresar a Teclado. \\
-                  & A8 & 5 & ``Aceptar''. Ir a Resumen de datos. \\
-A8 (Confirmar)    & A15 & 5 & ``Confirmar Todo''. Ir a Calibración. \\
-                  & A7 & 6 & ``Volver''. Editar nombre/datos. \\
-A9 (Lista Pág 1)  & A10 & 4 & ``Siguiente Pág''. Ver más archivos. \\
-                  & A11 & 1,2,3 & Seleccionar archivo de esta lista. \\
-                  & A4 & 6 & ``Volver''. Regresar a Gestión. \\
-A10 (Lista Pág 2) & A9 & 6 & ``Anterior Pág''. Volver a lista. \\
-                  & A12 & 1,2,3 & Seleccionar archivo de esta lista. \\
-A11 (Info Arch.\ 1) & A13 & 5 & ``Cargar''. Pre-cargar datos archivo. \\
-                  & A9 & 6 & ``Volver''. Regresar a Lista. \\
-A12 (Info Arch.\ 2) & A14 & 5 & ``Cargar''. Pre-cargar datos archivo 2. \\
-                  & A10 & 6 & ``Volver''. Regresar a Lista. \\
-A13 (Confirmar 1) & A15 & 5 & Confirmar carga. Ir a Calibración. \\
-                  & A11 & 6 & ``Cancelar''. Volver a Info Archivo. \\
-A14 (Confirmar 2) & A15 & 5 & Confirmar carga. Ir a Calibración. \\
-                  & A12 & 6 & ``Cancelar''. Volver a Info Archivo. \\
-A15 (Calibración) & A16 & 5 & ``No''. Omitir/Verificación directa. \\
-                  & A33 & 2 & Error en carga del sistema. \\
-\end{longtable}
+En la Figura~\ref{fig:electr_conexiones}, se observa el esquema de conexiones eléctricas, en la que se contemplan el microcontrolador (Raspberry Pi 4B), los puertos para sensores (pH, O\textsubscript{2}, temperatura y nivel), así como las etapas de potencia, módulos de comunicación y fuente de alimentación.
 
-\begin{longtable}{p{2.5cm}p{1.5cm}p{1.5cm}p{7cm}}
-\caption{Tabla de la máquina de estados parte dos.}
-\label{tab:estados2}\\
-\toprule
-\textbf{Estado Actual} & \textbf{Estado Sig.} & \textbf{Señal} & \textbf{Descripción / Acción de Salida} \\
-\midrule
-\endfirsthead
-\multicolumn{4}{c}{\tablename\ \thetable{} -- continuación}\\
-\toprule
-\textbf{Estado Actual} & \textbf{Estado Sig.} & \textbf{Señal} & \textbf{Descripción / Acción de Salida} \\
-\midrule
-\endhead
-\bottomrule
-\endfoot
-A16 (Check Inicio)  & A17 & 3 & ``Configuración de tabla''. Selección de tabla a mostrar. \\
-                    & A19 & 1 & ``Pausa/Detener''. \\
-                    & A18 & 5 & ``Proceso finalizado''. Se terminó de manera exitosa el proceso cultivo. \\
-A17 (Proc. Calibración) & A16 & 6 & ``Tabla seleccionada''. Regresar al menú de operaciones. \\
-A18 (Verificación)  & A20 & 5 & Ir a Gestión de Proyectos 2. \\
-A19 (Pausa)         & A20 & 5 & Ir a Gestión de Proyectos 2. \\
-A33 (Alerta Error)  & A15 & 1 & Confirmar carga. Ir a Calibración. \\
-A20 (Gestión 2)     & A21 & 5 & ``Enter''. Confirmar configuración deseada. \\
-                    & A35 & 1 & Loop de monitoreo (Lectura sensores). \\
-A35 (Alerta Error)  & A20 & 6 & Confirmar carga. Ir a Calibración. \\
-A21 (Menú Pausa)    & A20 & 6 & Ir a Gestión de Proyectos 2. \\
-                    & A22 & 5 & ``Comenzar Extracción''. Iniciar vaciado. \\
-A22 (Vaciado N1)    & A23 & 5 & Ir a confirmar N1. \\
-A23 (Confirmar N1)  & A24 & 5 & ``Aceptar''. Iniciar vaciado Nivel 1. \\
-                    & A22 & 6 & ``Atrás''. Regresar a estado anterior. \\
-A24 (Espere N1)     & A25 & 5 & Proceso activo. Ir a pantalla de Espera 1. \\
-A25 (Vaciado N2)    & A26 & 5 & Ir a confirmar N2. \\
-A26 (Confirmar N2)  & A34 & 5 & ``Aceptar''. Iniciar vaciado Nivel 2. \\
-                    & A25 & 6 & ``Atrás''. Regresar a estado anterior. \\
-A34 (Espere N2)     & A27 & 5 & Proceso activo. Ir a pantalla de finalización. \\
-A27 (Finalizado)    & A28 & 5 & Pantalla de guardado. \\
-A28 (Config.\ guardado) & A31 & 5 & ``No''. Ir directo a Limpieza. \\
-                    & A29 & 1 & ``Sí''. Ir a procesar guardado. \\
-A29 (Nombrar Archivo) & A30 & 1 & Confirmaci\'on de guardado. \\
-A30 (Confirm.\ guardado) & A31 & 5 & ``Aceptar''. Ejecutar guardado. Ir a Limpieza. \\
-                    & A29 & 6 & ``Cancelar''. Regresar a nombrar archivo. \\
-A31 (Limpieza)      & A3  & 5 & Limpieza completada. Ir a Men\'u Principal. \\
-A32 (Exportaci\'on) & A3  & 6 & Exportaci\'on completada. Volver a men\'u. \\
-\bottomrule
-\end{longtable}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{electr_diagrama_conexiones}
+  \caption{Diagrama de conexiones eléctrico.}
+  \label{fig:electr_conexiones}
+\end{figure}
+
+A continuación, en las Figuras~\ref{fig:electr_pistas}, \ref{fig:electr_superior} y~\ref{fig:electr_inferior} se muestran las pistas de la PCB, así como la vista final superior e inferior. En el Anexo~\ref{ap:especificaciones_electricas} se contienen los cálculos de potencia y consumos, así como la tabla de cableado con su respectivo calibre y finalmente una representación visual de conexiones para cada componente.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{electr_pistas_pcb}
+  \caption{Pistas de la PCB.}
+  \label{fig:electr_pistas}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{electr_pcb_superior}
+  \caption{Visualización superior de la PCB.}
+  \label{fig:electr_superior}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{electr_pcb_inferior}
+  \caption{Visualización inferior de la PCB.}
+  \label{fig:electr_inferior}
+\end{figure}
+
+\section{Plan de manufactura}
+
+Para la fabricación de los elementos que se implementarán en el prototipo se ha decidido plantear un plan de manufactura. La Figura~\ref{fig:jerarquia_manufactura} muestra un diagrama que establece la jerarquía entre los distintos procesos necesarios para la creación del sistema.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{diagrama_jerarquia_manufactura}
+  \caption{Diagrama de jerarquía para la manufactura del biorreactor.}
+  \label{fig:jerarquia_manufactura}
+\end{figure}
+
+La información detallada sobre el plan de manufactura se muestra en el Apéndice~\ref{ap:manufactura}.
+

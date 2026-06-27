@@ -1,60 +1,151 @@
 \chapter{Plan de manufactura}
 \label{ap:manufactura}
 
-\begin{table}[H]
-\centering
-\caption{Plano de manufactura de la HMI, parte 1.}
-\label{tab:manufactura_hmi1}
-\renewcommand{\arraystretch}{1.3}
-\small
-\begin{tabular}{llll}
+\begin{longtable}{@{} p{4.2cm} p{8.8cm} r @{}}
+\caption{Plan de manufactura del biorreactor.}
+\label{tab:manufactura_biorreactor} \\
 \toprule
-\textbf{Elemento} & \textbf{Material} & \textbf{Método} & \textbf{Tiempo} \\
+\multicolumn{2}{@{}l}{\textbf{Biorreactor}} & \textbf{Cantidad} \\
 \midrule
-Case pared derecha (x1)       & Acrílico & Corte láser & 1 hr/pieza \\
-Case pared izquierda (x1)     & Acrílico & Corte láser & 1 hr/pieza \\
-Case pared frontal (x1)       & Acrílico & Corte láser & 1 hr/pieza \\
-Case pared trasera (x1)       & Acrílico & Corte láser & 1 hr/pieza \\
-Case pared superior (x1)      & Acrílico & Corte láser & 1 hr/pieza \\
-Case pared inferior (x1)      & Acrílico & Corte láser & 1 hr/pieza \\
-Unión (x8)                    & PETG     & Impresión 3D & 2 hrs/pieza \\
-Soporte pantalla M2 (x1)      & PETG     & Impresión 3D & 8 hrs/pieza \\
-Case pantalla 7'' inferior (x1) & PETG   & Impresión 3D & 6 hrs/pieza \\
-Case pantalla 7'' superior (x1) & PETG   & Impresión 3D & 6 hrs/pieza \\
-Pata HMI (x4)                 & PETG     & Impresión 3D & 3 hrs/pieza \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{table}[H]
-\centering
-\caption{Plano de manufactura del biorreactor.}
-\label{tab:manufactura_biorreactor}
-\renewcommand{\arraystretch}{1.3}
-\small
-\begin{tabular}{llll}
+\endfirsthead
+\multicolumn{3}{c}{\tablename\ \thetable{} -- continuación} \\
 \toprule
-\textbf{Elemento} & \textbf{Material} & \textbf{Método} & \textbf{Tiempo} \\
+\multicolumn{2}{@{}l}{\textbf{Biorreactor}} & \textbf{Cantidad} \\
 \midrule
-Base biorreactor (x1) & Acero inoxidable AISI 304 & Dobleces, corte, soldado y perforación & 48 hrs/pieza \\
-Tapadera biorreactor (x1) & Acero inoxidable AISI 304 & Corte, perforación y roscado & 24 hrs/pieza \\
-Case burbujeador (x1) & PETG & Impresión 3D & 12 hrs/pieza \\
-Uni\'on roscada foco (x1) & ABS & Impresi\'on 3D (prototipo) & 4 hrs/pieza \\
+\endhead
 \bottomrule
-\end{tabular}
-\end{table}
+\endfoot
+%--- Elemento 1 ---
+\textbf{Elemento}     & Base biorreactor                                                   & x1 \\
+Material              & Acero 304                                                          &    \\
+Método de manufactura & Corte, soldado, perforación y pulido                               &    \\
+Tiempo de maquinado   & 72 hrs/pieza                                                       &    \\
+Equipo y herramientas & Machuelo, equipo de soldadura, fresadora, torno y pulidora         &    \\
+\midrule
+%--- Elemento 2 ---
+\textbf{Elemento}     & Tubo medio biorreactor                                             & x1 \\
+Material              & Acero 304                                                          &    \\
+Método de manufactura & Corte, perforación, roscado, soldado y pulido                      &    \\
+Tiempo de maquinado   & 96 hrs/pieza                                                       &    \\
+Equipo y herramientas & Machuelo, equipo de soldadura, fresadora, torno y pulidora         &    \\
+\midrule
+%--- Elemento 3 ---
+\textbf{Elemento}     & Tubo superior biorreactor                                          & x1 \\
+Material              & Acero 304                                                          &    \\
+Método de manufactura & Corte, perforación, roscado, soldado y pulido                      &    \\
+Tiempo de maquinado   & 96 hrs/pieza                                                       &    \\
+Equipo y herramientas & Machuelo, equipo de soldadura, fresadora, torno y pulidora         &    \\
+\midrule
+%--- Elemento 4 ---
+\textbf{Elemento}     & Tapadera biorreactor                                               & x1 \\
+Material              & Acero 304                                                          &    \\
+Método de manufactura & Corte, perforación, roscado, soldado y pulido                      &    \\
+Tiempo de maquinado   & 48 hrs/pieza                                                       &    \\
+Equipo y herramientas & Machuelo, fresadora, torno y pulidora                              &    \\
+\midrule
+%--- Elemento 5 ---
+\textbf{Elemento}     & Burbujeador                                                        & x1 \\
+Material              & Acero 304                                                          &    \\
+Método de manufactura & Corte láser, perforación y roscado                                 &    \\
+Tiempo de maquinado   & 12 hrs/pieza                                                       &    \\
+Equipo y herramientas & Machuelo, fresadora, torno y pulidora                              &    \\
+\end{longtable}
 
-\section*{Tolerancias de agujeros y roscas}
-
-Para garantizar las dimensiones de los agujeros pasados para la torníllería de 5/16, 1/2, 5/8 y 3/4~de pulgada, se utilizaron las especificaciones de la norma ASME~B18.2.8. De acuerdo con la Tabla~2 del estándar para un ajuste normal (\textit{Normal Fit}), se estableció el uso de brocas nominales de 11/32, 9/16, 11/16 y 13/16~de pulgada. En los planos de fabricación (Anexo~\ref{ap:planos}), los diámetros se acotaron con los tamaños mínimos de la herramienta: 0.344, 0.562, 0.688 y 0.812~pulgadas respectivamente. Se aplicó una tolerancia de $+0.010$~in para los barrenos de 5/16'', 1/2'' y 5/8'', y de $+0.012$~in para el de 3/4'', de modo que los diámetros máximos no excedan los límites permisibles de 0.354, 0.572, 0.698 y 0.824~pulgadas dictados por el estándar~\cite{ASME_B18_2_8}.
-
-Para los elementos de fijación métricos M5, la Tabla~3 de la misma norma (Figura~\ref{fig:tabla_agujeros_metricos}) establece una broca nominal de 5.5~mm para un ajuste normal~\cite{ASME_B18_2_8}.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.9\textwidth]{tabla_agujeros_metricos}
-  \caption{Tabla~3 de la norma ASME~B18.2.8: agujeros de paso para elementos de fijación métricos \cite{ASME_B18_2_8}.}
-  \label{fig:tabla_agujeros_metricos}
-\end{figure}
-
-Para garantizar el sellado hermético en las conexiones roscadas, las tolerancias de las roscas cónicas de 1/4 y 3/4~de pulgada se definieron según la norma ASME~B1.20.1. Para roscas NPT (\textit{National Pipe Taper}) se estableció el uso de 18~hilos por pulgada (TPI) en la conexión de 1/4'' y de 14~TPI en la de 3/4''. La variación máxima en el acoplamiento no excede $\pm 1$~vuelta de rosca respecto al plano de apriete manual (\textit{hand-tight plane}), asegurando la interferencia necesaria para el sellado~\cite{ASME_B1_20_1}.
+\begin{longtable}{@{} p{4.2cm} p{8.8cm} r @{}}
+\caption{Plan de manufactura de la HMI.}
+\label{tab:manufactura_hmi} \\
+\toprule
+\multicolumn{2}{@{}l}{\textbf{HMI}} & \textbf{Cantidad} \\
+\midrule
+\endfirsthead
+\multicolumn{3}{c}{\tablename\ \thetable{} -- continuación} \\
+\toprule
+\multicolumn{2}{@{}l}{\textbf{HMI}} & \textbf{Cantidad} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+%--- Elemento 1 ---
+\textbf{Elemento}     & Case pared derecha                                                 & x1 \\
+Material              & Acrílico                                                           &    \\
+Método de manufactura & Corte láser                                                        &    \\
+Tiempo de maquinado   & 1 hr/pieza                                                         &    \\
+Equipo y herramientas & Cortadora láser                                                    &    \\
+\midrule
+%--- Elemento 2 ---
+\textbf{Elemento}     & Case pared izquierda                                               & x1 \\
+Material              & Acrílico                                                           &    \\
+Método de manufactura & Corte láser                                                        &    \\
+Tiempo de maquinado   & 1 hr/pieza                                                         &    \\
+Equipo y herramientas & Cortadora láser                                                    &    \\
+\midrule
+%--- Elemento 3 ---
+\textbf{Elemento}     & Case pared frontal                                                 & x1 \\
+Material              & Acrílico                                                           &    \\
+Método de manufactura & Corte láser                                                        &    \\
+Tiempo de maquinado   & 1 hr/pieza                                                         &    \\
+Equipo y herramientas & Cortadora láser                                                    &    \\
+\midrule
+%--- Elemento 4 ---
+\textbf{Elemento}     & Case pared trasera                                                 & x1 \\
+Material              & Acrílico                                                           &    \\
+Método de manufactura & Corte láser                                                        &    \\
+Tiempo de maquinado   & 1 hr/pieza                                                         &    \\
+Equipo y herramientas & Cortadora láser                                                    &    \\
+\midrule
+%--- Elemento 5 ---
+\textbf{Elemento}     & Case pared superior                                                & x1 \\
+Material              & Acrílico                                                           &    \\
+Método de manufactura & Corte láser                                                        &    \\
+Tiempo de maquinado   & 1 hr/pieza                                                         &    \\
+Equipo y herramientas & Cortadora láser                                                    &    \\
+\midrule
+%--- Elemento 6 ---
+\textbf{Elemento}     & Case pared inferior                                                & x1 \\
+Material              & Acrílico                                                           &    \\
+Método de manufactura & Corte láser                                                        &    \\
+Tiempo de maquinado   & 1 hr/pieza                                                         &    \\
+Equipo y herramientas & Cortadora láser                                                    &    \\
+\midrule
+%--- Elemento 7 ---
+\textbf{Elemento}     & Soportes de electrónicos                                           & x8 \\
+Material              & ABS                                                                &    \\
+Método de manufactura & Impresión 3D                                                       &    \\
+Tiempo de maquinado   & 4 hrs/pieza                                                        &    \\
+Equipo y herramientas & Impresora 3D, pinzas de corte y cautín                             &    \\
+\midrule
+%--- Elemento 8 ---
+\textbf{Elemento}     & Coples de sensores                                                 & x2 \\
+Material              & ABS                                                                &    \\
+Método de manufactura & Impresión 3D                                                       &    \\
+Tiempo de maquinado   & 4 hrs/pieza                                                        &    \\
+Equipo y herramientas & Impresora 3D, pinzas de corte y cautín                             &    \\
+\midrule
+%--- Elemento 9 ---
+\textbf{Elemento}     & Base de lámpara LED                                                & x1 \\
+Material              & ABS                                                                &    \\
+Método de manufactura & Impresión 3D                                                       &    \\
+Tiempo de maquinado   & 1 hr/pieza                                                         &    \\
+Equipo y herramientas & Impresora 3D, pinzas de corte y cautín                             &    \\
+\midrule
+%--- Elemento 10 ---
+\textbf{Elemento}     & Case pantalla 7 pulgadas                                           & x1 \\
+Material              & PLA                                                                &    \\
+Método de manufactura & Impresión 3D                                                       &    \\
+Tiempo de maquinado   & 2 hrs/pieza                                                        &    \\
+Equipo y herramientas & Impresora 3D, pinzas de corte y cautín                             &    \\
+\midrule
+%--- Elemento 11 ---
+\textbf{Elemento}     & Esquinas HMI                                                       & x4 \\
+Material              & PLA                                                                &    \\
+Método de manufactura & Impresión 3D                                                       &    \\
+Tiempo de maquinado   & 3 hrs/pieza                                                        &    \\
+Equipo y herramientas & Impresora 3D, pinzas de corte y cautín                             &    \\
+\midrule
+%--- Elemento 12 ---
+\textbf{Elemento}     & Pata HMI                                                           & x4 \\
+Material              & PLA                                                                &    \\
+Método de manufactura & Impresión 3D                                                       &    \\
+Tiempo de maquinado   & 3 hrs/pieza                                                        &    \\
+Equipo y herramientas & Impresora 3D, pinzas de corte y cautín                             &    \\
+\end{longtable}

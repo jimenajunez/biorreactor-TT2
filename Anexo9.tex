@@ -1,23 +1,210 @@
 \chapter{Especificaciones eléctricas}
 \label{ap:especificaciones_electricas}
 
+\section*{Cálculos de potencia y consumo}
+
+
+A conitinuación los cálculos de energía y tiempo necesarios para elevar la temperatura de un tanque cilíndrico de acero inoxidable 304, con 55 litros de agua, de 18\,\textdegree C a 60\,\textdegree C, con una potencia máxima disponible de 550\,W.
+
+\subsubsection*{1. Datos del sistema}
+
+\begin{table}[H]
+\centering
+\caption{Datos del sistema de calentamiento.}
+\label{tab:calor_datos}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{@{} X l l @{}}
+\toprule
+\textbf{Parámetro} & \textbf{Valor} & \textbf{Unidad} \\
+\midrule
+Material del tanque & Acero Inoxidable 304 & --- \\
+Diámetro interno & 21.5 & cm \\
+Espesor de pared & 3.5 & mm \\
+Altura del tanque & 1.035 & m \\
+Volumen de agua & 55 & litros \\
+Temperatura inicial ($T_1$) & 18 & \textdegree C \\
+Temperatura final ($T_2$) & 60 & \textdegree C \\
+Delta de temperatura ($\Delta T$) & 42 & \textdegree C \\
+Potencia máxima disponible & 550 & W \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent\textit{Nota: El volumen de agua (55\,L) es independiente del volumen geométrico del tanque debido al tubo externo conectado a modo de agarradera.}
+
+\subsubsection*{2. Geometría y masa del sistema}
+
+\begin{align*}
+r_{\text{int}} &= 21.5 \div 2 = 10.75~\text{cm} = 0.1075~\text{m} \\
+e &= 3.5~\text{mm} = 0.0035~\text{m} \\
+r_{\text{ext}} &= 0.1075 + 0.0035 = 0.1110~\text{m} \\
+m_{\text{agua}} &= 55~\text{L} \times 1~\text{kg/L} = 55~\text{kg} \\
+V_{\text{pared}} &= \pi \times 1.035 \times (0.1110^2 - 0.1075^2) = 0.002487~\text{m}^3 \\
+V_{\text{tapas}} &= 2 \times \pi \times 0.1110^2 \times 0.0035 = 0.000271~\text{m}^3 \\
+m_{\text{acero}} &= 0.002758~\text{m}^3 \times 8{,}000~\text{kg/m}^3 = 22.06~\text{kg}
+\end{align*}
+
+\subsubsection*{3. Calores específicos}
+
+\begin{itemize}
+  \item Agua líquida: $c_p = 4{,}186~\text{J/(kg\,\textdegree C)}$ \cite{Cengel2019}
+  \item Acero inoxidable 304: $c_p = 500~\text{J/(kg\,\textdegree C)}$ \cite{ASMHandbook}
+\end{itemize}
+
+\subsubsection*{4. Cálculo de energía — calor sensible}
+
+\[Q = m \times c_p \times \Delta T\]
+
+\begin{align*}
+Q_{\text{agua}}  &= 55 \times 4{,}186 \times 42 = 9{,}669{,}660~\text{J} = 9.67~\text{MJ} = 2.686~\text{kWh} \\
+Q_{\text{acero}} &= 22.06 \times 500 \times 42 = 463{,}260~\text{J} = 0.463~\text{MJ} = 0.129~\text{kWh}
+\end{align*}
+
+\subsubsection*{5. Energía total del sistema}
+
+\begin{table}[H]
+\centering
+\caption{Energía total requerida para el calentamiento del sistema.}
+\label{tab:calor_energia}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{\textwidth}{@{} X l l l @{}}
+\toprule
+\textbf{Componente} & \textbf{Masa (kg)} & \textbf{Energía (MJ)} & \textbf{Energía (kWh)} \\
+\midrule
+Agua (55\,L) & 55.00 & 9.67 & 2.686 \\
+Acero Inox.\ 304 & 22.06 & 0.463 & 0.129 \\
+\midrule
+\textbf{TOTAL} & \textbf{77.06} & \textbf{10.13} & \textbf{2.815} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\[Q_{\text{total}} = 10{,}132{,}920~\text{J} \approx 10.13~\text{MJ} \approx 2.815~\text{kWh}\]
+
+\subsubsection*{6. Tiempo de calentamiento con 550\,W}
+
+\[t = \frac{Q}{P} = \frac{10{,}132{,}920~\text{J}}{550~\text{W}} = 18{,}423~\text{s} = 5~\text{h}~07~\text{min}\]
+
+\noindent Tiempo estimado por escenario:
+
+\begin{itemize}
+  \item Sin pérdidas (ideal): 5\,h 07\,min
+  \item Con forro de aluminio (diseño actual): 5\,h 38\,min ($\times$1.10 — recomendado)
+  \item Sin aislamiento, aire libre: 6\,h 08\,min ($\times$1.20 — conservador)
+\end{itemize}
+
+\noindent\textit{Nota: El aluminio pulido tiene emisividad térmica baja ($\varepsilon \approx 0.03$--$0.07$), reduciendo las pérdidas por radiación.}
+
+%------------------------------------------------------------------
+\section*{Tabla de cableado}
+%------------------------------------------------------------------
+
+\begin{table}[H]
+\centering
+\caption{Tabla de cableado del sistema.}
+\label{tab:cableado}
+\renewcommand{\arraystretch}{1.3}
+\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{@{} l l l l l l l @{}}
+\toprule
+\textbf{Componente} & \multicolumn{3}{c}{\textbf{Potencia / Alimentación}} & \multicolumn{3}{c}{\textbf{Carga}} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+ & \textbf{Voltaje} & \textbf{Corriente} & \textbf{Calibre (AWG)} & \textbf{Voltaje} & \textbf{Corriente} & \textbf{Calibre (AWG)} \\
+\midrule
+\multicolumn{7}{@{}l}{\textit{Alimentación}} \\
+Fuente conmutada S-250-12 & 110\,V & 2.29\,A & 18 & 12\,V & 21\,A & 18 \\
+Fuente conmutada S-25-5 & 110\,V & --- & 18 & 5\,V & 5\,A & 22 \\
+Conector C14 & 110\,V & 10\,A & --- & 110\,V & 10\,A & 18 \\
+Módulo regulador AMS1117 3.3\,V & 5\,V & 0.6\,A & --- & 3.3\,V & 1\,A & --- \\
+\midrule
+\multicolumn{7}{@{}l}{\textit{Controladores}} \\
+Módulo PCA9685 & 3.3\,V & 10\,mA & 22 & 3.3\,V & 160\,mA & 22 \\
+Raspberry Pi 4B & 5\,V & 3\,A & --- & 3.3\,V & --- & --- \\
+Módulo relé 4 canales optoacoplado & 3.3\,V & 10\,mA & 22 & 110\,V & 10\,A & --- \\
+Módulo Dimer AC & 3.3\,V & 10\,mA & 22 & 110\,V & 8\,A & 18 \\
+Módulo amplificador TDA7297 & 12\,V & 2\,A & 18 & --- & --- & 18 \\
+\midrule
+\multicolumn{7}{@{}l}{\textit{Actuadores}} \\
+Bomba de acoplamiento magnético MP15RM & 110\,V & 0.1\,A & 18 & --- & --- & --- \\
+Bomba de aire electromagnética ACO-003 & 110\,V & 0.41\,A & 18 & --- & --- & --- \\
+Altavoz & --- & --- & 22 & --- & --- & --- \\
+Ventilador & 12\,V & 0.16\,A & 18 & --- & --- & --- \\
+Electroválvula 1/4'' USS-MSV00025 & 12\,V & 0.16\,A & 22 & --- & --- & --- \\
+Cable calefactor de carbono 12K & 110\,V & 0.83\,A & 18 & --- & --- & --- \\
+Pantalla táctil LCD 7'' & 5\,V & --- & --- & --- & --- & --- \\
+Módulo convertidor TTL a RS485 & 3.3\,V & --- & 22 & --- & --- & --- \\
+\midrule
+\multicolumn{7}{@{}l}{\textit{Sensores}} \\
+SparkFun Acconeer XM125 & 3.3\,V & --- & 22 & --- & --- & --- \\
+Módulo de reloj DS3231 & 3.3\,V & --- & 22 & --- & --- & --- \\
+RK500-04 Sensor OD & 12\,V & 12.5\,mA & 22 & --- & --- & --- \\
+Sonda de pH RK500-12 tipo B3 & 12\,V & 12.5\,mA & 22 & --- & --- & --- \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Calibres de cable utilizados en el sistema.}
+\label{tab:calibres_cable}
+\renewcommand{\arraystretch}{1.3}
+\small
+\begin{tabularx}{0.3\textwidth}{@{} X @{}}
+\toprule
+\textbf{Calibre de cable} \\
+\midrule
+18\,(AWG) \\
+22\,(AWG) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+%------------------------------------------------------------------
+\section*{Diagramas de conexiones para cada sensor}
+%------------------------------------------------------------------
+
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 99: Modelo 3D de la PCB para el microcontrolador central]\vspace{2cm}}}
-  \caption{Modelo 3D de la PCB para el microcontrolador central.}
-  \label{fig:pcb3d_1}
+  \includegraphics[width=0.7\textwidth]{electr_diagrama_rs485}
+  \caption{Diagrama eléctrico del convertidor de RS485 a TTL.}
+  \label{fig:electr_rs485}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 100: Modelo 3D de la PCB para protocolos de comunicación RS485]\vspace{2cm}}}
-  \caption{Modelo 3D de la PCB para protocolos de comunicación RS485.}
-  \label{fig:pcb3d_2}
+  \includegraphics[width=0.7\textwidth]{electr_diagrama_rtc}
+  \caption{Diagrama eléctrico del módulo RTC.}
+  \label{fig:electr_rtc}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{\textwidth}{\centering\vspace{2cm}[FIGURA 101: Modelo 3D de la PCB para la gestión de actuadores]\vspace{2cm}}}
-  \caption{Modelo 3D de la PCB para la gestión de actuadores.}
-  \label{fig:pcb3d_3}
+  \includegraphics[width=0.7\textwidth]{electr_diagrama_sensor_dist}
+  \caption{Diagrama eléctrico del sensor de distancia.}
+  \label{fig:electr_sensor_dist}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{electr_diagrama_pwm}
+  \caption{Diagrama eléctrico del módulo PWM.}
+  \label{fig:electr_pwm}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{electr_diagrama_modulo_ac}
+  \caption{Diagrama de conexión del módulo controlador de AC.}
+  \label{fig:electr_modulo_ac}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{electr_diagrama_histeresis}
+  \caption{Diagrama de conexión de control por histéresis.}
+  \label{fig:electr_histeresis}
 \end{figure}
