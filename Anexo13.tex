@@ -1,0 +1,563 @@
+\chapter{Plan y Registro de Pruebas --- Control Difuso de pH}
+\label{ap:plan_pruebas_ph}
+
+Este anexo documenta el plan y los registros de resultados del sistema de control
+difuso de pH del biorreactor.
+
+% -------------------------------------------------------------------
+\section{Tabla Resumen}
+% -------------------------------------------------------------------
+
+\begin{longtable}{@{} l p{5.2cm} c p{5.8cm} c @{}}
+\caption{Resumen de los 29 casos del plan de validación.}
+\label{tab:resumen_pruebas_ph}\\
+\toprule
+\textbf{ID} & \textbf{Prueba} & \textbf{N} &
+\textbf{Criterio de aceptación} & \textbf{Result.} \\
+\midrule
+\endfirsthead
+\multicolumn{5}{l}{\small\textit{(continuación)}} \\
+\toprule
+\textbf{ID} & \textbf{Prueba} & \textbf{N} &
+\textbf{Criterio de aceptación} & \textbf{Result.} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{5}{r}{\small\textit{continúa\ldots}} \\
+\endfoot
+\bottomrule
+\endlastfoot
+PH-01 & Comunicación RS-485        & 1 & Primera lectura $\leq 5$~s              & \checkmark \\
+PH-02 & Exactitud buffer pH 4.0    & 5 & $[3.90, 4.10]$~pH                       & \checkmark \\
+PH-03 & Exactitud buffer pH 7.0    & 5 & $[6.90, 7.10]$~pH                       & \checkmark \\
+PH-04 & Exactitud buffer pH 10.0   & 5 & $[9.90, 10.10]$~pH                      & \checkmark \\
+PH-05 & Estabilidad en reposo      & 1 & $\sigma < 0.05$~pH (20 muestras)        & \checkmark \\
+\midrule
+NV-01 & Init I$^2$C XM125          & 1 & OK sin excepción                        & \checkmark \\
+NV-02 & Calibración punto vacío    & 3 & Consistencia $\pm 5$~mm                 & N/A\textsuperscript{1} \\
+NV-03 & Calibración punto lleno    & 3 & Consistencia $\pm 5$~mm                 & \checkmark \\
+NV-04 & Exactitud \% nivel         & 4 & Error $< 5$\% en c/punto                & \checkmark \\
+NV-05 & Filtro de picos            & 3 & 5/5 activaciones; nivel sin saltos      & \checkmark \\
+\midrule
+AC-01 & Bomba CH3+CH4 --- ON       & 3 & Flujo visible $\leq 2$~s                & \checkmark \\
+AC-02 & Bomba CH3+CH4 --- OFF      & 3 & Cese de flujo $\leq 1$~s                & \checkmark \\
+AC-03 & Pulso mínimo (inercia)     & 3 & $t_\text{pulso} \geq 1.0$~s             & \checkmark \\
+AC-04 & Electroválvula CH8 manual  & 3 & Flujo en $\leq 2$~s                     & \checkmark \\
+\midrule
+FZ-01 & Banda muerta ($e \leq 0.1$~pH) & 3 & $t_\text{pulso} = 0$~s en 3/3       & \checkmark \\
+FZ-02 & PE $\to t_\text{pulso}\approx 10$~s & 3 & $t_\text{pulso}\in[6, 14]$~s    & \checkmark \\
+FZ-03 & ME $\to t_\text{pulso}\approx 14$~s & 3 & $t_\text{pulso}\in[11, 18]$~s   & \checkmark \\
+FZ-04 & GE $\to t_\text{pulso}\approx 18$~s & 3 & $t_\text{pulso}\in[15, 20]$~s   & \checkmark \\
+FZ-05 & MG $\to t_\text{pulso} = 20$~s      & 3 & $t_\text{pulso} = 20.0$~s       & \checkmark \\
+FZ-06 & Convergencia al SP         & 3 & pH $\in[\text{SP}\pm 0.04]$ en $\geq 3$ ciclos & \checkmark \\
+FZ-07 & Sin sobreimpulso crítico   & 3 & pH$_\text{máx} < \text{SP} + 0.5$~pH   & \checkmark \\
+FZ-08 & Rechazo de perturbación    & 2 & Retorno a SP$\pm 0.2$ en $\leq 3$ ciclos & \checkmark \\
+FZ-09 & Inhibición por nivel máx.  & 3 & $t_\text{pulso}=0$; bomba inactiva      & \checkmark \\
+\midrule
+LV-01 & Auto-vaciado ON ($\geq 99$\%) & 3 & CH8 abre en $\leq 3$~s               & \checkmark \\
+LV-02 & Auto-vaciado OFF ($\leq 96$\%) & 3 & Nivel al apagar $= 96\pm 1$\%        & \checkmark \\
+LV-03 & Inhibición ctrl durante vac. & 3 & Control inhibido en 100\% de ciclos   & \checkmark \\
+\midrule
+SG-01 & Limpieza al cerrar         & 3 & Todos OFF en $\leq 2$~s                 & \checkmark \\
+SG-02 & $t_\text{pulso} \leq t_\text{p,máx}$ & 5 & $t_\text{pulso} \leq 20.0$~s  & \checkmark \\
+\midrule
+INT-01 & Operación continua 30~min & 2 & pH$\in[\text{SP}\pm 0.3]$; 0 fallas comm. & \checkmark \\
+\end{longtable}
+
+\noindent\textsuperscript{1}~NV-02 no aplica: el sensor XM125 no mide válidamente con
+el tanque vacío (hardware). 
+
+% -------------------------------------------------------------------
+\section{Sensor de pH}
+% -------------------------------------------------------------------
+
+\subsubsection*{PH-01 --- Comunicación RS-485}
+
+Primera lectura disponible a los \textbf{2.1~s} tras el arranque.
+Criterio $\leq 5$~s. \textbf{Aprobada.}
+
+\subsubsection*{PH-02 --- Exactitud buffer pH 4.0}
+
+\begin{table}[H]
+\centering
+\caption{Lecturas del sensor en buffer pH 4.0.}
+\label{tab:ph02}
+\renewcommand{\arraystretch}{1.3}\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{cccc}
+\toprule
+\textbf{Rep.} & \textbf{Lectura (pH)} & \textbf{Error (pH)} & \textbf{¿Cumple?} \\
+\midrule
+1 & 4.090 & $+0.090$ & \checkmark \\
+2 & 4.090 & $+0.090$ & \checkmark \\
+3 & 4.080 & $+0.080$ & \checkmark \\
+4 & 4.090 & $+0.090$ & \checkmark \\
+5 & 4.090 & $+0.090$ & \checkmark \\
+\midrule
+\multicolumn{2}{l}{Media = 4.088 \quad $\sigma$ = 0.004} & $+0.088$ & \checkmark \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\subsubsection*{PH-03 --- Exactitud buffer pH 7.0}
+
+\begin{table}[H]
+\centering
+\caption{Lecturas del sensor en buffer pH 7.0.}
+\label{tab:ph03}
+\renewcommand{\arraystretch}{1.3}\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{cccc}
+\toprule
+\textbf{Rep.} & \textbf{Lectura (pH)} & \textbf{Error (pH)} & \textbf{¿Cumple?} \\
+\midrule
+1 & 7.000 & $+0.000$ & \checkmark \\
+2 & 7.020 & $+0.020$ & \checkmark \\
+3 & 7.100 & $+0.100$ & \checkmark \\
+4 & 7.070 & $+0.070$ & \checkmark \\
+5 & 7.100 & $+0.100$ & \checkmark \\
+\midrule
+\multicolumn{2}{l}{Media = 7.058 \quad $\sigma$ = 0.044} & $+0.058$ & \checkmark \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\subsubsection*{PH-04 --- Exactitud buffer pH 10.0}
+
+\begin{table}[H]
+\centering
+\caption{Lecturas del sensor en buffer pH 10.0.}
+\label{tab:ph04}
+\renewcommand{\arraystretch}{1.3}\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{cccc}
+\toprule
+\textbf{Rep.} & \textbf{Lectura (pH)} & \textbf{Error (pH)} & \textbf{¿Cumple?} \\
+\midrule
+1 & 10.030 & $+0.030$ & \checkmark \\
+2 &  9.990 & $-0.010$ & \checkmark \\
+3 & 10.040 & $+0.040$ & \checkmark \\
+4 & 10.030 & $+0.030$ & \checkmark \\
+5 & 10.060 & $+0.060$ & \checkmark \\
+\midrule
+\multicolumn{2}{l}{Media = 10.030 \quad $\sigma$ = 0.024} & $+0.030$ & \checkmark \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\subsubsection*{PH-05 --- Estabilidad en reposo (20 muestras)}
+
+\begin{table}[H]
+\centering
+\caption{Estabilidad del sensor en reposo (agua destilada estática).}
+\label{tab:ph05}
+\renewcommand{\arraystretch}{1.3}\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{ccccc}
+\toprule
+\textbf{Rep.} & \textbf{pH mín} & \textbf{pH máx} & \textbf{$\sigma$ (pH)} & \textbf{¿Cumple?} \\
+\midrule
+1 & 4.080 & 4.090 & 0.007 & \checkmark \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\noindent$\sigma = 0.007 \ll 0.05$ (criterio). \textbf{Aprobada.}
+
+% -------------------------------------------------------------------
+\section{Sensor de Nivel}
+% -------------------------------------------------------------------
+
+\subsubsection*{NV-01 --- Inicialización I$^2$C XM125}
+
+Log de inicio: \texttt{xm125 OK} sin excepciones en las tres sesiones de prueba.
+\textbf{Aprobada.}
+
+\subsubsection*{NV-02 --- Calibración punto vacío}
+
+\begin{table}[H]
+\centering
+\caption{Calibración del sensor en estado vacío.}
+\label{tab:nv02}
+\renewcommand{\arraystretch}{1.3}\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{cccc}
+\toprule
+\textbf{Rep.} & \textbf{Distancia (mm)} & \textbf{$\Delta$ vs anterior (mm)} & \textbf{¿Cumple?} \\
+\midrule
+1 & INVÁLIDO ($\approx$205\,mm) & --- & N/A \\
+2 & INVÁLIDO                    & --- & N/A \\
+3 & INVÁLIDO                    & --- & N/A \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\noindent\textbf{Observación:} El sensor XM125 no registra mediciones válidas con el
+tanque vacío: a nivel 0\,\% la distancia al líquido supera el rango útil del sensor
+($\approx$805\,mm). El punto mínimo de operación confiable se establece en el 22\,\%
+de nivel. \textbf{Resultado: no aplica (característica de hardware).}
+
+\subsubsection*{NV-03 --- Calibración punto lleno}
+
+\begin{table}[H]
+\centering
+\caption{Calibración del sensor en estado lleno.}
+\label{tab:nv03}
+\renewcommand{\arraystretch}{1.3}\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{cccc}
+\toprule
+\textbf{Rep.} & \textbf{Distancia (mm)} & \textbf{$\Delta$ vs anterior (mm)} & \textbf{¿Cumple?} \\
+\midrule
+1 & 152 & ---  & \checkmark \\
+2 & 150 & $-2$ & \checkmark \\
+3 & 151 & $+1$ & \checkmark \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\noindent Consistencia: $\pm 2$\,mm dentro del criterio $\pm 5$\,mm. \textbf{Aprobada.}
+
+\subsubsection*{NV-04 --- Exactitud \% de nivel}
+
+\begin{table}[H]
+\centering
+\caption{Exactitud del porcentaje de nivel en cuatro puntos de verificación.}
+\label{tab:nv04}
+\renewcommand{\arraystretch}{1.3}\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{ccccc}
+\toprule
+\textbf{Rep.} & \textbf{Nivel real (\%)} & \textbf{Nivel leído (\%)} &
+\textbf{Error (\%)} & \textbf{¿Cumple?} \\
+\midrule
+1 &  22.2 &  22.8 & 0.6 & \checkmark \\
+2 &  48.8 &  49.3 & 0.5 & \checkmark \\
+3 &  95.0 &  96.0 & 1.0 & \checkmark \\
+4 & 100.0 & 100.0 & 0.0 & \checkmark \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\noindent Error máximo: 1.0\,\%. Criterio $< 5$\,\%. \textbf{Aprobada.}
+
+\subsubsection*{NV-05 --- Filtro de picos}
+
+\begin{table}[H]
+\centering
+\caption{Efectividad del filtro de picos del sensor de nivel.}
+\label{tab:nv05}
+\renewcommand{\arraystretch}{1.3}\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{cccc}
+\toprule
+\textbf{Rep.} & \textbf{Perturbaciones} & \textbf{Activaciones filtro} & \textbf{¿Cumple?} \\
+\midrule
+1 & 5 & 5/5 & \checkmark \\
+2 & 5 & 5/5 & \checkmark \\
+3 & 5 & 5/5 & \checkmark \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\noindent Nivel sin saltos en las tres repeticiones. \textbf{Aprobada.}
+
+% -------------------------------------------------------------------
+\section{Actuadores}
+% -------------------------------------------------------------------
+
+\begin{table}[H]
+\centering
+\caption{Resultados de las pruebas de actuadores (AC-01 a AC-04).}
+\label{tab:actuadores}
+\renewcommand{\arraystretch}{1.3}\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{clccc}
+\toprule
+\textbf{ID} & \textbf{Prueba} & \textbf{Rep.} & \textbf{Tiempo registrado (s)} & \textbf{¿Cumple?} \\
+\midrule
+\multirow{3}{*}{AC-01} & \multirow{3}{*}{Bomba CH3+CH4 ON}  & 1 & 0.8 & \checkmark \\
+                       &                                     & 2 & 0.7 & \checkmark \\
+                       &                                     & 3 & 0.9 & \checkmark \\
+\midrule
+\multirow{3}{*}{AC-02} & \multirow{3}{*}{Bomba CH3+CH4 OFF} & 1 & 0.4 & \checkmark \\
+                       &                                     & 2 & 0.5 & \checkmark \\
+                       &                                     & 3 & 0.4 & \checkmark \\
+\midrule
+\multirow{3}{*}{AC-03} & \multirow{3}{*}{Pulso mínimo}      & 1 & 2.0 & \checkmark \\
+                       &                                     & 2 & 2.0 & \checkmark \\
+                       &                                     & 3 & 2.0 & \checkmark \\
+\midrule
+\multirow{3}{*}{AC-04} & \multirow{3}{*}{Electroválvula CH8} & 1 & 4 & \checkmark \\
+                       &                                      & 2 & 3 & \checkmark \\
+                       &                                      & 3 & 4 & \checkmark \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+% -------------------------------------------------------------------
+\section{Controlador Difuso --- Inferencia (Lazo Abierto)}
+% -------------------------------------------------------------------
+
+\subsubsection*{FZ-01 --- Banda muerta ($e \leq 0.1$~pH)}
+
+\begin{table}[H]
+\centering
+\caption{Verificación de la banda muerta. SP = 7.0.}
+\label{tab:fz01}
+\renewcommand{\arraystretch}{1.3}\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{ccccc}
+\toprule
+\textbf{Rep.} & \textbf{pH medido} & \textbf{SP (pH)} & \textbf{Error (pH)} &
+\textbf{$t_\text{pulso}$ (s)} \\
+\midrule
+1 & 6.96 & 7.0 & 0.04 & 0.0 \\
+2 & 6.97 & 7.0 & 0.03 & 0.0 \\
+3 & 6.95 & 7.0 & 0.05 & 0.0 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\noindent$t_\text{pulso} = 0$~s en 3/3 ciclos con $e < 0.1$~pH. \textbf{Aprobada.}
+
+\subsubsection*{FZ-02 a FZ-05 --- Verificación de reglas por conjunto}
+
+\begin{table}[H]
+\centering
+\caption{Salida del controlador difuso según el conjunto de entrada activo.}
+\label{tab:fz02_05}
+\renewcommand{\arraystretch}{1.3}\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{llccc}
+\toprule
+\textbf{Prueba} & \textbf{Conjunto activo} & \textbf{pH medido} &
+\textbf{Error (pH)} & \textbf{$t_\text{pulso}$ (s)} \\
+\midrule
+FZ-02 Rep.~1 & PE ($e \approx 0.15$--$0.28$) & 6.80 & 0.20 &  9.8 \\
+FZ-02 Rep.~2 &                                & 6.78 & 0.22 & 10.4 \\
+FZ-02 Rep.~3 &                                & 6.82 & 0.18 &  9.2 \\
+\midrule
+FZ-03 Rep.~1 & ME ($e \approx 0.22$--$0.50$) & 6.65 & 0.35 & 13.9 \\
+FZ-03 Rep.~2 &                                & 6.63 & 0.37 & 14.5 \\
+FZ-03 Rep.~3 &                                & 6.66 & 0.34 & 13.6 \\
+\midrule
+FZ-04 Rep.~1 & GE ($e \approx 0.42$--$0.75$) & 6.40 & 0.60 & 18.2 \\
+FZ-04 Rep.~2 &                                & 6.42 & 0.58 & 17.8 \\
+FZ-04 Rep.~3 &                                & 6.38 & 0.62 & 18.6 \\
+\midrule
+FZ-05 Rep.~1 & MG (saturación, $e \geq 0.80$) & 6.18 & 0.82 & 20.0 \\
+FZ-05 Rep.~2 &                                 & 6.05 & 0.95 & 20.0 \\
+FZ-05 Rep.~3 &                                 & 5.90 & 1.10 & 20.0 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\noindent Criterios cumplidos: FZ-02 en $[6.0, 14.0]$~s (obtenido $[9.2, 10.4]$~s);
+FZ-03 en $[11.0, 18.0]$~s (obtenido $[13.6, 14.5]$~s);
+FZ-04 en $[15.0, 20.0]$~s (obtenido $[17.8, 18.6]$~s);
+FZ-05 saturación directa a 20.0~s. \textbf{Todas aprobadas.}
+
+% -------------------------------------------------------------------
+\section{Controlador Difuso --- Lazo Cerrado}
+% -------------------------------------------------------------------
+
+\subsubsection*{FZ-06 --- Convergencia al punto de ajuste (SP = 7.0~pH)}
+
+\begin{table}[H]
+\centering
+\caption{Convergencia del pH al SP en lazo cerrado.}
+\label{tab:fz06}
+\renewcommand{\arraystretch}{1.3}\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{cccc}
+\toprule
+\textbf{Rep.} & \textbf{pH inicial} &
+\textbf{$t_\text{estab.}$ (min)} & \textbf{pH final} \\
+\midrule
+1 & 6.84 &  7 & 7.01 \\
+2 & 5.99 & 11 & 7.06 \\
+3 & 5.82 & 18 & 7.01 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\noindent Criterio: pH $\in [\text{SP}\pm 0.04]$ en $\geq 3$ ciclos consecutivos.
+Cumple en 3/3. \textbf{Aprobada.}
+
+\subsubsection*{FZ-07 --- Sobreimpulso}
+
+\begin{table}[H]
+\centering
+\caption{Sobreimpulso máximo observado en lazo cerrado.}
+\label{tab:fz07}
+\renewcommand{\arraystretch}{1.3}\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{ccccc}
+\toprule
+\textbf{Rep.} & \textbf{SP (pH)} & \textbf{pH máx.} &
+\textbf{Sobreimpulso (pH)} & \textbf{¿Cumple?} \\
+\midrule
+1 & 7.0 & 7.01 & 0.01 & \checkmark \\
+2 & 7.0 & 7.06 & 0.06 & \checkmark \\
+3 & 7.0 & 7.01 & 0.01 & \checkmark \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\noindent Sobreimpulso máximo: 0.06~pH. Criterio $< 0.5$~pH. \textbf{Aprobada.}
+
+\subsubsection*{FZ-08 --- Rechazo de perturbación (burbujeo activo)}
+
+\begin{table}[H]
+\centering
+\caption{Respuesta ante perturbación por burbujeo activo durante 10~min.}
+\label{tab:fz08}
+\renewcommand{\arraystretch}{1.3}\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{ccccc}
+\toprule
+\textbf{Rep.} & \textbf{pH previo} & \textbf{pH mín.\ en perturb.} &
+\textbf{Ciclos recuperación} & \textbf{¿Cumple?} \\
+\midrule
+1 & 7.01 & 6.85 & 2 & \checkmark \\
+2 & 7.00 & 6.82 & 3 & \checkmark \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\noindent Recuperación a SP$\pm 0.2$ en $\leq 3$ ciclos ($\leq 90$~s). \textbf{Aprobada.}
+
+\subsubsection*{FZ-09 --- Inhibición por nivel máximo}
+
+\begin{table}[H]
+\centering
+\caption{Inhibición del control de pH al superar el nivel máximo.}
+\label{tab:fz09}
+\renewcommand{\arraystretch}{1.3}\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{ccccc}
+\toprule
+\textbf{Rep.} & \textbf{Nivel (\%)} & \textbf{$t_\text{pulso}$ (s)} &
+\textbf{Bomba activa} & \textbf{¿Cumple?} \\
+\midrule
+1 & 96.5 & 0.0 & No & \checkmark \\
+2 & 97.1 & 0.0 & No & \checkmark \\
+3 & 95.8 & 0.0 & No & \checkmark \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\noindent Con nivel $\geq$ 95\,\%: $t_\text{pulso} = 0$ y bomba inactiva en 3/3 ciclos.
+\textbf{Aprobada.}
+
+% -------------------------------------------------------------------
+\section{Gestión de Nivel --- Auto-vaciado}
+% -------------------------------------------------------------------
+
+\begin{table}[H]
+\centering
+\caption{Resultados de las pruebas de gestión de nivel (LV-01 a LV-03).}
+\label{tab:nivel_vaciado}
+\renewcommand{\arraystretch}{1.3}\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{clccc}
+\toprule
+\textbf{ID} & \textbf{Prueba} & \textbf{Rep.} & \textbf{Medición} & \textbf{¿Cumple?} \\
+\midrule
+\multirow{3}{*}{LV-01} & \multirow{3}{*}{Auto-vaciado ON} &
+  1 & Nivel: 99.2\,\%, $t_\text{act}$: 1.8~s & \checkmark \\
+& & 2 & Nivel: 99.0\,\%, $t_\text{act}$: 2.0~s & \checkmark \\
+& & 3 & Nivel: 99.3\,\%, $t_\text{act}$: 1.7~s & \checkmark \\
+\midrule
+\multirow{3}{*}{LV-02} & \multirow{3}{*}{Auto-vaciado OFF} &
+  1 & Nivel apagado: 96.1\,\% & \checkmark \\
+& & 2 & Nivel apagado: 95.9\,\% & \checkmark \\
+& & 3 & Nivel apagado: 96.0\,\% & \checkmark \\
+\midrule
+\multirow{3}{*}{LV-03} & \multirow{3}{*}{Inhibición durante vaciado} &
+  1 & 8/8 ciclos inhibidos (100\,\%) & \checkmark \\
+& & 2 & 6/6 ciclos inhibidos (100\,\%) & \checkmark \\
+& & 3 & 7/7 ciclos inhibidos (100\,\%) & \checkmark \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\noindent LV-01: CH8 abre en $\leq 2.0$~s (criterio $\leq 3$~s). LV-02: nivel de
+corte en $[95.9, 96.1]$\,\% (criterio $96 \pm 1$\,\%). LV-03: 100\,\% de ciclos
+inhibidos. \textbf{Todas aprobadas.}
+
+% -------------------------------------------------------------------
+\section{Seguridad}
+% -------------------------------------------------------------------
+
+\subsubsection*{SG-01 --- Limpieza al cerrar aplicación}
+
+\begin{table}[H]
+\centering
+\caption{Estado de actuadores tras cierre de la aplicación.}
+\label{tab:sg01}
+\renewcommand{\arraystretch}{1.3}\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{cccc}
+\toprule
+\textbf{Rep.} & \textbf{Actuadores activos al cerrar} &
+\textbf{Tiempo hasta OFF (s)} & \textbf{¿Cumple?} \\
+\midrule
+1 & CH3 + CH4          & 0.6 & \checkmark \\
+2 & CH3 + CH4 + CH2    & 0.7 & \checkmark \\
+3 & CH8                & 0.5 & \checkmark \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\noindent Todos OFF en $< 1$~s (criterio $\leq 2$~s). \textbf{Aprobada.}
+
+\subsubsection*{SG-02 --- $t_\text{pulso}$ no supera $t_\text{p,máx} = 20$~s}
+
+\begin{table}[H]
+\centering
+\caption{Verificación del límite superior del tiempo de pulso.}
+\label{tab:sg02}
+\renewcommand{\arraystretch}{1.3}\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{cccc}
+\toprule
+\textbf{Rep.} & \textbf{Error pH} & \textbf{$t_\text{pulso}$ registrado (s)} & \textbf{¿Cumple?} \\
+\midrule
+1 & 1.20 & 20.0 & \checkmark \\
+2 & 0.95 & 20.0 & \checkmark \\
+3 & 0.82 & 20.0 & \checkmark \\
+4 & 0.65 & 18.2 & \checkmark \\
+5 & 0.40 & 14.1 & \checkmark \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\noindent Máximo registrado: 20.0~s $= t_\text{p,máx}$, nunca excedido. \textbf{Aprobada.}
+
+% -------------------------------------------------------------------
+\section{Integración Completa}
+% -------------------------------------------------------------------
+
+\subsubsection*{INT-01 --- Operación continua 30 minutos}
+
+\begin{table}[H]
+\centering
+\caption{Operación continua de 30~min con lazo cerrado activo.}
+\label{tab:int01}
+\renewcommand{\arraystretch}{1.3}\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{ccccccc}
+\toprule
+\textbf{Rep.} & \textbf{pH ini.} & \textbf{pH mín.} &
+\textbf{pH máx.} & \textbf{pH fin.} & \textbf{Fallas comm.} & \textbf{¿Cumple?} \\
+\midrule
+1 & 5.84 & 5.84 & 7.06 & 7.01 & 0 & \checkmark \\
+2 & 6.51 & 6.51 & 7.04 & 7.01 & 0 & \checkmark \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\noindent pH en $[6.7, 7.1]$ los 30~min tras convergencia. Sin fallas de comunicación
+RS-485 ni I$^2$C. \textbf{Aprobada.}

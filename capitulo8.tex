@@ -9,7 +9,7 @@ El objetivo fue crear las especificaciones técnicas necesarias para la
 fabricación, ensamblaje y automatización del sistema. El diseño detallado se
 desglosará en los siguientes puntos:
 
-\begin{itemize}
+\begin{enumerate}
   \item \textbf{Diseño Geométrico y Mecánico:} Justifica la geometría del tanque principal.
   \item \textbf{Selección de componentes:} En esta sección se detallan las características que fueron determinantes al seleccionar los componentes que conformarán el sistema.
   \item \textbf{Integración y CAD:} Se describe la disposición de los elementos hidráulicos y neumáticos, sistema de iluminación e interfaz.
@@ -17,7 +17,7 @@ desglosará en los siguientes puntos:
   \item \textbf{Programación:} Detalla el algoritmo utilizando, haciendo uso los diagramas de flujo con la estructura del código que rige el comportamiento del sistema.
   \item \textbf{Sistemas Eléctricos:} Presenta los esquemas de conexión y la integración de los componentes electrónicos como actuadores, sensores y microcontroladores.
   \item \textbf{Plan de manufactura:} Define la ruta de fabricación, la selección de herramientas y los procesos técnicos de montaje.
-\end{itemize}
+\end{enumerate}
 
 \section{Diseño geométrico y mecánico}
 
@@ -611,19 +611,25 @@ El error se define como:
   e(t) = \text{pH}_{\text{setpoint}} - \text{pH}_{\text{actual}}
 \end{equation}
 
-El rango de control de interés es de 4 a 7.5 unidades de pH, por lo que el universo
-del discurso de la entrada se define como $e \in [0, 6]$ unidades de pH. La salida del
-controlador es el tiempo de pulso $t_{\text{pulso}} \in [0, 7]$~s durante el cual la bomba opera
-al 100\% de su capacidad; al emplear una potencia fija se obtiene un caudal
-predecible sin necesidad de caracterizar la respuesta de la bomba ante distintos
-valores de PWM.
+El rango de control de interés es de 4 a 7.5 unidades de pH. La implementación
+opera con un universo de entrada eficaz de $e \in [0, 0.8]$~pH: los errores
+menores a la banda muerta ($e \leq 0.1$~pH) se cancelan mediante un prefiltro
+y producen $t_\text{pulso} = 0$~s; los errores iguales o mayores al umbral de
+saturación ($e \geq e_\text{sat} = 0.8$~pH) producen directamente el pulso máximo
+$t_\text{p,máx} = 20$~s sin pasar por la inferencia.
 
-Se definieron cinco conjuntos difusos para la variable de entrada a partir de la
-caracterización experimental del comportamiento del pH (véase Cap.~\ref{cap:pruebas}). Los datos
-capturados demostraron que la ganancia del sistema es considerablemente menor en
-la zona ácida ($e > 3$, ganancia $\approx 0.006$~pH/ciclo) en comparación con la zona
-intermedia, lo que justifica el uso de conjuntos asimétricos. La Tabla~\ref{tab:mf_entrada} especifica
-las funciones de membresía de la variable de entrada y la Tabla~\ref{tab:mf_salida} las de la salida.
+La salida del inferenciador Mamdani es el tiempo de pulso normalizado
+$t_\text{int} \in [0, 10]$~s, que se escala por el factor $k_\text{pulso} = 2$ para
+obtener el tiempo de pulso efectivo $t_\text{pulso} = k_\text{pulso} \cdot t_\text{int}
+\in [0, 20]$~s. Al operar la bomba a potencia fija, este tiempo determina el volumen
+de neutralizador entregado en cada ciclo de control.
+
+Se definieron cinco conjuntos difusos para cada variable a partir de la
+caracterización experimental del pH (véase Cap.~\ref{cap:pruebas}). La
+Figura~\ref{fig:mfs_difuso} muestra las funciones de membresía; la
+Tabla~\ref{tab:mf_entrada} lista los parámetros de entrada y la
+Tabla~\ref{tab:mf_salida} los de salida (universo interno $[0,10]$~s;
+valores efectivos al multiplicar por $k_\text{pulso}=2$ en columna~Efectivo).
 
 \begin{table}[H]
 \centering
@@ -636,11 +642,11 @@ las funciones de membresía de la variable de entrada y la Tabla~\ref{tab:mf_sal
 \toprule
 \textbf{Etiqueta} & \textbf{Nombre} & \textbf{Tipo} & \textbf{$a$} & \textbf{$b$} & \textbf{$c$} & \textbf{$d$} \\
 \midrule
-N   & Neutro            & trimf  & 0.0 & 0.0 & 0.4 & --- \\
-PE  & Error Pequeño     & trimf  & 0.2 & 0.6 & 1.2 & --- \\
-ME  & Error Medio       & trimf  & 1.0 & 1.8 & 2.8 & --- \\
-GE  & Error Grande      & trimf  & 2.3 & 3.5 & 5.0 & --- \\
-MG  & Error Muy Grande  & trapmf & 4.0 & 5.0 & 6.0 & 6.0 \\
+N   & Neutro            & trimf  & 0.00 & 0.00 & 0.06 & ---  \\
+PE  & Error Pequeño     & trimf  & 0.04 & 0.15 & 0.28 & ---  \\
+ME  & Error Medio       & trimf  & 0.22 & 0.35 & 0.50 & ---  \\
+GE  & Error Grande      & trimf  & 0.42 & 0.58 & 0.75 & ---  \\
+MG  & Error Muy Grande  & trapmf & 0.65 & 0.80 & 0.80 & 0.80 \\
 \bottomrule
 \end{tabular}
 }
@@ -648,20 +654,20 @@ MG  & Error Muy Grande  & trapmf & 4.0 & 5.0 & 6.0 & 6.0 \\
 
 \begin{table}[H]
 \centering
-\caption{Funciones de membresía de la variable de salida --- Tiempo de pulso $t_{\text{pulso}}$ [s].}
+\caption{Funciones de membresía de la variable de salida --- Tiempo de pulso interno $t_\text{int}$ [s] y efectivo ($\times k_\text{pulso}=2$).}
 \label{tab:mf_salida}
 \renewcommand{\arraystretch}{1.3}
 \small
 \adjustbox{max width=\textwidth}{%
-\begin{tabular}{llllllll}
+\begin{tabular}{lllllllll}
 \toprule
-\textbf{Etiqueta} & \textbf{Nombre} & \textbf{Tipo} & \textbf{$a$} & \textbf{$b$} & \textbf{$c$} & \textbf{$d$} & \textbf{Volumen aprox.} \\
+\textbf{Etiq.} & \textbf{Nombre} & \textbf{Tipo} & \textbf{$a$} & \textbf{$b$} & \textbf{$c$} & \textbf{$d$} & \textbf{Efectivo (s)} & \textbf{Vol. aprox.} \\
 \midrule
-OFF   & Sin acci\'on   & trimf  & 0.0 & 0.0 & 0.7 & ---  & 0~mL \\
-POCO  & Pulso corto    & trimf  & 0.0 & 1.4 & 2.8 & ---  & $\approx 55$~mL \\
-MEDIO & Pulso medio    & trimf  & 2.1 & 3.5 & 4.9 & ---  & $\approx 137$~mL \\
-MUCHO & Pulso largo    & trimf  & 4.2 & 5.6 & 7.0 & ---  & $\approx 218$~mL \\
-MAX   & Pulso m\'aximo & trapmf & 6.3 & 7.0 & 7.0 & 7.0 & $\approx 275$~mL \\
+OFF   & Sin acci\'on    & trimf  & 0.0 & 0.0 &  1.5 & ---  & 0~s   & 0~mL \\
+POCO  & Pulso corto     & trimf  & 3.0 & 5.0 &  7.0 & ---  & 10~s  & $\approx 390$~mL \\
+MEDIO & Pulso medio     & trimf  & 5.5 & 7.0 &  9.0 & ---  & 14~s  & $\approx 546$~mL \\
+MUCHO & Pulso largo     & trimf  & 7.5 & 9.0 & 10.0 & ---  & 18~s  & $\approx 702$~mL \\
+MAX   & Pulso m\'aximo  & trapmf & 9.5 &10.0 & 10.0 & 10.0 & 20~s  & $\approx 780$~mL \\
 \bottomrule
 \end{tabular}
 }
@@ -682,14 +688,39 @@ $T_s = 30$~s.
 \toprule
 \textbf{Regla} & \textbf{Si error es\ldots} & \textbf{Entonces $t_{\text{pulso}}$ es\ldots} & \textbf{Volumen aprox.} \\
 \midrule
-1 & N  (Neutro)           & OFF   (0~s)   & 0~mL \\
-2 & PE (Error Pequeño)    & POCO  (1.4~s) & $\approx 55$~mL \\
-3 & ME (Error Medio)      & MEDIO (3.5~s) & $\approx 137$~mL \\
-4 & GE (Error Grande)     & MUCHO (5.6~s) & $\approx 218$~mL \\
-5 & MG (Error Muy Grande) & MAX   (7.0~s) & $\approx 275$~mL \\
+1 & N  (Neutro)           & OFF   (0~s)    & 0~mL \\
+2 & PE (Error Pequeño)    & POCO  (~10~s)  & $\approx 390$~mL \\
+3 & ME (Error Medio)      & MEDIO (~14~s)  & $\approx 546$~mL \\
+4 & GE (Error Grande)     & MUCHO (~18~s)  & $\approx 702$~mL \\
+5 & MG (Error Muy Grande) & MAX   (20~s)\textsuperscript{*} & $\approx 780$~mL \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\noindent\textsuperscript{*}~La regla MG $\to$ MAX se implementa como saturación
+directa al superar $e_\text{sat} = 0.8$~pH, sin pasar por el mecanismo de inferencia
+Mamdani. La Figura~\ref{fig:superficie_control}b muestra la distribución de las
+pruebas de validación por zona de operación, confirmando que los cinco escenarios
+cubren las regiones PE, ME, GE y MG del espacio de control.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{Figuras/fig_mfs_difuso.png}
+  \caption{Funciones de membresía del controlador difuso Mamdani. (a) Variable de
+           entrada: error de pH. (b) Variable de salida interna: tiempo de pulso en
+           el universo $[0, 10]$~s antes de aplicar $k_\text{pulso}=2$.}
+  \label{fig:mfs_difuso}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{Figuras/fig_superficie_control.png}
+  \caption{Superficie de control del sistema difuso de pH. (a) Tiempo de pulso interno
+           vs.\ error de pH para diferentes valores del parámetro $K$. (b) Distribución
+           de las pruebas de validación por zona de operación vs.\ tiempo de
+           establecimiento.}
+  \label{fig:superficie_control}
+\end{figure}
 
 \subsection{Control de nivel}
 
@@ -718,6 +749,73 @@ de supervisión y control por histéresis del nivel.
 
 \subsection{Control de temperatura}
 
+\subsubsection*{Dimensionamiento del actuador calefactor}
+
+Se seleccionó un cable calefactor de carbono tipo 12K como actuador térmico.
+Cada sección de manta emplea 4~m de cable con una resistividad lineal de
+33~$\Omega$/m, distribuyendo seis bobinas alrededor del tanque. Los parámetros
+eléctricos de cada bobina son:
+
+\begin{align}
+  R &= 33\;\Omega\text{/m} \times 4\;\text{m} = 132\;\Omega \notag \\
+  I &= \frac{V}{R} = \frac{110\;\text{V}}{132\;\Omega} = 0.83\;\text{A} \notag \\
+  P_\text{bobina} &= V \cdot I = 110\;\text{V} \times 0.83\;\text{A} = 91.3\;\text{W}
+\end{align}
+
+La potencia total instalada con las seis bobinas resulta:
+
+\begin{equation}
+  P_\text{total} = 6 \times 91.3\;\text{W} \approx 550\;\text{W}
+\end{equation}
+
+\subsubsection*{Cálculo de transferencia de calor}
+
+Para estimar el tiempo de calentamiento se calculó la energía necesaria para
+elevar la temperatura del agua y del acero inoxidable 304 desde
+$T_1 = 18\,^{\circ}$C hasta $T_2 = 60\,^{\circ}$C
+($\Delta T = 42\,^{\circ}$C), utilizando la ecuación de calor sensible
+\cite{Cengel2015}:
+
+\begin{equation}
+  Q = m \cdot c_p \cdot \Delta T
+  \label{eq:calor_sensible}
+\end{equation}
+
+\noindent\textbf{Masa de agua.} Con un volumen de operación de 55~L y
+$\rho_\text{agua} = 1\,000\;\text{kg/m}^3$ \cite{Cengel2015}:
+$m_\text{agua} = 55\;\text{kg}$.
+
+\noindent\textbf{Masa del acero inoxidable 304.} Considerando el cuerpo
+cilíndrico ($D_\text{int} = 21.5$~cm, $e = 3.5$~mm, $h = 1.035$~m) y las dos
+tapas \cite{Cengel2015}:
+
+\begin{align}
+  V_\text{cil}  &= \pi h \!\left(r_\text{ext}^2 - r_\text{int}^2\right)
+                 = \pi (1.035)(0.1110^2 - 0.1075^2) = 2.487 \times 10^{-3}\;\text{m}^3 \notag \\
+  V_\text{tapas}&= 2\pi r_\text{ext}^2\, e
+                 = 2\pi (0.1110)^2(0.0035) = 2.71 \times 10^{-4}\;\text{m}^3 \notag \\
+  m_\text{acero}&= \rho_\text{acero}\,(V_\text{cil}+V_\text{tapas})
+                 = 8\,000 \times 2.758 \times 10^{-3} = 22.06\;\text{kg}
+\end{align}
+
+\noindent\textbf{Energía total y tiempo de calentamiento.}
+Con $c_{p,\text{agua}} = 4\,186\;\text{J/(kg·°C)}$ y
+$c_{p,\text{acero}} = 500\;\text{J/(kg·°C)}$ \cite{Cengel2015}:
+
+\begin{align}
+  Q_\text{agua}  &= 55 \times 4\,186 \times 42 = 9\,669\,660\;\text{J} \notag \\
+  Q_\text{acero} &= 22.06 \times 500 \times 42 = 463\,260\;\text{J} \notag \\
+  Q_\text{total} &= 10\,132\,920\;\text{J}
+\end{align}
+
+\begin{equation}
+  t = \frac{Q_\text{total}}{P_\text{total}} =
+      \frac{10\,132\,920\;\text{J}}{550\;\text{W}} \approx 18\,423\;\text{s}
+      \approx 5\;\text{h}\;7\;\text{min}
+\end{equation}
+
+\subsubsection*{Identificación de la planta y diseño del controlador PI}
+
 El diseño del control de temperatura comenzó con la realización de una prueba a
 lazo abierto aplicando un escalón unitario (fuente de calor constante) a un
 recipiente con agua mientras se registró el cambio en la temperatura a lo largo del
@@ -726,8 +824,8 @@ transitoria de la planta (Figura~\ref{fig:planta_temp}).
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 26: Caracterización de la planta de temperatura (temperatura \textdegree C vs tiempo s)]\vspace{2cm}}}
-  \caption{Caracterización de la planta de temperatura.}
+  \includegraphics[width=0.85\textwidth]{temp_planta_respuesta}
+  \caption{Caracterización de la planta de temperatura: respuesta a lazo abierto ante escalón unitario de calor.}
   \label{fig:planta_temp}
 \end{figure}
 
@@ -746,8 +844,8 @@ salida tras la aplicación del bloque de control PID.
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 27: Comportamiento real del sistema, planta aproximada y respuesta PID]\vspace{2cm}}}
-  \caption{Comportamiento real del sistema, planta aproximada y respuesta PID.}
+  \includegraphics[width=0.85\textwidth]{temp_validacion_pid}
+  \caption{Validación del control PI ($K_p=0.017$, $\tau=1350$\,s): datos reales, planta aproximada en lazo abierto y respuesta PID.}
   \label{fig:respuesta_pid}
 \end{figure}
 
@@ -777,8 +875,8 @@ C(s) = 0.017 \cdot \frac{1350s + 1}{1350s}
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 28: Diagrama de bloques del control de temperatura]\vspace{2cm}}}
-  \caption{Diagrama de bloques del control de temperatura.}
+  \includegraphics[width=0.85\textwidth]{temp_diagrama_bloques}
+  \caption{Diagrama de bloques del sistema de control de temperatura en lazo cerrado.}
   \label{fig:bloques_temp}
 \end{figure}
 
@@ -786,8 +884,8 @@ Donde $K_p = 0.017$ y $K_i = 12.59 \times 10^{-6}$.
 
 \begin{figure}[H]
   \centering
-  \fbox{\parbox{0.9\textwidth}{\centering\vspace{2cm}[FIGURA 29: Simulación del sistema ante un setpoint de 20]\vspace{2cm}}}
-  \caption{Simulación del sistema ante un setpoint de 20.}
+  \includegraphics[width=0.85\textwidth]{temp_simulacion_sp20}
+  \caption{Simulación del sistema de control PI ante un escalón de $16.17\,^{\circ}$C a $20\,^{\circ}$C, con la potencia requerida al actuador.}
   \label{fig:sim_sp20}
 \end{figure}
 
@@ -802,6 +900,18 @@ realizar el programa.
   \includegraphics[width=0.4\textwidth]{diagrama_flujo_simplificado}
   \caption{Diagrama de flujo simplificado de la programación del biorreactor.}
   \label{fig:flujo_simplificado}
+\end{figure}
+
+La Figura~\ref{fig:arquitectura_software} muestra la arquitectura completa del
+software de la HMI, organizada en cinco capas: vista QML, backend C++,
+controladores de lazo cerrado, drivers de hardware y hardware físico del
+biorreactor, además del módulo de persistencia.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1.2\textwidth, page=1]{Figuras/arquitectura_software.pdf}
+  \caption{Arquitectura del software de control del biorreactor.}
+  \label{fig:arquitectura_software}
 \end{figure}
 
 \section{Sistemas eléctricos}

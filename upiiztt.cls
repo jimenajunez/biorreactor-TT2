@@ -486,7 +486,7 @@
 %   \altbibtitle has been added to change the chapter title.
 %   This command does nothing more than change REFERENCES to BIBLIOGRAPHY
 %============================================================================
-\def\@bibchaptitle{Referencias}
+\def\@bibchaptitle{BIBLIOGRAF\'IA}
 %\def\altbibtitle{\def\@bibchaptitle{Bibliografía}}
 \def\thebibliography#1{
   %\separatorpage{\@bibchaptitle}
